@@ -2762,10 +2762,10 @@ spec:
       #      - nodes/proxy
       #    verbs: [ "get", "list", "watch" ]
 
-      additionalServiceMonitors: []
-      ## Name of the ServiceMonitor to create
-      ##
-      # - name: ""
+      additionalServiceMonitors:
+        - name: traefik
+          selector:
+            matchLabels:
 
       ## Additional labels to set used for the ServiceMonitorSelector. Together with standard labels from
       ## the chart
