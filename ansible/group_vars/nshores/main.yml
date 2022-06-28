@@ -1,0 +1,27 @@
+# The Ansible roles allow you to override certain aspects of the environment generation and recipe deployment.
+
+vsphere_datacenter: ShoresLab
+vsphere_datastore: ESX3-VMFS-500GB-SSD-870
+vsphere_compute_cluster: ProdCluster
+vsphere_network: production-10gb
+vsphere_template_folder: Templates
+vsphere_template_name: ubuntu2004-amd64-shoreslab
+vsphere_vm_ram: 8096 # How much RAM to give each VM
+vsphere_vm_cores: 4 # How many processors to give each VM
+vsphere_vm_disk0_size: 120 # Size (in GB) of the primary (system) disk on each VM
+vsphere_vm_disk1_size: 100 # Size (in GB) of scratch disk on each vm.
+vsphere_vlan_gateway: 192.168.99.253 # Network gateway for the VM network adapter
+vsphere_dns_server: 192.168.99.253
+terraform_dir: ~/.terraform/home-k8s-ops # Directory to store the generated Terraform files
+admin_ssh_user: nshores # User to be created on each VM
+admin_ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZKWeDB3RQKEvoz5QcEnOw5wFJUjmKoGdqRYzIZlaN6iduSRD8ZpzQBmKAg7kfd3laG1urhAHuCL1ZT9YonIuanXrB5b0k5hA9BrxGd+K5LYwgAMGW169a/dBjXozM/D2TYs/+NDWisvLnHqqWU6YckQxnSl1jtLM8Ahmp5GIbNePzsU5XzNp6cGxNV+W9FyzkRSxGcqbKEm8lqncqLxGAkrKVYvLcxjpLqOLTnj6wupucWpJfi3ogaWURwnz1eto3gRp2DIunSSaGMp7co0KYEoGGw09itzT22PbCJ05NyjAjfHD3lgDpgdOKx0fYsvPU4pH73MGPrW6l6jP9lUZN nshores@slimdesktop
+vsphere_host_name: vcenter67.local # Name of the vsphere host that commands will be run against
+vsphere_host_username: administrator@vsphere.local # vsphere user name for running commands
+
+k3s_server_token: home-k8s-ops
+kubeconfig: ~/.kube/config
+
+vcenter_host_password: "{{ vault_vcenter_host_password }}"
+
+# Set this value to your DNS domain - it's used to generate URLs for the various recipes, such as "radarr.batman.com", "sabnzbd.batman.com", etc
+dns_domain: lab.nickshores.net

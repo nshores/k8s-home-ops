@@ -1,0 +1,35 @@
+version: "3"
+services:
+
+  pihole:
+    image: pihole/pihole:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      labels:
+        - traefik.frontend.rule=Host:pihole.lab.nickshores.net
+        - traefik.docker.network=traefik_public
+        - traefik.port=80
+        - shepherd.update=0
+    networks:
+      - traefik_public
+    volumes:
+      - "/var/data/pihole/config/etc-pihole:/etc/pihole"
+      - "/var/data/pihole/config/etc-dnsmasq.d:/etc/dnsmasq.d"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      - TZ='America/Los_Angeles'
+      - WEBPASSWORD="admin"
+      - FTL_CMD=debug
+      - DNSMASQ_LISTENING=all
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+networks:
+  traefik_public:
+    external: true

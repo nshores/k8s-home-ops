@@ -1,0 +1,212 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home
+spec:
+  chart:
+    spec:
+      chart: home-assistant
+      version: 13.2.x
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: home-assistant
+  values:
+    image:
+      # -- image repository
+      repository: ghcr.io/home-assistant/home-assistant
+      # -- image tag
+      # @default -- chart.appVersion
+      tag: 2022.6.7
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+
+    # -- environment variables.
+    # @default -- See below
+    env:
+      # -- Set the container timezone
+      TZ: America/Los_Angeles
+
+    # -- Configures service settings for the chart. Normally this does not need to be modified.
+    # @default -- See values.yaml
+    service:
+      main:
+        ports:
+          http:
+            port: 8123
+
+    ingress:
+      # -- Enable and configure ingress settings for the chart under this key.
+      # @default -- See values.yaml
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+        hosts:
+          - # -- Host address. Helm template can be passed.
+            host: ha.nickshores.net
+            ## Configure the paths for the host
+            paths:
+              - # -- Path.  Helm template can be passed.
+                path: /
+                # -- Ignored if not kubeVersion >= 1.14-0
+                pathType: Prefix
+                service:
+                  # -- Overrides the service name reference for this path
+                  name:
+                  # -- Overrides the service port reference for this path
+                  port:
+
+    # -- Enable devices to be discoverable
+    # hostNetwork: true
+
+    # -- When hostNetwork is true set dnsPolicy to ClusterFirstWithHostNet
+    # dnsPolicy: ClusterFirstWithHostNet
+
+    securityContext:
+      # -- (bool) Privileged securityContext may be required if USB devics are accessed directly through the host machine
+      privileged: # true
+
+    # -- Configure persistence settings for the chart under this key.
+    # @default -- See values.yaml
+    persistence:
+      #Create a general PVC that holds all persistent data that we don't track.
+      config:
+        enabled: true
+        size: 5Gi
+      #Mount a config map for each of our persistent configs we track in git.
+      ha-configuration:
+        enabled: true
+        type: custom
+        volumeSpec:
+          configMap:
+            name: home-assistant-configuration
+        subPath:
+          - path: config
+            mountPath: /config/configuration.yaml
+      ha-automation:
+        enabled: true
+        type: custom
+        volumeSpec:
+          configMap:
+            name: home-assistant-automation
+        subPath:
+          - path: config
+            mountPath: /config/automations.yaml
+      ha-customize:
+        enabled: true
+        type: custom
+        volumeSpec:
+          configMap:
+            name: home-assistant-customize
+        subPath:
+          - path: config
+            mountPath: /config/customize.yaml
+      ha-secrets:
+        enabled: true
+        type: custom
+        volumeSpec:
+          configMap:
+            name: ha-configmap-secret
+        subPath:
+          - path: secrets.yaml
+            mountPath: /config/secrets.yaml
+
+    # -- Enable and configure mariadb database subchart under this key.
+    #    For more options see [mariadb chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/mariadb)
+    # @default -- See values.yaml
+    mariadb:
+      enabled: false
+      architecture: standalone
+      auth:
+        database: home-assistant
+        username: home-assistant
+        password: home-assistant-pass
+        rootPassword: home-assistantrootpass
+      primary:
+        persistence:
+          enabled: false
+          # storageClass: ""
+
+    # -- Enable and configure postgresql database subchart under this key.
+    #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
+    # @default -- See values.yaml
+    postgresql:
+      enabled: false
+      image:
+        repository: bitnami/postgresql
+        tag: 14.1.0
+      postgresqlUsername: home-assistant
+      postgresqlPassword: home-assistant-pass
+      postgresqlDatabase: home-assistant
+      persistence:
+        primary:
+          enabled: false
+          # storageClass: ""
+
+    # -- Enable and configure influxdb database subchart under this key.
+    #    For more options see [influxdb chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/influxdb)
+    # @default -- See values.yaml
+    influxdb:
+      enabled: false
+      architecture: standalone
+      database: home_assistant
+      authEnabled: false
+      persistence:
+        enabled: false
+        # storageClass: ""
+        # size: 8Gi
+
+    metrics:
+      # -- Enable and configure a Prometheus serviceMonitor for the chart under this key.
+      # @default -- See values.yaml
+      enabled: false
+      serviceMonitor:
+        interval: 1m
+        scrapeTimeout: 30s
+        labels: {}
+        ## See https://www.home-assistant.io/docs/authentication/ for where to find
+        ## long lived access token creation under your account profile, which is
+        ## needed to monitor Home Assistant
+        # bearerTokenSecret:
+        #   name: ""
+        #   key: ""
+
+      # -- Enable and configure Prometheus Rules for the chart under this key.
+      # @default -- See values.yaml
+      prometheusRule:
+        enabled: true
+        labels: {}
+        # -- Configure additionial rules for the chart under this key.
+        # @default -- See prometheusrules.yaml
+        rules:
+          - alert: HomeAssistantAbsent
+            annotations:
+              description: Home Assistant has disappeared from Prometheus service discovery.
+              summary: Home Assistant is down.
+            expr: |
+              absent(up{job=~".*home-assistant.*"} == 1)
+            for: 5m
+            labels:
+              severity: critical
+
+    addons:
+      # -- Enable and configure codeserver for the chart.
+      #    This allows for easy access to configuration.yaml
+      # @default -- See values.yaml
+      codeserver:
+        enabled: true
+        args:
+          - --auth
+          - none
+          - --user-data-dir
+          - /data/config/.vscode
+        volumeMounts:
+          - name: config
+            mountPath: /data/config

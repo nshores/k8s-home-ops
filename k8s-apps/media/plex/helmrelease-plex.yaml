@@ -1,0 +1,145 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plex
+  namespace: home
+spec:
+  chart:
+    spec:
+      chart: plex
+      version: 6.3.x
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: plex
+  values:
+    image:
+      # -- image repository
+      repository: ghcr.io/k8s-at-home/plex
+      # -- image tag
+      tag: v1.27.0.5897-3940636f2
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+
+    # -- environment variables.
+    # @default -- See below
+    env:
+      # -- Set the container timezone
+      TZ: America/Los_Angeles
+      VERSION: docker
+      PLEX_UID: 1001
+      PLEX_GID: 1001
+      PLEX_CLAIM:
+        valueFrom:
+          secretKeyRef:
+            name: home-secrets
+            key: PLEX_CLAIM
+      ALLOWED_NETWORKS: 172.16.200.0/24,192.168.99.0/24,10.42.0.0/22
+      ADVERTISE_IP: http://192.168.99.200:32400
+
+    # -- Configures service settings for the chart.
+    # @default -- See values.yaml
+    service:
+      main:
+        primary: true
+        type: NodePort
+        ports:
+          http:
+            port: 32400
+            NodePort: 32400
+      dnla-tcp:
+        enabled: false
+        type: NodePort
+        ports:
+          dnla-tcp:
+            enabled: true
+            port: 32469
+            protocol: TCP
+            targetPort: 32469
+        externalTrafficPolicy: Local
+      dnla-udp:
+        enabled: false
+        type: NodePort
+        ports:
+          dnla-udp:
+            enabled: true
+            port: 1900
+            protocol: TCP
+            targetPort: 1900
+        externalTrafficPolicy:
+          Local
+          # -- Enable devices to be discoverable
+    hostNetwork: true
+
+    initContainers:
+      update-volume-permissions:
+        image: busybox:1.31.1
+        command: ["/bin/sh", "-c"]
+        args: ["chown -R 1001:1001 /config"]
+        volumeMounts:
+          - name: config
+            mountPath: /config
+        securityContext:
+          runAsUser: 0
+
+    podSecurityContext:
+      runAsUser: 1001
+      runAsGroup: 1001
+      fsGroup: 1001
+      fsGroupChangePolicy: "OnRootMismatch"
+
+    ingress:
+      # -- Enable and configure ingress settings for the chart under this key.
+      # @default -- See values.yaml
+      main:
+        enabled: false
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+        hosts:
+          - # -- Host address. Helm template can be passed.
+            host: plex.nickshores.net
+            ## Configure the paths for the host
+            paths:
+              - # -- Path.  Helm template can be passed.
+                path: /
+                # -- Ignored if not kubeVersion >= 1.14-0
+                pathType: Prefix
+                service:
+                  # -- Overrides the service name reference for this path
+                  name:
+                  # -- Overrides the service port reference for this path
+                  port:
+
+    # -- Configure persistence settings for the chart under this key.
+    # @default -- See values.yaml
+    persistence:
+      config:
+        enabled: true
+        type: pvc
+        existingClaim: plex-data
+
+      movies:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /mnt/user/Movies
+            server: slimcloud.lab.nickshores.net
+        mountPath: /movies
+
+      tv:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /mnt/user/TV
+            server: slimcloud.lab.nickshores.net
+        mountPath: /tv
+
+    nodeSelector:
+      kubernetes.io/hostname: k3s-master-1

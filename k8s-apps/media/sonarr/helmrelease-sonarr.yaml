@@ -1,0 +1,117 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: home
+spec:
+  chart:
+    spec:
+      chart: sonarr
+      version: 16.2.x
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: sonarr
+  values:
+    image:
+      # -- image repository
+      repository: ghcr.io/k8s-at-home/sonarr
+      # -- image tag
+      tag: v3.0.8.1507
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+
+    # -- environment variables.
+    # @default -- See below
+    env:
+      # -- Set the container timezone
+      TZ: America/Los_Angeles
+      # HOST_WHITELIST_ENTRIES:
+
+    # -- Configures service settings for the chart.
+    # @default -- See values.yaml
+    service:
+      main:
+        ports:
+          http:
+            port: 8989
+
+    initContainers:
+      update-volume-permissions:
+        image: busybox:1.31.1
+        command: ["/bin/sh", "-c"]
+        args: ["chown -R 1000:1000 /config; chown -R 1000:1000 /download"]
+        volumeMounts:
+          - name: config
+            mountPath: /config
+          - name: downloads
+            mountPath: /download
+        securityContext:
+          runAsUser: 0
+
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
+
+    ingress:
+      # -- Enable and configure ingress settings for the chart under this key.
+      # @default -- See values.yaml
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+        hosts:
+          - # -- Host address. Helm template can be passed.
+            host: sonarr.nickshores.net
+            ## Configure the paths for the host
+            paths:
+              - # -- Path.  Helm template can be passed.
+                path: /
+                # -- Ignored if not kubeVersion >= 1.14-0
+                pathType: Prefix
+                service:
+                  # -- Overrides the service name reference for this path
+                  name:
+                  # -- Overrides the service port reference for this path
+                  port:
+
+    # -- Configure persistence settings for the chart under this key.
+    # @default -- See values.yaml
+    persistence:
+      config:
+        enabled: true
+        size: 5Gi
+
+      downloads:
+        enabled: true
+        type: pvc
+        existingClaim: media-pv-pvc-claim
+        mountPath: /download
+
+      movies:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /mnt/user/Movies
+            server: slimcloud.lab.nickshores.net
+        mountPath: /movies
+
+      tv:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            path: /mnt/user/TV
+            server: slimcloud.lab.nickshores.net
+        mountPath: /tv
+
+    nodeSelector:
+      kubernetes.io/hostname: k3s-master-1

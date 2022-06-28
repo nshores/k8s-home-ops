@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  frigate:
+    container_name: frigate
+    restart: unless-stopped
+    image: blakeblackshear/frigate:stable-amd64
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/data/frigate/config/frigate.yml:/config/config.yml
+      - /var/data/frigate/clips:/media/frigate
+      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "1935:1935" # RTMP feeds
+    networks:
+    - mqtt_private
+    environment:
+      FRIGATE_RTSP_PASSWORD: "password"
+
+networks:
+  mqtt_private:
+    external: true

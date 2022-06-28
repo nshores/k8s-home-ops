@@ -1,0 +1,23 @@
+#cloud-config
+autoinstall:
+    version: 1
+    locale: en_US
+    keyboard:
+        layout: en
+        variant: us
+    network:
+        network:
+        version: 2
+        ethernets:
+            ens192:
+            dhcp4: true
+            dhcp-identifier: mac
+    identity:
+        hostname: ubuntu-20-template
+        username: packer
+        # `packer`, but hashed
+        #mkpasswd --methhod=SHA-512 --rounds=4096
+        password: '$6$rounds=4096$HPOCjDkry3F$3rP7h5J/scxvMV5zlEdmeZl1H.hd0cGHQudCqe3Vb5MhwBaL33ewl/YegU3SSpwYGJZGCC6hdJzzhPKuN.SoL/'
+    ssh:
+        install-server: yes
+        allow-pw: yes
