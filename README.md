@@ -14,13 +14,13 @@ This repository is the running configuration of my personal home kubernetes clus
 
 # Infrastructure
 
-### Hypervisor: vSphere
+### Hypervisor: VMware ESXI
 
-### K8S Distribution: K3s
+### K8S Distribution: [K3s](https://k3s.io/)
 
-### K8S Storage Provider: Longhorn
+### K8S Storage Provider: [Longhorn](https://longhorn.io/)
 
-### K8S Ingress: Traefik2
+### K8S Ingress: [Traefik2](https://doc.traefik.io/traefik/)
 
 # Directory Structure
 
