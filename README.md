@@ -10,7 +10,7 @@
 _...with Ansible and Kubernetes!_ :sailboat:
 <br/><br/><br/><br/>
 
-This repository is the running configuration of my personal home kubernetes cluster. The cluster is powered by vSphere and maintainend by in real-time by Flux.
+This repository is the running configuration of my personal home kubernetes cluster. The cluster is powered by vSphere and maintainend in real-time by Flux.
 
 # Infrastructure
 
