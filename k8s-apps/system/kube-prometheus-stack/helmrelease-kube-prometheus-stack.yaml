@@ -513,9 +513,7 @@ spec:
 
         ## AlermanagerConfig to be used as top level configuration
         ##
-        alertmanagerConfiguration:
-          alertmanagerConfiguration:
-            name: alertmanager-global-config
+        alertmanagerConfiguration: alertmanager-global-config
 
         ## Define Log Format
         # Use logfmt (default) or json logging
