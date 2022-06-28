@@ -21,7 +21,7 @@ spec:
   receivers:
     - name: "null"
     - name: "slack"
-      slack_configs:
+      slackConfigs:
         - channel: "#k8s"
           apiURL:
             key: 'address'
