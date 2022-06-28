@@ -1,0 +1,108 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hajimari
+  namespace: home
+spec:
+  chart:
+    spec:
+      chart: hajimari
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: hajimari
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: hajimari
+  values:
+    image:
+      # -- image repository
+      repository: ghcr.io/toboshii/hajimari
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+      # -- image tag
+      tag: v0.1.0
+
+    # -- environment variables.
+    # @default -- See below
+    env:
+      # -- Set the container timezone
+      TZ: America/Los_Angeles
+
+    # -- Configures Hajimari settings for this instance.
+    # @default -- See below
+    hajimari:
+      # -- The name of this instance, this allows running multiple
+      # instances of Hajimari on the same cluster
+      instanceName: null
+      # -- Set to true to show all discovered applications by default.
+      defaultEnable: true
+      # -- Namespace selector to use for discovering applications
+      namespaceSelector:
+        matchNames:
+          - home
+      # -- Override the title of the Hajimari pages
+      title: SlimLab
+      # -- Default name for welcome message
+      name: "Nick"
+      # -- Add custom applications to the discovered application list
+      customApps: []
+      # - name: Test
+      #   url: https://example.com
+      #   icon: test-tube
+
+      # -- Set default bookmarks
+      groups: []
+      # - name: Communicate
+      #   links:
+      #   - name: Discord
+      #     url: 'https://discord.com'
+      #   - name: Gmail
+      #     url: 'http://gmail.com'
+      #   - name: Slack
+      #     url: 'https://slack.com/signin'
+
+    # -- Configures service settings for the chart.
+    # @default -- See values.yaml
+    service:
+      main:
+        ports:
+          http:
+            port: 3000
+
+    # -- Configures service account needed for reading k8s ingress objects
+    # @default -- See below
+    serviceAccount:
+      # -- Create service account
+      create: true
+
+    ingress:
+      # -- Enable and configure ingress settings for the chart under this key.
+      # @default -- See values.yaml
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+        hosts:
+          - # -- Host address. Helm template can be passed.
+            host: dash.lab.nickshores.net
+            ## Configure the paths for the host
+            paths:
+              - # -- Path.  Helm template can be passed.
+                path: /
+                # -- Ignored if not kubeVersion >= 1.14-0
+                pathType: Prefix
+                service:
+                  # -- Overrides the service name reference for this path
+                  name:
+                  # -- Overrides the service port reference for this path
+                  port:
+
+    # -- Configure persistence settings for the chart under this key.
+    # @default -- See values.yaml
+    persistence:
+      data:
+        enabled: true
