@@ -2775,15 +2775,7 @@ spec:
             - longhorn-system
           endpoints:
           - port: manager
-           
-             selector:
-    matchLabels:
-      app: longhorn-manager
-  namespaceSelector:
-    matchNames:
-    - longhorn-system
-  endpoints:
-  - port: manager
+       
 
       ## Additional labels to set used for the ServiceMonitorSelector. Together with standard labels from
       ## the chart
