@@ -15,7 +15,9 @@ spec:
     routes:
       - receiver: "null"
         matchers:
-          - alertname =~ "InfoInhibitor|Watchdog"
+          - name: "alertname"
+            regex: true
+            value: "InfoInhibitor|Watchdog"
       - receiver: "slack"
         continue: true
   receivers:
