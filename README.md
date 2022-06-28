@@ -3,11 +3,12 @@
 <p align="left">
    <img src="https://i.imgur.com/4l9bHvG.png" alt="ansible logo" width="150" align="left" />
    <img src="https://i.imgur.com/EXNTJnA.png" alt="kubernetes home logo" width="150" align="left" />
+   <img src="https://user-images.githubusercontent.com/31406378/108641411-f9374f00-7496-11eb-82a7-0fa2a9cc5f93.png" alt="terraform home logo" width="150" align="left" />
 </p>
 
 ### Operations for my home
 
-_...with Ansible and Kubernetes!_ :sailboat:
+_...with Ansible + Terraform and Kubernetes!_ :sailboat:
 <br/><br/><br/><br/>
 
 This repository is the running configuration of my personal home kubernetes cluster. The cluster is powered by [K3s](https://k3s.io/) Nodes and maintainend in real-time by [Flux](https://fluxcd.io/docs/).
