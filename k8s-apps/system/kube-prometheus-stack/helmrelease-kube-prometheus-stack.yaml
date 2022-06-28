@@ -477,15 +477,14 @@ spec:
 
         ## AlertmanagerConfigs to be selected to merge and configure Alertmanager with.
         ##
-        alertmanagerConfigSelector:
         ## Example which selects all alertmanagerConfig resources
         ## with label "alertconfig" with values any of "example-config" or "example-config-2"
-          alertmanagerConfigSelector:
-            matchExpressions:
-              - key: alertmanagerConfig
-                operator: In
-                values:
-                  - alertmanager-global-config
+        alertmanagerConfigSelector:
+          matchExpressions:
+            - key: alertmanagerConfig
+              operator: In
+              values:
+                - alertmanager-global-config
         #
         ## Example which selects all alertmanagerConfig resources with label "role" set to "example-config"
         # alertmanagerConfigSelector:
