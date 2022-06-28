@@ -11,6 +11,7 @@
 
 _...with Ansible + Terraform and Kubernetes!_ :sailboat:
 <br/><br/><br/><br/>
+<br/>
 <img src="https://raw.githubusercontent.com/nshores/k8s-home-ops/main/images/dashboard.png" alt="dashboard" align="center" />
 
 
