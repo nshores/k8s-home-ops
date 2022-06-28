@@ -1,0 +1,5 @@
+flux_token
+*.env
+secrets.yaml
+.secrets/*
+.vscode/*
