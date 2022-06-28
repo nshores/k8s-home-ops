@@ -2766,6 +2766,12 @@ spec:
         - name: traefik
           selector:
             matchLabels:
+              app: traefik
+          namespaceSelector:
+            matchNames:
+            - traefik
+          endpoints:
+          - port: metrics
         - name: longhorn
           selector:
             matchLabels:
