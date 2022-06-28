@@ -26,7 +26,7 @@ spec:
           apiURL:
             key: 'address'
             name: 'home-secrets'
-          send_resolved: true
+          sendResolved: true
           title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
           text: >-
             {{ range .Alerts }}
