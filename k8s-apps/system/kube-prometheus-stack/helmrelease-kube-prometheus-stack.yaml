@@ -2772,7 +2772,7 @@ spec:
         - name: traefik
           selector:
             matchLabels:
-              app: traefik
+              app.kubernetes.io/name: traefik
           namespaceSelector:
             matchNames:
             - traefik
