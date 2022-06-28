@@ -11,7 +11,7 @@
 
 _...with Ansible + Terraform and Kubernetes!_ :sailboat:
 <br/><br/><br/><br/>
-<img src="https://raw.githubusercontent.com/nshores/k8s-home-ops/main/images/dashboard.png" alt="dashboard" width="150" align="center" />
+<img src="https://raw.githubusercontent.com/nshores/k8s-home-ops/main/images/dashboard.png" alt="dashboard" align="center" />
 
 
 This repository is the running configuration of my personal home kubernetes cluster. The cluster is powered by [K3s](https://k3s.io/) Nodes and maintainend in real-time by [Flux](https://fluxcd.io/docs/).
