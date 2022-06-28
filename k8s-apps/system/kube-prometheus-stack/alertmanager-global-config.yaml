@@ -37,5 +37,3 @@ spec:
               {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
               {{ end }}
             {{ end }}
-  templates:
-    - "/etc/alertmanager/config/*.tmpl"
