@@ -43,7 +43,7 @@ This repository is the running configuration of my personal home kubernetes clus
 # Bootstrapping
 
 * Populate with environment specific setings
-  * vCenter or vSphere is required to create the VM's.
+  * vCenter (For Templates) is required to create the VM's.
   * Terraform is required to create the VM resources.
 
  ```
