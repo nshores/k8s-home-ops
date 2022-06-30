@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: bitnami
+  name: stakater
   namespace: flux-system
 spec:
   interval: 15m
