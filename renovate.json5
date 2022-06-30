@@ -27,7 +27,7 @@
       {
         "fileMatch": ["./.+\\.yaml$"],
         "matchStrings": [
-          "*chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
+          "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
         ],
         "datasourceTemplate": "helm"
       }
