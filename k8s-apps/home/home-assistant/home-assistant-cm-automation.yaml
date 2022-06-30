@@ -456,7 +456,7 @@ data:
       alias: Living Room Movie Lights - Playing
       trigger:
       - platform: state
-        entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua_2
+        entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
         to: playing
       condition:
       - condition: state
@@ -471,7 +471,7 @@ data:
       alias: Living Room Movie Lights - Paused
       trigger:
       - platform: state
-        entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua_2
+        entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
         from: playing
         to: paused
       condition:
