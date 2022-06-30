@@ -15,12 +15,14 @@
     },
     "kubernetes": {
       "fileMatch": ["\\.yaml$"],
-      "ignorePaths": [,
+      "ignorePaths": [
+        "clusters",
         "ansible",
-        "k8s-apps\bootstrap"
+        "k8s-apps\bootstrap",
+        "scripts",
         ".github"
       ],
-    }
+    },
     "regexManagers": [
       {
         "fileMatch": ["./.+\\.yaml$"],
