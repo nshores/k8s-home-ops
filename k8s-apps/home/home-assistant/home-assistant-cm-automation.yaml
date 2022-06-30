@@ -351,10 +351,10 @@ data:
         - condition: or
           conditions:
           - condition: state
-            entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua_2
+            entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
             state: idle
           - condition: state
-            entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua_2
+            entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
             state: unavailable
       action:
       - service: light.turn_off
