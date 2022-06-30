@@ -13,16 +13,16 @@
     "helm-values": {
       "fileMatch": ["./.+\\.yaml$"]
     },
-    "kubernetes": {
-      "fileMatch": ["\\.yaml$"],
-      "ignorePaths": [
-        "clusters",
-        "ansible",
-        "k8s-apps\bootstrap",
-        "scripts",
-        ".github"
-      ],
-    },
+//    "kubernetes": {
+//      "fileMatch": ["\\.yaml$"],
+//      "ignorePaths": [
+//        "clusters",
+//        "ansible",
+//        "k8s-apps\bootstrap",
+//        "scripts",
+//        ".github"
+//      ],
+//    },
     "regexManagers": [
       {
         "fileMatch": ["./.+\\.yaml$"],
