@@ -15,10 +15,9 @@
     },
     "kubernetes": {
       "fileMatch": ["\\.yaml$"],
-      "ignorePaths": [
-        "clusters",
+      "ignorePaths": [,
         "ansible",
-        "scripts",
+        "k8s-apps\bootstrap"
         ".github"
       ],
     },
