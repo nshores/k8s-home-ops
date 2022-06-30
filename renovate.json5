@@ -20,7 +20,7 @@
         "k8s-apps\bootstrap"
         ".github"
       ],
-    },
+    }
     "regexManagers": [
       {
         "fileMatch": ["./.+\\.yaml$"],
