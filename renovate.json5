@@ -85,7 +85,7 @@
       // auto-updates
       {
         "datasources": ["docker"],
-        "automerge": true,
+        "automerge": false,
         "requiredStatusChecks": null,
         "schedule": "after 1am and before 5am",
         "updateTypes": ["minor", "patch"],
@@ -99,7 +99,7 @@
 
       {
         "datasources": ["helm"],
-        "automerge": true,
+        "automerge": false,
         "requiredStatusChecks": null,
         "schedule": "after 1am and before 5am",
         "updateTypes": ["minor", "patch"],
