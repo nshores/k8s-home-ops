@@ -94,7 +94,10 @@
         //   "plexinc/pms-docker",
         //   "ghcr.io/k8s-at-home/tt-rss"
         // ],
-        excludePackageNames: []
+        excludePackageNames: [
+        "ghcr.io/home-assistant/home-assistant",
+        "ghcr.io/k8s-at-home/plex"
+        ]
       },
 
       {
@@ -107,7 +110,10 @@
         //   "homeassistant/home-assistant",
         //   "plexinc/pms-docker"
         // ],
-        excludePackageNames: []
+        excludePackageNames: [
+        "ghcr.io/home-assistant/home-assistant",
+        "ghcr.io/k8s-at-home/plex"
+        ]
       }
     ]
   }
