@@ -9,6 +9,14 @@
     "suppressNotifications": ["prIgnoreNotification"],
     // Do not rebase PRs
     "rebaseWhen": "conflicted",
+    "ignoreDeps": [
+    "ghcr.io/fluxcd/helm-controller",
+    "ghcr.io/fluxcd/image-automation-controller",
+    "ghcr.io/fluxcd/image-reflector-controller",
+    "ghcr.io/fluxcd/kustomize-controller",
+    "ghcr.io/fluxcd/notification-controller",
+    "ghcr.io/fluxcd/source-controller"
+    ],
     "assignees": ["@nshores"],
     "helm-values": {
       "fileMatch": ["./.+\\.yaml$"]
