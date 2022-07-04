@@ -74,16 +74,16 @@ spec:
           # -- Enable devices to be discoverable
     hostNetwork: true
 
-    initContainers:
-      update-volume-permissions:
-        image: busybox:1.35.0
-        command: ["/bin/sh", "-c"]
-        args: ["chown -R 1001:1001 /config"]
-        volumeMounts:
-          - name: config
-            mountPath: /config
-        securityContext:
-          runAsUser: 0
+#     initContainers:
+#       update-volume-permissions:
+#         image: busybox:1.35.0
+#         command: ["/bin/sh", "-c"]
+#         args: ["chown -R 1001:1001 /config"]
+#         volumeMounts:
+#           - name: config
+#             mountPath: /config
+#         securityContext:
+#           runAsUser: 0
 
     podSecurityContext:
       runAsUser: 1001
