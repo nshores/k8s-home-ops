@@ -346,15 +346,15 @@ data:
           - sensor.date_time_iso
           - binary_sensor.doorbell_motion_alarm
 
-    # Example configuration.yaml entry
-    alert:
-      garage_door:
-        name: Garage is open
-        done_message: Garage is closed
-        entity_id: cover.garage_door
-        state: "open"
-        repeat: 10
-        can_acknowledge: true
-        skip_first: true
-        notifiers:
-          - pixel_phones
+    # # Example configuration.yaml entry
+    # alert:
+    #   garage_door:
+    #     name: Garage is open
+    #     done_message: Garage is closed
+    #     entity_id: cover.garage_door
+    #     state: "open"
+    #     repeat: 10
+    #     can_acknowledge: true
+    #     skip_first: true
+    #     notifiers:
+    #       - pixel_phones
