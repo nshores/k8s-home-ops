@@ -159,6 +159,7 @@ data:
             - light.shapes_82f4
             - light.ceiling_fan_master
             - light.controller_rgb_ww_cw_8fbc55
+            - switch.spare
       google_actions:
         filter:
           exclude_entities:
@@ -184,6 +185,7 @@ data:
             - light.shapes_82f4
             - light.ceiling_fan_master
             - light.controller_rgb_ww_cw_8fbc55
+            - switch.spare
         entity_config:
           camera.front_door_ffmpeg:
             name: Front Door Camera
