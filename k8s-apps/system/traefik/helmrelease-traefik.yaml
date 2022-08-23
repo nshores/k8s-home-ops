@@ -413,7 +413,7 @@ spec:
       spec:
         #enable this to perserve the client source IP for logging
         #https://kubernetes.io/docs/tutorials/services/source-ip/
-        externalTrafficPolicy: local
+        externalTrafficPolicy: Local
         # loadBalancerIP: "1.2.3.4"
         # clusterIP: "2.3.4.5"
       loadBalancerSourceRanges:
