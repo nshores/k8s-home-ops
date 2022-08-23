@@ -411,8 +411,9 @@ spec:
       # Additional entries here will be added to the service spec.
       # Cannot contain type, selector or ports entries.
       spec:
-        {}
-        # externalTrafficPolicy: Cluster
+        #enable this to perserve the client source IP for logging
+        #https://kubernetes.io/docs/tutorials/services/source-ip/
+        externalTrafficPolicy: Cluster
         # loadBalancerIP: "1.2.3.4"
         # clusterIP: "2.3.4.5"
       loadBalancerSourceRanges:
