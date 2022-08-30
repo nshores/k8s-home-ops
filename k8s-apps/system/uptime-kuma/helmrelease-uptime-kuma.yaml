@@ -19,6 +19,7 @@ spec:
   values:
     image:
       name: uptime-kuma
+      repository: louislam/uptime-kuma
       # defaults to appVersion
       tag: 1.16.1
       pullPolicy: IfNotPresent
