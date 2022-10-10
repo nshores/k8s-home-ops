@@ -579,13 +579,13 @@ data:
         platform: mqtt
         topic: frigate/events
       action:
-      - service: notify.pixel_phones
+      - service: notify.slack_notify
         data_template:
           message: A {{trigger.payload_json["after"]["label"]}} was detected at the front
             door!
           data:
-            image: https://ha.nickshores.net/api/frigate/notifications/{{trigger.payload_json["after"]["id"]}}/thumbnail.jpg?format=android
-            tag: '{{trigger.payload_json["after"]["id"]}}'
+            file:
+              url: https://ha.nickshores.net/api/frigate/notifications/{{trigger.payload_json["after"]["id"]}}/thumbnail.jpg
       - delay:
           minutes: 1
       id: d4bab80f373546e4b27924c92df6f136
