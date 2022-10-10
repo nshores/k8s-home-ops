@@ -102,11 +102,6 @@ data:
         platform: group
         services:
           - service: mobile_app_pixel_6_pro
-      - name: ALL_DEVICES
-        platform: group
-        services: 
-          - service: mobile_app_pixel_6_pro
-          - service: slack.notify
         
 
     #Timers
