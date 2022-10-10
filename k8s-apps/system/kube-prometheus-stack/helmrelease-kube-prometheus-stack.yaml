@@ -76,6 +76,8 @@ spec:
         nodeExporterRecording: true
         prometheus: true
         prometheusOperator: true
+      disabled: 
+        CPUThrottlingHigh: true
 
       ## Reduce app namespace alert scope
       appNamespacesTarget: ".*"
