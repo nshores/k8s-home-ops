@@ -76,8 +76,6 @@ spec:
         nodeExporterRecording: true
         prometheus: true
         prometheusOperator: true
-      disabled: 
-        CPUThrottlingHigh: true
 
       ## Reduce app namespace alert scope
       appNamespacesTarget: ".*"
@@ -97,9 +95,8 @@ spec:
       runbookUrl: "https://runbooks.prometheus-operator.dev/runbooks"
 
       ## Disabled PrometheusRule alerts
-      disabled: {}
-      # KubeAPIDown: true
-      # NodeRAIDDegraded: true
+      disabled:
+        CPUThrottlingHigh: true
 
     ## Deprecated way to provide custom recording or alerting rules to be deployed into the cluster.
     ##
@@ -229,8 +226,8 @@ spec:
             slack_configs:
               - channel: "#k8s"
                 apiURL:
-                  key: 'address'
-                  name: 'home-secrets'
+                  key: "address"
+                  name: "home-secrets"
                 send_resolved: true
                 title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
                 text: >-
@@ -291,9 +288,9 @@ spec:
         # ingressClassName: nginx
 
         annotations:
-         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-         traefik.ingress.kubernetes.io/router.tls: 'true'
-         traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
 
         labels: {}
 
@@ -758,7 +755,7 @@ spec:
         ##
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
 
         ## Labels to be added to the Ingress
@@ -2075,7 +2072,7 @@ spec:
 
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
         labels: {}
 
@@ -2779,19 +2776,18 @@ spec:
               app.kubernetes.io/name: traefik
           namespaceSelector:
             matchNames:
-            - traefik
+              - traefik
           endpoints:
-          - port: metrics
+            - port: metrics
         - name: longhorn
           selector:
             matchLabels:
-              app: longhorn-manager 
+              app: longhorn-manager
           namespaceSelector:
             matchNames:
-            - longhorn
+              - longhorn
           endpoints:
-          - port: manager
-       
+            - port: manager
 
       ## Additional labels to set used for the ServiceMonitorSelector. Together with standard labels from
       ## the chart
