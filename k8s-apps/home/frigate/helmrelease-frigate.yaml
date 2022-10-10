@@ -155,8 +155,6 @@ spec:
                   enabled: True
                 rtmp:
                   enabled: false
-                motion:
-                  mask:    - 0,480,522,480,526,259,0,258
             detectors:
               cpu1:
                 type: cpu
