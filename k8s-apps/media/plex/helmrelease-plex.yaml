@@ -8,7 +8,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: plex
-      version: 6.3.x
+      version: 6.4.x
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home
