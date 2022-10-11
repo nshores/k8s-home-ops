@@ -24,6 +24,8 @@ data:
         - /media
       external_url: https://ha.nickshores.net
       internal_url: https://ha.nickshores.net
+      whitelist_external_urls:
+      - "https://ha.nickshores.net/api/"
 
     #Enable zeroconf:
     zeroconf:
