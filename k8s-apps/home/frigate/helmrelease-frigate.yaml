@@ -151,8 +151,12 @@ spec:
                   fps: 5
                 snapshots:
                   enabled: True
+                  required_zones:
+                    - porch
                 record:
                   enabled: True
+                  required_zones:
+                    - porch
                 rtmp:
                   enabled: false
                 motion:
@@ -160,6 +164,11 @@ spec:
                     - 519,480,640,480,640,480,640,480,640,90,640,0,518,0,525,276
                     - 0,255,0,165,640,158,640,254
                     - 0,236,640,230,640,0,0,0
+                zones:
+                  porch:
+                    coordinates: 0,480,517,480,525,264,0,229
+                    objects:
+                    - person
             detectors:
               cpu1:
                 type: cpu
