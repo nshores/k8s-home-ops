@@ -155,8 +155,9 @@ spec:
                     - porch
                 record:
                   enabled: True
-                  required_zones:
-                    - porch
+                  events:
+                    required_zones:
+                      - porch
                 rtmp:
                   enabled: false
                 motion:
