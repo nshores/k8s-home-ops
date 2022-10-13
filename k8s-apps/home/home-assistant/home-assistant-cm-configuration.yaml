@@ -58,6 +58,8 @@ data:
           - sensor.time
           - sensor.time_date
           - sensor.internet_time
+          - binary_sensor.doorbell_alarm_local
+          - sensor.home_alarm_keypad
 
     # Enables a map showing the location of tracked devices
     map:
