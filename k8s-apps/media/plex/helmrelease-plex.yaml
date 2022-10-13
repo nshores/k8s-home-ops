@@ -142,5 +142,11 @@ spec:
             server: slimcloud.lab.nickshores.net
         mountPath: /tv
 
+      transcode:
+        enabled: true
+        type: hostPath
+        mountPath: /transcode
+        hostPath: /var/data/transcode
+
     nodeSelector:
       kubernetes.io/hostname: k3s-master-1
