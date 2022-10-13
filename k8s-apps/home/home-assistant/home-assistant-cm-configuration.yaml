@@ -123,9 +123,6 @@ data:
       - platform: ffmpeg
         input: !secret garage_ffmpeg_input
         name: garage__ffmpeg
-      - platform: ffmpeg
-        input: !secret front_door_ffmpeg_input
-        name: front_door_ffmpeg
 
     #ZM Config
     zoneminder:
@@ -364,7 +361,7 @@ data:
     #     notifiers:
     #       - pixel_phones
 
-    # Example configuration.yaml entry
+
     envisalink:
       host: 192.168.99.188
       panel_type: HONEYWELL
