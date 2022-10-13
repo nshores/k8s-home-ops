@@ -372,7 +372,7 @@ data:
       password: user
       code: "2950"
       port: 4025
-      evl_version: 3
+      evl_version: 4
       keepalive_interval: 60
       zonedump_interval: 30
       timeout: 10
