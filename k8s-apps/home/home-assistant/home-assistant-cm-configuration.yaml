@@ -378,10 +378,16 @@ data:
       timeout: 10
       panic_type: Police
       zones:
-        11:
-          name: "Back Door"
+        1:
+          name: "Front Door"
           type: "opening"
-        21:
+        2:
+          name: "Garage Door"
+          type: "opening"
+        3:
+          name: "Patio Door"
+          type: "opening"
+        5:
           name: "First Floor Motion"
           type: "motion"
       partitions:
