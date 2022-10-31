@@ -332,7 +332,7 @@ data:
       action:
       - service: light.turn_on
         data:
-          entity_id: light.living_room_lights_125
+          entity_id: light.living_room_lights
       id: fad1cc2ac279424283301b871688f464
     - alias: Living Room Motion Lighting Off
       trigger:
@@ -359,7 +359,7 @@ data:
       action:
       - service: light.turn_off
         data:
-          entity_id: light.living_room_lights_125
+          entity_id: light.living_room_lights
       id: bb4d40ba686940be9fe9f5927e501975
     - alias: Turn off HVAC if window/door is opened
       trigger:
