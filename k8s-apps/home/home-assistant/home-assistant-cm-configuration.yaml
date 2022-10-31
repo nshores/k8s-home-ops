@@ -140,7 +140,7 @@ data:
           exclude_entities:
             - switch.living_room_lights_17
           include_entities:
-            - light.living_room_lights_125
+            - light.living_room_lights
             - cover.garage_door
             - lock.door_lock_118
             - script.go_to_sleep
@@ -167,7 +167,7 @@ data:
           exclude_entities:
             - switch.living_room_lights_17
           include_entities:
-            - light.living_room_lights_125
+            - light.living_room_lights
             - cover.garage_door
             - lock.door_lock_118
             - script.go_to_sleep
