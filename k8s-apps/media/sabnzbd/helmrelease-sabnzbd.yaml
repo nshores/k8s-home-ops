@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/k8s-at-home/sabnzbd
       # -- image tag
-      tag: v3.6.1
+      tag: v3.7.0
       # -- image pull policy
       pullPolicy: IfNotPresent
 
