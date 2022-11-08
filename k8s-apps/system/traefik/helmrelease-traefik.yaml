@@ -277,7 +277,6 @@ spec:
     ## Use curly braces to pass values: `helm install --set="additionalArguments={--providers.kubernetesingress.ingressclass=traefik-internal,--log.level=DEBUG}"`
     additionalArguments:
       #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
-      - "--log.level=DEBUG"
       - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
       - "--entrypoints.web.forwardedHeaders.insecure"
       - "--entrypoints.websecure.forwardedHeaders.insecure"
