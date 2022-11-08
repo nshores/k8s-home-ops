@@ -1,0 +1,1982 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana-loki
+  namespace: default
+spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: grafana-loki
+      version: 2.4.8
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: grafana-loki
+  values:
+    clusterDomain: cluster.local
+    common:
+      exampleValue: common-chart
+      global:
+        imagePullSecrets: []
+        imageRegistry: ""
+        storageClass: longhorn
+    commonAnnotations: {}
+    commonLabels: {}
+    compactor:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      enabled: false
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        dataSource: {}
+        enabled: true
+        existingClaim: ""
+        selector: {}
+        size: 8Gi
+        storageClass: ""
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          http: ""
+        ports:
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    diagnosticMode:
+      args:
+      - infinity
+      command:
+      - sleep
+      enabled: false
+    distributor:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    externalMemcachedChunks:
+      host: ""
+      port: 11211
+    externalMemcachedFrontend:
+      host: ""
+      port: 11211
+    externalMemcachedIndexQueries:
+      host: ""
+      port: 11211
+    externalMemcachedIndexWrites:
+      host: ""
+      port: 11211
+    extraDeploy: []
+    fullnameOverride: ""
+    gateway:
+      affinity: {}
+      args: []
+      auth:
+        enabled: false
+        existingSecret: ""
+        password: ""
+        username: user
+      command: []
+      containerPorts:
+        http: 8080
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      enabled: true
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      image:
+        debug: false
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/nginx
+        tag: 1.23.1-debian-11-r32
+      ingress:
+        annotations: {}
+        apiVersion: ""
+        enabled: false
+        extraHosts: []
+        extraPaths: []
+        extraTls: []
+        hostname: grafana-loki.local
+        ingressClassName: ""
+        path: /
+        pathType: ImplementationSpecific
+        secrets: []
+        selfSigned: false
+        tls: false
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          http: ""
+        ports:
+          http: 80
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+      verboseLogging: false
+    global:
+      imagePullSecrets: []
+      imageRegistry: ""
+      storageClass: longhorn
+    indexGateway:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      enabled: false
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: ""
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    ingester:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        enabled: true
+        selector: {}
+        size: 8Gi
+        storageClass: ""
+        subPath: ""
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: ""
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    kubeVersion: ""
+    loki:
+      configuration: |
+        auth_enabled: false
+
+        server:
+          http_listen_port: {{ .Values.loki.containerPorts.http }}
+
+        distributor:
+          ring:
+            kvstore:
+              store: memberlist
+
+        memberlist:
+          join_members:
+            - {{ include "grafana-loki.gossip-ring.fullname" . }}
+
+        ingester:
+          lifecycler:
+            ring:
+              kvstore:
+                store: memberlist
+              replication_factor: 1
+          chunk_idle_period: 30m
+          chunk_block_size: 262144
+          chunk_encoding: snappy
+          chunk_retain_period: 1m
+          max_transfer_retries: 0
+          wal:
+            dir: {{ .Values.loki.dataDir }}/wal
+
+        limits_config:
+          enforce_metric_name: false
+          reject_old_samples: true
+          reject_old_samples_max_age: 168h
+          max_cache_freshness_per_query: 10m
+          split_queries_by_interval: 15m
+
+        schema_config:
+          configs:
+          - from: 2020-10-24
+            store: boltdb-shipper
+            object_store: filesystem
+            schema: v11
+            index:
+              prefix: index_
+              period: 24h
+
+        storage_config:
+          boltdb_shipper:
+            shared_store: filesystem
+            active_index_directory: {{ .Values.loki.dataDir }}/loki/index
+            cache_location: {{ .Values.loki.dataDir }}/loki/cache
+            cache_ttl: 168h
+            {{- if .Values.indexGateway.enabled }}
+            index_gateway_client:
+              server_address: {{ (printf "dns:///%s:9095" (include "grafana-loki.index-gateway.fullname" .)) }}
+            {{- end }}
+          filesystem:
+            directory: {{ .Values.loki.dataDir }}/chunks
+          index_queries_cache_config:
+            {{- if .Values.memcachedindexqueries.enabled }}
+            memcached:
+              batch_size: 100
+              parallelism: 100
+            memcached_client:
+              consistent_hash: true
+              addresses: dns+{{ include "grafana-loki.memcached-index-queries.host" . }}
+              service: http
+            {{- end }}
+
+        chunk_store_config:
+          max_look_back_period: 0s
+          {{- if .Values.memcachedchunks.enabled }}
+          chunk_cache_config:
+            memcached:
+              batch_size: 100
+              parallelism: 100
+            memcached_client:
+              consistent_hash: true
+              addresses: dns+{{ include "grafana-loki.memcached-chunks.host" . }}
+          {{- end }}
+          {{- if .Values.memcachedindexwrites.enabled }}
+          write_dedupe_cache_config:
+            memcached:
+              batch_size: 100
+              parallelism: 100
+            memcached_client:
+              consistent_hash: true
+              addresses: dns+{{ include "grafana-loki.memcached-index-writes.host" . }}
+          {{- end }}
+
+        table_manager:
+          retention_deletes_enabled: false
+          retention_period: 0s
+
+        query_range:
+          align_queries_with_step: true
+          max_retries: 5
+          cache_results: true
+          results_cache:
+            cache:
+              {{- if .Values.memcachedfrontend.enabled }}
+              memcached_client:
+                consistent_hash: true
+                addresses: dns+{{ include "grafana-loki.memcached-frontend.host" . }}
+                max_idle_conns: 16
+                timeout: 500ms
+                update_interval: 1m
+              {{- else }}
+              enable_fifocache: true
+              fifocache:
+                max_size_items: 1024
+                validity: 24h
+              {{- end }}
+        {{- if not .Values.queryScheduler.enabled }}
+        frontend_worker:
+          frontend_address: {{ include "grafana-loki.query-frontend.fullname" . }}:{{ .Values.queryFrontend.service.ports.grpc }}
+        {{- end }}
+
+        frontend:
+          log_queries_longer_than: 5s
+          compress_responses: true
+          tail_proxy_url: http://{{ include "grafana-loki.querier.fullname" . }}:{{ .Values.querier.service.ports.http }}
+
+        compactor:
+          shared_store: filesystem
+
+        ruler:
+          storage:
+            type: local
+            local:
+              directory: {{ .Values.loki.dataDir }}/conf/rules
+          ring:
+            kvstore:
+              store: memberlist
+          rule_path: /tmp/loki/scratch
+          alertmanager_url: https://alertmanager.xx
+          external_url: https://alertmanager.xx
+      containerPorts:
+        gossipRing: 7946
+        grpc: 9095
+        http: 3100
+      dataDir: /bitnami/grafana-loki
+      existingConfigmap: ""
+      gossipRing:
+        service:
+          annotations: {}
+          ports:
+            http: 7946
+      image:
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/grafana-loki
+        tag: 2.6.1-debian-11-r30
+      overrideConfiguration: {}
+    memcachedchunks:
+      affinity: {}
+      architecture: high-availability
+      args: []
+      auth:
+        enabled: false
+        password: ""
+        username: ""
+      autoscaling:
+        enabled: false
+        maxReplicas: 6
+        minReplicas: 3
+        targetCPU: 50
+        targetMemory: 50
+      clusterDomain: cluster.local
+      command: []
+      common:
+        exampleValue: common-chart
+        global:
+          imagePullSecrets: []
+          imageRegistry: ""
+          storageClass: longhorn
+      commonAnnotations: {}
+      commonLabels: {}
+      containerPorts:
+        memcached: 11211
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      diagnosticMode:
+        args:
+        - infinity
+        command:
+        - sleep
+        enabled: false
+      enabled: true
+      extraDeploy: []
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      fullnameOverride: ""
+      global:
+        imagePullSecrets: []
+        imageRegistry: ""
+        storageClass: longhorn
+      hostAliases: []
+      image:
+        debug: false
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/memcached
+        tag: 1.6.17-debian-11-r14
+      initContainers: []
+      kubeVersion: ""
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      metrics:
+        containerPorts:
+          metrics: 9150
+        customLivenessProbe: {}
+        customReadinessProbe: {}
+        customStartupProbe: {}
+        enabled: true
+        image:
+          digest: ""
+          pullPolicy: IfNotPresent
+          pullSecrets: []
+          registry: docker.io
+          repository: bitnami/memcached-exporter
+          tag: 0.10.0-debian-11-r32
+        livenessProbe:
+          enabled: true
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        podAnnotations:
+          prometheus.io/port: '{{ .Values.metrics.containerPorts.metrics }}'
+          prometheus.io/scrape: "true"
+        readinessProbe:
+          enabled: true
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          limits: {}
+          requests: {}
+        service:
+          annotations:
+            prometheus.io/port: '{{ .Values.metrics.service.ports.metrics }}'
+            prometheus.io/scrape: "true"
+          clusterIP: ""
+          ports:
+            metrics: 9150
+          sessionAffinity: None
+        serviceMonitor:
+          enabled: true
+          honorLabels: false
+          interval: ""
+          jobLabel: ""
+          labels:
+            release: kube-prometheus-stack
+          metricRelabelings: []
+          namespace: ""
+          relabelings: []
+          scrapeTimeout: ""
+          selector: {}
+        startupProbe:
+          enabled: false
+          failureThreshold: 15
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+      nameOverride: ""
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      pdb:
+        create: false
+        maxUnavailable: 1
+        minAvailable: ""
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        enabled: false
+        selector: {}
+        size: 8Gi
+        storageClass: ""
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: Parallel
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 3
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests:
+          cpu: 250m
+          memory: 256Mi
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          memcached: ""
+        ports:
+          memcached: 11211
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      serviceAccount:
+        annotations: {}
+        automountServiceAccountToken: true
+        create: false
+        name: ""
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      terminationGracePeriodSeconds: ""
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+      volumePermissions:
+        containerSecurityContext:
+          runAsUser: 0
+        enabled: false
+        image:
+          digest: ""
+          pullPolicy: IfNotPresent
+          pullSecrets: []
+          registry: docker.io
+          repository: bitnami/bitnami-shell
+          tag: 11-debian-11-r34
+        resources:
+          limits: {}
+          requests: {}
+    memcachedfrontend:
+      affinity: {}
+      architecture: high-availability
+      args: []
+      auth:
+        enabled: false
+        password: ""
+        username: ""
+      autoscaling:
+        enabled: false
+        maxReplicas: 6
+        minReplicas: 3
+        targetCPU: 50
+        targetMemory: 50
+      clusterDomain: cluster.local
+      command: []
+      common:
+        exampleValue: common-chart
+        global:
+          imagePullSecrets: []
+          imageRegistry: ""
+          storageClass: longhorn
+      commonAnnotations: {}
+      commonLabels: {}
+      containerPorts:
+        memcached: 11211
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      diagnosticMode:
+        args:
+        - infinity
+        command:
+        - sleep
+        enabled: false
+      enabled: true
+      extraDeploy: []
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      fullnameOverride: ""
+      global:
+        imagePullSecrets: []
+        imageRegistry: ""
+        storageClass: longhorn
+      hostAliases: []
+      image:
+        debug: false
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/memcached
+        tag: 1.6.17-debian-11-r14
+      initContainers: []
+      kubeVersion: ""
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      metrics:
+        containerPorts:
+          metrics: 9150
+        customLivenessProbe: {}
+        customReadinessProbe: {}
+        customStartupProbe: {}
+        enabled: true
+        image:
+          digest: ""
+          pullPolicy: IfNotPresent
+          pullSecrets: []
+          registry: docker.io
+          repository: bitnami/memcached-exporter
+          tag: 0.10.0-debian-11-r32
+        livenessProbe:
+          enabled: true
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        podAnnotations:
+          prometheus.io/port: '{{ .Values.metrics.containerPorts.metrics }}'
+          prometheus.io/scrape: "true"
+        readinessProbe:
+          enabled: true
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          limits: {}
+          requests: {}
+        service:
+          annotations:
+            prometheus.io/port: '{{ .Values.metrics.service.ports.metrics }}'
+            prometheus.io/scrape: "true"
+          clusterIP: ""
+          ports:
+            metrics: 9150
+          sessionAffinity: None
+        serviceMonitor:
+          enabled: true
+          honorLabels: false
+          interval: ""
+          jobLabel: ""
+          labels:
+            release: kube-prometheus-stack
+          metricRelabelings: []
+          namespace: ""
+          relabelings: []
+          scrapeTimeout: ""
+          selector: {}
+        startupProbe:
+          enabled: false
+          failureThreshold: 15
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+      nameOverride: ""
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      pdb:
+        create: false
+        maxUnavailable: 1
+        minAvailable: ""
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        enabled: false
+        selector: {}
+        size: 8Gi
+        storageClass: ""
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: Parallel
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 3
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests:
+          cpu: 250m
+          memory: 256Mi
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          memcached: ""
+        ports:
+          memcached: 11211
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      serviceAccount:
+        annotations: {}
+        automountServiceAccountToken: true
+        create: false
+        name: ""
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      terminationGracePeriodSeconds: ""
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+      volumePermissions:
+        containerSecurityContext:
+          runAsUser: 0
+        enabled: false
+        image:
+          digest: ""
+          pullPolicy: IfNotPresent
+          pullSecrets: []
+          registry: docker.io
+          repository: bitnami/bitnami-shell
+          tag: 11-debian-11-r34
+        resources:
+          limits: {}
+          requests: {}
+    memcachedindexqueries:
+      affinity: {}
+      architecture: high-availability
+      args: []
+      auth:
+        enabled: false
+        password: ""
+        username: ""
+      autoscaling:
+        enabled: false
+        maxReplicas: 6
+        minReplicas: 3
+        targetCPU: 50
+        targetMemory: 50
+      clusterDomain: cluster.local
+      command: []
+      common:
+        exampleValue: common-chart
+        global:
+          imagePullSecrets: []
+          imageRegistry: ""
+          storageClass: longhorn
+      commonAnnotations: {}
+      commonLabels: {}
+      containerPorts:
+        memcached: 11211
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      diagnosticMode:
+        args:
+        - infinity
+        command:
+        - sleep
+        enabled: false
+      enabled: true
+      extraDeploy: []
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      fullnameOverride: ""
+      global:
+        imagePullSecrets: []
+        imageRegistry: ""
+        storageClass: longhorn
+      hostAliases: []
+      image:
+        debug: false
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/memcached
+        tag: 1.6.17-debian-11-r14
+      initContainers: []
+      kubeVersion: ""
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      metrics:
+        containerPorts:
+          metrics: 9150
+        customLivenessProbe: {}
+        customReadinessProbe: {}
+        customStartupProbe: {}
+        enabled: true
+        image:
+          digest: ""
+          pullPolicy: IfNotPresent
+          pullSecrets: []
+          registry: docker.io
+          repository: bitnami/memcached-exporter
+          tag: 0.10.0-debian-11-r32
+        livenessProbe:
+          enabled: true
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        podAnnotations:
+          prometheus.io/port: '{{ .Values.metrics.containerPorts.metrics }}'
+          prometheus.io/scrape: "true"
+        readinessProbe:
+          enabled: true
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          limits: {}
+          requests: {}
+        service:
+          annotations:
+            prometheus.io/port: '{{ .Values.metrics.service.ports.metrics }}'
+            prometheus.io/scrape: "true"
+          clusterIP: ""
+          ports:
+            metrics: 9150
+          sessionAffinity: None
+        serviceMonitor:
+          enabled: true
+          honorLabels: false
+          interval: ""
+          jobLabel: ""
+          labels:
+            release: kube-prometheus-stack
+          metricRelabelings: []
+          namespace: ""
+          relabelings: []
+          scrapeTimeout: ""
+          selector: {}
+        startupProbe:
+          enabled: false
+          failureThreshold: 15
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+      nameOverride: ""
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      pdb:
+        create: false
+        maxUnavailable: 1
+        minAvailable: ""
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        enabled: false
+        selector: {}
+        size: 8Gi
+        storageClass: ""
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: Parallel
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 3
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests:
+          cpu: 250m
+          memory: 256Mi
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          memcached: ""
+        ports:
+          memcached: 11211
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      serviceAccount:
+        annotations: {}
+        automountServiceAccountToken: true
+        create: false
+        name: ""
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      terminationGracePeriodSeconds: ""
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+      volumePermissions:
+        containerSecurityContext:
+          runAsUser: 0
+        enabled: false
+        image:
+          digest: ""
+          pullPolicy: IfNotPresent
+          pullSecrets: []
+          registry: docker.io
+          repository: bitnami/bitnami-shell
+          tag: 11-debian-11-r34
+        resources:
+          limits: {}
+          requests: {}
+    memcachedindexwrites:
+      architecture: high-availability
+      enabled: false
+      image:
+        digest: ""
+        registry: docker.io
+        repository: bitnami/memcached
+        tag: 1.6.17-debian-11-r14
+      nameOverride: ""
+      service:
+        ports:
+          memcached: 11211
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        honorLabels: false
+        interval: ""
+        jobLabel: ""
+        labels:
+          release: kube-prometheus-stack
+        metricRelabelings: []
+        namespace: ""
+        relabelings: []
+        scrapeTimeout: ""
+        selector: {}
+    nameOverride: ""
+    promtail:
+      affinity: {}
+      args: []
+      command: []
+      configuration: |
+        server:
+          log_level: {{ .Values.promtail.logLevel }}
+          http_listen_port: {{ .Values.promtail.containerPorts.http }}
+
+        clients:
+          - url: http://{{ include "grafana-loki.gateway.fullname" . }}:{{ .Values.gateway.service.ports.http }}/loki/api/v1/push
+            {{- if .Values.gateway.auth.enabled }}
+            basic_auth:
+              # The username to use for basic auth
+              username: {{ .Values.gateway.auth.username }}
+              password_file: /bitnami/promtail/conf/secrets/password
+            {{- end }}
+        positions:
+          filename: /run/promtail/positions.yaml
+
+        scrape_configs:
+          # See also https://github.com/grafana/loki/blob/master/production/ksonnet/promtail/scrape_config.libsonnet for reference
+          - job_name: kubernetes-pods
+            pipeline_stages:
+              - cri: {}
+            kubernetes_sd_configs:
+              - role: pod
+            relabel_configs:
+              - source_labels:
+                  - __meta_kubernetes_pod_controller_name
+                regex: ([0-9a-z-.]+?)(-[0-9a-f]{8,10})?
+                action: replace
+                target_label: __tmp_controller_name
+              - source_labels:
+                  - __meta_kubernetes_pod_label_app_kubernetes_io_name
+                  - __meta_kubernetes_pod_label_app
+                  - __tmp_controller_name
+                  - __meta_kubernetes_pod_name
+                regex: ^;*([^;]+)(;.*)?$
+                action: replace
+                target_label: app
+              - source_labels:
+                  - __meta_kubernetes_pod_label_app_kubernetes_io_component
+                  - __meta_kubernetes_pod_label_component
+                regex: ^;*([^;]+)(;.*)?$
+                action: replace
+                target_label: component
+              - action: replace
+                source_labels:
+                - __meta_kubernetes_pod_node_name
+                target_label: node_name
+              - action: replace
+                source_labels:
+                - __meta_kubernetes_namespace
+                target_label: namespace
+              - action: replace
+                replacement: $1
+                separator: /
+                source_labels:
+                - namespace
+                - app
+                target_label: job
+              - action: replace
+                source_labels:
+                - __meta_kubernetes_pod_name
+                target_label: pod
+              - action: replace
+                source_labels:
+                - __meta_kubernetes_pod_container_name
+                target_label: container
+              - action: replace
+                replacement: /var/log/pods/*$1/*.log
+                separator: /
+                source_labels:
+                - __meta_kubernetes_pod_uid
+                - __meta_kubernetes_pod_container_name
+                target_label: __path__
+              - action: replace
+                regex: true/(.*)
+                replacement: /var/log/pods/*$1/*.log
+                separator: /
+                source_labels:
+                - __meta_kubernetes_pod_annotationpresent_kubernetes_io_config_hash
+                - __meta_kubernetes_pod_annotation_kubernetes_io_config_hash
+                - __meta_kubernetes_pod_container_name
+                target_label: __path__
+          - job_name: journal
+            journal:
+              path: /var/log/journal
+              max_age: 12h
+              labels:
+                job: systemd-journal
+            relabel_configs:
+              - source_labels: ['__journal__systemd_unit']
+                target_label: 'unit'
+              - source_labels: ['__journal__hostname']
+                target_label: 'hostname'
+      containerPorts:
+        http: 8080
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: false
+        runAsUser: 0
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      enabled: true
+      existingSecret: ""
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts:
+      - mountPath: /var/log/journal
+        name: journal
+        readOnly: true
+      extraVolumes:
+      - hostPath:
+          path: /var/log/journal/
+          type: ""
+        name: journal
+      hostAliases: []
+      image:
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/promtail
+        tag: 2.6.1-debian-11-r29
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      logLevel: info
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 0
+      priorityClassName: ""
+      rbac:
+        create: true
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          http: ""
+        ports:
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      serviceAccount:
+        annotations: {}
+        automountServiceAccountToken: true
+        create: true
+        name: ""
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    querier:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        enabled: true
+        selector: {}
+        size: 8Gi
+        storageClass: ""
+        subPath: ""
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: ""
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    queryFrontend:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    queryScheduler:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      minReadySeconds: 10
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    ruler:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      enabled: false
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        enabled: true
+        selector: {}
+        size: 8Gi
+        storageClass: ""
+        subPath: ""
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: ""
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    serviceAccount:
+      annotations: {}
+      automountServiceAccountToken: true
+      create: false
+      name: ""
+    tableManager:
+      affinity: {}
+      args: []
+      command: []
+      containerSecurityContext:
+        enabled: true
+        runAsNonRoot: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      customStartupProbe: {}
+      enabled: false
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      lifecycleHooks: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      schedulerName: ""
+      service:
+        annotations: {}
+        clusterIP: ""
+        externalTrafficPolicy: Cluster
+        extraPorts: []
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
+        nodePorts:
+          grpc: ""
+          http: ""
+        ports:
+          grpc: 9095
+          http: 3100
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: ClusterIP
+      sidecars: []
+      startupProbe:
+        enabled: false
+        failureThreshold: 15
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      tolerations: []
+      topologySpreadConstraints: []
+      updateStrategy:
+        rollingUpdate: {}
+        type: RollingUpdate
+    volumePermissions:
+      containerSecurityContext:
+        runAsUser: 0
+      enabled: false
+      image:
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/bitnami-shell
+        tag: 11-debian-11-r40
+      resources:
+        limits: {}
+        requests: {}
