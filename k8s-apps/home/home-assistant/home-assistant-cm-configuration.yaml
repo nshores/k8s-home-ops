@@ -30,8 +30,8 @@ data:
     #Enable zeroconf:
     zeroconf:
 
-    #scene
-    #scene: !include scenes.yaml
+
+    scene: !include scenes.yaml
 
     # Enables the frontend
     frontend:
