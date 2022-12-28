@@ -676,7 +676,7 @@ data:
         entity_id: light.living_room_lights
         to: 'unavailable'
       action:
-      - service: light.turn_off
-        entity_id: light.living_room_lights_125
-      - service: light.turn.on
-        entity_id: light.living_room_lights_125
+        - service: light.turn_off
+          entity_id: light.living_room_lights_125
+        - service: light.turn.on
+          entity_id: light.living_room_lights_125
