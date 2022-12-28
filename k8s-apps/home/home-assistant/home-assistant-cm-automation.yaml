@@ -670,3 +670,13 @@ data:
         service: light.turn_off
         entity_id: light.ak001_zj210_c44f3390c0af
       id: 94668e8641e147c585ecb20ed973c3bb
+    - alias: Fix WIZ Living Room Lights
+      trigger:
+        platform: state
+        entity_id: light.living_room_lights
+        to 'unavailable'
+      action:
+      - service: light.turn_off
+        entity_id: light.living_room_lights_125
+      - service: light.turn.on
+        entity_id: light.living_room_lights_125
