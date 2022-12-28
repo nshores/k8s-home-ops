@@ -678,5 +678,5 @@ data:
       action:
         - service: light.turn_off
           entity_id: light.living_room_lights_125
-        - service: light.turn.on
+        - service: light.turn_on
           entity_id: light.living_room_lights_125
