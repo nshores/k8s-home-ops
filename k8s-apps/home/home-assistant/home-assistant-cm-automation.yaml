@@ -674,7 +674,8 @@ data:
       trigger:
         platform: state
         entity_id: light.living_room_lights
-        to: 'Unavailable'
+        for: 00:01:00
+        to: unavailable
       action:
         - service: light.turn_off
           entity_id: light.living_room_lights_125
