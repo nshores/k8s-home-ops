@@ -672,10 +672,10 @@ data:
       id: 94668e8641e147c585ecb20ed973c3bb
     - alias: Fix WIZ Living Room Lights
       trigger:
-        platform: state
-        entity_id: light.living_room_lights
-        for: 00:01:00
-        to: "unavailable"
+      - platform: state
+        entity_id:
+        - light.living_room_lights
+      condition: "{{ trigger.to_state.state == 'unavailable' }}"
       action:
         - service: light.turn_off
           entity_id: light.living_room_lights_125
