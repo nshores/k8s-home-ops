@@ -32,6 +32,11 @@ data:
     
     #Enable media extractor
     media_extractor:
+    
+    #media dir
+    media_dirs:
+      media: /media
+      recording: /mnt/recordings
 
 
     scene: !include scenes.yaml
