@@ -686,3 +686,11 @@ data:
             milliseconds: 0
         - service: light.turn_on
           entity_id: light.living_room_lights_125
+    - alias: NYE 2023 
+      trigger:
+        - platform: time
+          at: "12:58:00"
+      condition: []
+      action:
+        - service: script.nye_2023
+          data: {}
