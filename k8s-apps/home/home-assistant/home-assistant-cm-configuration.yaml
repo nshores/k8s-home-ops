@@ -30,6 +30,8 @@ data:
     #Enable zeroconf:
     zeroconf:
     
+    schedule:
+    
     #Enable media extractor
     media_extractor:
    
