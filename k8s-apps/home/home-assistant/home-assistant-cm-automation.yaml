@@ -689,8 +689,7 @@ data:
     - alias:NYE 2023
       trigger:
         - platform: time
-          at: "12:45:00"
-      condition: []
+          at: "12:50:00"
       action:
         - service: media_player.play_media
           target:
@@ -698,12 +697,3 @@ data:
           data:
             media_content_id: media-source://media_source/local/NYE 2023.mp3
             media_content_type: audio/mpeg
-          metadata:
-            title: NYE 2023.mp3
-            thumbnail: null
-            media_class: music
-            children_media_class: null
-            navigateIds:
-              - {}
-              - media_content_type: app
-                media_content_id: media-source://media_source
