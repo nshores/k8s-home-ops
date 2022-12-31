@@ -29,6 +29,9 @@ data:
 
     #Enable zeroconf:
     zeroconf:
+    
+    #Enable media extractor
+    media_extractor:
 
 
     scene: !include scenes.yaml
