@@ -35,7 +35,7 @@ data:
     
     #media dir
     media_dirs:
-      media: /media
+      media: /config
       recording: /mnt/recordings
 
 
