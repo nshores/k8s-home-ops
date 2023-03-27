@@ -475,7 +475,7 @@ data:
         from: playing
         to:
           - "paused"
-          - "off"
+          - "idle"
       condition:
       - condition: state
         entity_id: sun.sun
