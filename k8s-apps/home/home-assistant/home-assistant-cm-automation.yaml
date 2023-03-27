@@ -594,7 +594,7 @@ data:
       description: ''
       trigger:
       - platform: state
-        entity_id: media_player.shield_4_2
+        entity_id: media_player.shield_4
         to: playing
       condition: []
       action:
