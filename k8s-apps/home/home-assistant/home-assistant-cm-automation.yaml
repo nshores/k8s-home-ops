@@ -8,7 +8,7 @@ data:
     - id: '1549141011449'
       alias: Front Door Lock 5 minute lock
       trigger:
-      - entity_id: lock.front_door_lock_131
+      - entity_id: lock.door_lock_118
         platform: state
         from: locked
         to: unlocked
@@ -17,7 +17,7 @@ data:
       action:
       - service: lock.lock
         entity_id:
-        - lock.front_door_lock_131
+        - lock.door_lock_118
     - alias: Door Chime
       trigger:
       - platform: state
@@ -332,7 +332,7 @@ data:
       action:
       - service: light.turn_on
         data:
-          entity_id: light.living_room_lights
+          entity_id: light.living_room_lights_125
       id: fad1cc2ac279424283301b871688f464
     - alias: Living Room Motion Lighting Off
       trigger:
@@ -351,15 +351,12 @@ data:
         - condition: or
           conditions:
           - condition: state
-            entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
-            state: idle
-          - condition: state
-            entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
-            state: unavailable
+            entity_id: media_player.shield_4
+            state: off
       action:
       - service: light.turn_off
         data:
-          entity_id: light.living_room_lights
+          entity_id: light.living_room_lights_125
       id: bb4d40ba686940be9fe9f5927e501975
     - alias: Turn off HVAC if window/door is opened
       trigger:
@@ -456,7 +453,7 @@ data:
       alias: Living Room Movie Lights - Playing
       trigger:
       - platform: state
-        entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
+        entity_id: media_player.shield_4
         to: playing
       condition:
       - condition: state
@@ -464,14 +461,14 @@ data:
         state: below_horizon
       action:
       - service: light.turn_on
-        entity_id: light.living_room_lights
+        entity_id: light.living_room_lights_125
         data:
           brightness_pct: 20
     - id: 3eeb0aad017041d08c88d3a33b717f17
       alias: Living Room Movie Lights - Paused
       trigger:
       - platform: state
-        entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua
+        entity_id: media_player.shield_4
         from: playing
         to: paused
       condition:
@@ -480,7 +477,7 @@ data:
         state: below_horizon
       action:
       - service: light.turn_on
-        entity_id: light.living_room_lights
+        entity_id: light.living_room_lights_125
         data:
           brightness_pct: 90
     - alias: Turn on entry light when there is movement
@@ -579,13 +576,13 @@ data:
         platform: mqtt
         topic: frigate/events
       action:
-      - service: notify.slack_notify
+      - service: notify.pixel_phones
         data_template:
           message: A {{trigger.payload_json["after"]["label"]}} was detected at the front
             door!
           data:
-            file:
-              url: https://ha.nickshores.net/api/frigate/notifications/{{trigger.payload_json["after"]["id"]}}/thumbnail.jpg
+            image: https://ha.nickshores.net/api/frigate/notifications/{{trigger.payload_json["after"]["id"]}}/thumbnail.jpg?format=android
+            tag: '{{trigger.payload_json["after"]["id"]}}'
       - delay:
           minutes: 1
       id: d4bab80f373546e4b27924c92df6f136
@@ -594,7 +591,7 @@ data:
       description: ''
       trigger:
       - platform: state
-        entity_id: media_player.plex_plex_for_lg_lg_oled65b8pua_2
+        entity_id: media_player.shield_4
         to: playing
       condition: []
       action:
@@ -670,27 +667,3 @@ data:
         service: light.turn_off
         entity_id: light.ak001_zj210_c44f3390c0af
       id: 94668e8641e147c585ecb20ed973c3bb
-    - alias: Fix WIZ Living Room Lights
-      trigger:
-      - platform: state
-        entity_id:
-        - light.living_room_lights
-      condition: "{{ trigger.to_state.state == 'unavailable' }}"
-      action:
-        - service: light.turn_off
-          entity_id: light.living_room_lights_125
-        - delay:
-            hours: 0
-            minutes: 0
-            seconds: 30
-            milliseconds: 0
-        - service: light.turn_on
-          entity_id: light.living_room_lights_125
-    - alias: NYE 2023 
-      trigger:
-        - platform: time
-          at: "23:59:00"
-      condition: []
-      action:
-        - service: script.nye_2023
-          data: {}
