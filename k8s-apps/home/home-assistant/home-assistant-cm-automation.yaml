@@ -345,17 +345,14 @@ data:
         - condition: state
           entity_id: media_player.lg_webos_smart_tv_2
           state: 'off'
-        - condition: state
-          entity_id: media_player.chromecast0130
-          state: 'off'
         - condition: or
           conditions:
           - condition: state
             entity_id: media_player.shield_4
-            state: idle
+            state: 'idle'
           - condition: state
             entity_id: media_player.shield_4
-            state: off
+            state: 'off'
       action:
       - service: light.turn_off
         data:
