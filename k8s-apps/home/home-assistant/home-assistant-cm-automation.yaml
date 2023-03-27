@@ -473,7 +473,9 @@ data:
       - platform: state
         entity_id: media_player.shield_4
         from: playing
-        to: paused
+        to:
+          - "paused"
+          - "off"
       condition:
       - condition: state
         entity_id: sun.sun
