@@ -373,7 +373,7 @@ data:
 
 
     envisalink:
-      host: 192.168.99.188
+      host: 192.168.99.147
       panel_type: HONEYWELL
       user_name: user
       password: user
