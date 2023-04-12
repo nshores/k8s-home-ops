@@ -343,6 +343,7 @@ data:
       use_x_forwarded_for: true
       trusted_proxies:
         - 10.42.0.0/22
+        - 192.168.99.0/24
         - 127.0.0.1
         - ::1
 
