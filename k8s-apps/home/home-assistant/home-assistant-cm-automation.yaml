@@ -659,7 +659,7 @@ data:
         event: sunset
       action:
         service: light.turn_on
-        entity_id: light.ak001_zj210_c44f3390c0af
+        entity_id: light.controller_rgb_ir_90c0af
       id: 757761ec33dc40f08b71c5e688c3cd39
     - alias: Bedroom LED Sunrise
       trigger:
@@ -667,7 +667,7 @@ data:
         event: sunrise
       action:
         service: light.turn_off
-        entity_id: light.ak001_zj210_c44f3390c0af
+        entity_id: light.controller_rgb_ir_90c0af
       id: 94668e8641e147c585ecb20ed973c3bb
     - alias: Fix WIZ Living Room Lights
       trigger:
