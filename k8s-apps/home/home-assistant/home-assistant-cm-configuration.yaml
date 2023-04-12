@@ -161,7 +161,7 @@ data:
             - switch.smart_switch_6_104
             - switch.washing_machine_111
             - switch.bedroom_lamp
-            - light.ak001_zj210_c44f3390c0af
+            - light.controller_rgb_ir_90c0af
             - light.wiz_bulb_office
             - light.ceiling_fan_office
             - light.shapes_82f4
@@ -188,7 +188,7 @@ data:
             - light.2cf432f4a1bd_192_168_99_164
             - switch.washing_machine_111
             - switch.bedroom_lamp
-            - light.ak001_zj210_c44f3390c0af
+            - light.controller_rgb_ir_90c0af
             - light.wiz_bulb_office
             - light.ceiling_fan_office
             - light.shapes_82f4
