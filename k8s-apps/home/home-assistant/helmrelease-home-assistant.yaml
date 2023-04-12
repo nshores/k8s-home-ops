@@ -76,7 +76,7 @@ spec:
                   port:
 
     # -- Enable devices to be discoverable
-    # hostNetwork: true
+     hostNetwork: true
 
     # -- When hostNetwork is true set dnsPolicy to ClusterFirstWithHostNet
     # dnsPolicy: ClusterFirstWithHostNet
