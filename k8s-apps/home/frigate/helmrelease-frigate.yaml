@@ -21,7 +21,7 @@ spec:
       repository: blakeblackshear/frigate
       # -- image tag
       # @default -- chart.appVersion
-      tag:
+      tag: stable
       # -- image pull policy
       pullPolicy: IfNotPresent
 
