@@ -29,12 +29,12 @@ data:
 
     #Enable zeroconf:
     zeroconf:
-    
+
     schedule:
-    
+
     #Enable media extractor
     media_extractor:
-   
+
 
 
     scene: !include scenes.yaml
@@ -249,7 +249,7 @@ data:
           average_house_temp:
             friendly_name: "Average House Temp"
             unit_of_measurement: "°F"
-            value_template: "{{((float(states('sensor.downstairs_motion_temperature_measurement')) + float(states.climate.hallway_upstairs_2.attributes.current_temperature)) + float(states('sensor.upstairs_temp_temperature_measurement'))) | int /3 }}"
+            value_template: "{{((float(states('sensor.downstairs_motion_temperature_measurement')) + float(states.climate.hallway_upstairs_2.attributes.current_temperature))) | int /2 }}"
           warm_inside:
             friendly_name: "Warm Inside"
             value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
