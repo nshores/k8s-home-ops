@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/onedr0p/tautulli
       # -- image tag
-      tag: 2.10.5
+      tag: 2.12.3
       # -- image pull policy
       pullPolicy: IfNotPresent
 
