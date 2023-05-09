@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: frigate
       version: 8.2.x
       sourceRef:
@@ -18,7 +19,7 @@ spec:
   values:
     image:
       # -- image repository
-      repository: blakeblackshear/frigate
+      repository: ghcr.io/blakeblackshear/frigate
       # -- image tag
       # @default -- chart.appVersion
       tag: stable
