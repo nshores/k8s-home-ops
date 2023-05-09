@@ -89,7 +89,7 @@
       {
         "datasources": ["docker"],
         "versioning": "loose",
-        "packageNames": ["plexinc/pms-docker", "ghcr.io/k8s-at-home/plex"]
+        "packageNames": ["plexinc/pms-docker", "ghcr.io/k8s-at-home/plex", "ghcr.io/onedr0p/plex"]
       },
       // auto-updates
       {
