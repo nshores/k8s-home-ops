@@ -19,7 +19,7 @@ spec:
   values:
     image:
       # -- image repository
-      repository: ghcr.io/onedr0p/tautulli/plex
+      repository: ghcr.io/onedr0p/plex
       # -- image tag
       tag: 1.29.2.6364-6d72b0cf6
       # -- image pull policy

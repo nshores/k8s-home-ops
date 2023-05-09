@@ -19,7 +19,7 @@ spec:
   values:
     image:
       # -- image repository
-      repository: ghcr.io/onedr0p/tautulli/sabnzbd
+      repository: ghcr.io/onedr0p/sabnzbd
       # -- image tag
       tag: 3.7.0
       # -- image pull policy

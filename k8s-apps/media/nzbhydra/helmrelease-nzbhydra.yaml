@@ -19,7 +19,7 @@ spec:
   values:
     image:
       # -- image repository
-      repository: ghcr.io/onedr0p/tautulli/nzbhydra2
+      repository: ghcr.io/onedr0p/nzbhydra2
       # -- image tag
       tag: 4.7.1
       # -- image pull policy
