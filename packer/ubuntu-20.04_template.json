@@ -37,7 +37,7 @@
       "ssh_port": 22,
       "http_directory": "http",
       "iso_paths": [
-        "[ESX3-4TB-HDD] isos/ubuntu-20.04.1-live-server-amd64.iso"
+        "[ESX4-NVME-1TB-1] isos/ubuntu-20.04.1-live-server-amd64.iso"
       ],
       "boot_wait": "5s",
       "ssh_timeout": "40m",

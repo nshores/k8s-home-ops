@@ -5,7 +5,7 @@ vsphere_datastore: ESX4-NVME-1TB-1
 vsphere_compute_cluster: ProdCluster
 vsphere_network: production-10gb
 vsphere_template_folder: Templates
-vsphere_template_name: ubuntu2004-amd64-shoreslab
+vsphere_template_name: ubuntu2004-amd64-shoreslab-052323
 vsphere_vm_ram: 8096 # How much RAM to give each VM
 vsphere_vm_cores: 4 # How many processors to give each VM
 vsphere_vm_disk0_size: 120 # Size (in GB) of the primary (system) disk on each VM

@@ -33,7 +33,10 @@ resource "vsphere_virtual_machine" "{{ inventory_hostname_short }}" {
         vapp,
         datastore_id,
         num_cpus,
-        folder
+        folder,
+        clone,
+        extra_config,
+        wait_for_guest_net_timeout
     ]
   }
 
