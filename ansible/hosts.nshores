@@ -10,13 +10,13 @@ vcenter67.local    ansible_host=192.168.99.59
 [vsphere_vms]
 k3s-master-1   ansible_host=192.168.99.200
 k3s-master-2   ansible_host=192.168.99.201
-k3s-master-3   ansible_host=192.168.99.203
+# k3s-master-3   ansible_host=192.168.99.203
 k3s-master-4   ansible_host=192.168.99.206
 
 [k3s_masters]
 k3s-master-1   ansible_host=192.168.99.200
 k3s-master-2   ansible_host=192.168.99.201
-k3s-master-3   ansible_host=192.168.99.203
+# k3s-master-3   ansible_host=192.168.99.203
 k3s-master-4   ansible_host=192.168.99.206
 
 

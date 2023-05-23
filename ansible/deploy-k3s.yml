@@ -42,9 +42,12 @@
       vars:
         packages:
           - nfs-common
+      tags: k3s-master
     - name: set tz
       timezone:
         name: America/Los_Angeles
+      tags:
+        k3s-master
 
         #TODO install and start avahi-daemon
         #sudo apt install -y avahi-daemon &&  sudo sed -i 's/#enable-reflector=no/enable-reflector=yes/g' avahi-daemon.conf
