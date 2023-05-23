@@ -1,7 +1,7 @@
 # The Ansible roles allow you to override certain aspects of the environment generation and recipe deployment.
 
 vsphere_datacenter: ShoresLab
-vsphere_datastore: ESX3-VMFS-500GB-SSD-870
+vsphere_datastore: ESX4-NVME-1TB-1
 vsphere_compute_cluster: ProdCluster
 vsphere_network: production-10gb
 vsphere_template_folder: Templates

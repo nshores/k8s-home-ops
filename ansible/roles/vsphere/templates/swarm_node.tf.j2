@@ -25,6 +25,18 @@ resource "vsphere_virtual_machine" "{{ inventory_hostname_short }}" {
     thin_provisioned = true
   }
 
+  lifecycle {
+    ignore_changes = [
+        disk,
+        storage_policy_id,
+        enable_disk_uuid,
+        vapp,
+        datastore_id,
+        num_cpus,
+        folder
+    ]
+  }
+
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
   }

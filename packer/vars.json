@@ -1,14 +1,13 @@
 {
-    
-        "vm_name": "ubuntu2004-amd64-shoreslab",
+        "vm_name": "ubuntu2004-amd64-shoreslab-052323",
         "vcenter_address": "vcenter67.local",
         "vcenter_user": "administrator@vsphere.local",
         "vcenter_password": "{{ user `vcenter_password` }}",
         "vcenter_dc": "ShoresLab",
         "vcenter_cluster": "ProdCluster",
-        "vcenter_host": "192.168.99.8",
-        "vcenter_datastore": "Local Storage 500GB",
-        "vcenter_network": "Production",
+        "vcenter_host": "192.168.99.70",
+        "vcenter_datastore": "ESX3-4TB-HDD",
+        "vcenter_network": "production-10gb",
         "vcenter_ignore_ssl": "true",
         "packer_host": "192.168.99.191",
         "packer_host_port": "8924"

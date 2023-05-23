@@ -65,7 +65,7 @@
             chdir: "{{ terraform_dir }}"
 
         - name: Run terraform apply
-          command: terraform apply -parallelism=1
+          command: terraform apply -parallelism=1 -auto-approve
           args:
             chdir: "{{ terraform_dir }}"
 
