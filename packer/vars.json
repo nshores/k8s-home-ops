@@ -1,5 +1,5 @@
 {
-        "vm_name": "ubuntu2004-amd64-shoreslab-052323",
+        "vm_name": "ubuntu2204-amd64-shoreslab-052323",
         "vcenter_address": "vcenter67.local",
         "vcenter_user": "administrator@vsphere.local",
         "vcenter_password": "{{ user `vcenter_password` }}",

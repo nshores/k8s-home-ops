@@ -2,9 +2,9 @@
 autoinstall:
     version: 1
     locale: en_US
-    keyboard:
-        layout: en
-        variant: us
+    # keyboard:
+    #     layout: en
+    #     variant: us
     network:
         network:
         version: 2
@@ -17,7 +17,7 @@ autoinstall:
         username: packer
         # `packer`, but hashed
         #mkpasswd --methhod=SHA-512 --rounds=4096
-        password: '$6$rounds=4096$HPOCjDkry3F$3rP7h5J/scxvMV5zlEdmeZl1H.hd0cGHQudCqe3Vb5MhwBaL33ewl/YegU3SSpwYGJZGCC6hdJzzhPKuN.SoL/'
+        password: "$6$rounds=4096$HPOCjDkry3F$3rP7h5J/scxvMV5zlEdmeZl1H.hd0cGHQudCqe3Vb5MhwBaL33ewl/YegU3SSpwYGJZGCC6hdJzzhPKuN.SoL/"
     ssh:
         install-server: yes
         allow-pw: yes

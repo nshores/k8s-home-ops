@@ -26,18 +26,7 @@ resource "vsphere_virtual_machine" "{{ inventory_hostname_short }}" {
   }
 
   lifecycle {
-    ignore_changes = [
-        disk,
-        storage_policy_id,
-        enable_disk_uuid,
-        vapp,
-        datastore_id,
-        num_cpus,
-        folder,
-        clone,
-        extra_config,
-        wait_for_guest_net_timeout
-    ]
+    ignore_changes = all
   }
 
   clone {
