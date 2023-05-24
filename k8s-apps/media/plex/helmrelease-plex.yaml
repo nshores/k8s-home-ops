@@ -31,8 +31,8 @@ spec:
       # -- Set the container timezone
       TZ: America/Los_Angeles
       VERSION: docker
-      PLEX_UID: 1001
-      PLEX_GID: 1001
+      PLEX_UID: 1002
+      PLEX_GID: 1002
       PLEX_CLAIM:
         valueFrom:
           secretKeyRef:
@@ -87,9 +87,9 @@ spec:
     #           runAsUser: 0
 
     podSecurityContext:
-      runAsUser: 1001
-      runAsGroup: 1001
-      fsGroup: 1001
+      runAsUser: 1002
+      runAsGroup: 1002
+      fsGroup: 1002
       fsGroupChangePolicy: "OnRootMismatch"
 
     ingress:
