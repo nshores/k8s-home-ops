@@ -31,15 +31,15 @@ spec:
       # -- Set the container timezone
       TZ: America/Los_Angeles
       VERSION: docker
-      PLEX_UID: 1001
-      PLEX_GID: 1001
+      PLEX_UID: 1002
+      PLEX_GID: 1002
       PLEX_CLAIM:
         valueFrom:
           secretKeyRef:
             name: home-secrets
             key: PLEX_CLAIM
       ALLOWED_NETWORKS: 172.16.200.0/24,192.168.99.0/24,10.42.0.0/22
-      ADVERTISE_IP: http://192.168.99.200:32400
+      ADVERTISE_IP: http://192.168.99.207:32400
 
     # -- Configures service settings for the chart.
     # @default -- See values.yaml
@@ -87,9 +87,9 @@ spec:
     #           runAsUser: 0
 
     podSecurityContext:
-      runAsUser: 1001
-      runAsGroup: 1001
-      fsGroup: 1001
+      runAsUser: 1002
+      runAsGroup: 1002
+      fsGroup: 1002
       fsGroupChangePolicy: "OnRootMismatch"
 
     ingress:
@@ -149,7 +149,7 @@ spec:
         hostPath: /var/data/transcode
 
     nodeSelector:
-      kubernetes.io/hostname: k3s-master-1
+      kubernetes.io/hostname: k3s-master-5
 
 #     resources:
 #       requests:
