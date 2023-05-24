@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/onedr0p/plex
       # -- image tag
-      tag: 1.29.2.6364-6d72b0cf6
+      tag: 1.32.2.7100-248a2daf0
       # -- image pull policy
       pullPolicy: IfNotPresent
 
