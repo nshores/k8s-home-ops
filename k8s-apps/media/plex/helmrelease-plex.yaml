@@ -149,10 +149,10 @@ spec:
         hostPath: /var/data/transcode
 
     nodeSelector:
-      kubernetes.io/hostname: k3s-master-5
+      kubernetes.io/hostname: k3s-master-1
 
-    resources:
-      requests:
-        gpu.intel.com/i915: "1"
-      limits:
-        gpu.intel.com/i915: "1"
+#     resources:
+#       requests:
+#         gpu.intel.com/i915: "1"
+#       limits:
+#         gpu.intel.com/i915: "1"
