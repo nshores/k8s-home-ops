@@ -39,7 +39,7 @@ spec:
             name: home-secrets
             key: PLEX_CLAIM
       ALLOWED_NETWORKS: 172.16.200.0/24,192.168.99.0/24,10.42.0.0/22
-      ADVERTISE_IP: http://192.168.99.207:32400
+      ADVERTISE_IP: http://192.168.99.200:32400
 
     # -- Configures service settings for the chart.
     # @default -- See values.yaml
