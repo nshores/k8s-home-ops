@@ -19,7 +19,7 @@ This repository is the running configuration of my personal home kubernetes clus
 
 # Infrastructure
 
-### Hypervisor: VMware ESXI
+### Hypervisor: VMware ESXI 8.0
 
 ### K8S Distribution: [K3s](https://k3s.io/)
 
