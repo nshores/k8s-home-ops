@@ -149,7 +149,7 @@ spec:
       quicksync:
         enabled: true
         type: hostPath
-        mountPath: /transcode
+        mountPath: /dev/dri
         hostPath: /dev/dri
         
         
