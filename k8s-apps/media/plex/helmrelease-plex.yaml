@@ -91,6 +91,8 @@ spec:
       runAsGroup: 1002
       fsGroup: 1002
       fsGroupChangePolicy: "OnRootMismatch"
+      privileged: true
+ 
 
     ingress:
       # -- Enable and configure ingress settings for the chart under this key.
