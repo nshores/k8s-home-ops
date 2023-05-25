@@ -146,11 +146,17 @@ spec:
         mountPath: /transcode
         hostPath: /var/data/transcode
         
-      quicksync:
+      quicksync-card1-to-card-0:
         enabled: true
         type: hostPath
-        mountPath: /dev/dri
-        hostPath: /dev/dri
+        mountPath: /dev/dri/card0
+        hostPath: /dev/dri/card1
+        
+      quicksync-renderd129-to-renderd128:
+        enabled: true
+        type: hostPath
+        mountPath: /dev/dri/renderD128
+        hostPath: /dev/dri/renderD129
         
         
 
