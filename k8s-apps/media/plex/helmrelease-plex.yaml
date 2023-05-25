@@ -86,7 +86,7 @@ spec:
     #         securityContext:
     #           runAsUser: 0
 
-    SecurityContext:
+    securityContext:
       privileged: true
  
 
