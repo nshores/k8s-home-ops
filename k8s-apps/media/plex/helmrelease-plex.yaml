@@ -87,10 +87,6 @@ spec:
     #           runAsUser: 0
 
     podSecurityContext:
-      runAsUser: 1002
-      runAsGroup: 1002
-      fsGroup: 1002
-      fsGroupChangePolicy: "OnRootMismatch"
       privileged: true
  
 
