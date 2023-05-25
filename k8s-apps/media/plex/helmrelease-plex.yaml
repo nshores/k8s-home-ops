@@ -145,12 +145,20 @@ spec:
         type: hostPath
         mountPath: /transcode
         hostPath: /var/data/transcode
+        
+      quicksync:
+        enabled: true
+        type: hostPath
+        mountPath: /transcode
+        hostPath: /dev/dri
+        
+        
 
     nodeSelector:
       kubernetes.io/hostname: k3s-master-5
 
-    resources:
-      requests:
-        gpu.intel.com/i915: "1"
-      limits:
-        gpu.intel.com/i915: "1"
+#     resources:
+#       requests:
+#         gpu.intel.com/i915: "1"
+#       limits:
+#         gpu.intel.com/i915: "1"
