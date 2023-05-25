@@ -19,9 +19,9 @@ spec:
   values:
     image:
       # -- image repository
-      repository: ghcr.io/onedr0p/plex
+      repository: lscr.io/linuxserver/plex:latest
       # -- image tag
-      tag: 1.32.2.7100-248a2daf0
+      tag: 1.32.2
       # -- image pull policy
       pullPolicy: IfNotPresent
 
@@ -31,8 +31,8 @@ spec:
       # -- Set the container timezone
       TZ: America/Los_Angeles
       VERSION: docker
-      PLEX_UID: 1002
-      PLEX_GID: 1002
+      PUID: 1002
+      PGID: 1002
       PLEX_CLAIM:
         valueFrom:
           secretKeyRef:
@@ -151,8 +151,8 @@ spec:
     nodeSelector:
       kubernetes.io/hostname: k3s-master-5
 
-#     resources:
-#       requests:
-#         gpu.intel.com/i915: "1"
-#       limits:
-#         gpu.intel.com/i915: "1"
+    resources:
+      requests:
+        gpu.intel.com/i915: "1"
+      limits:
+        gpu.intel.com/i915: "1"
