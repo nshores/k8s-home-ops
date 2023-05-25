@@ -86,7 +86,7 @@ spec:
     #         securityContext:
     #           runAsUser: 0
 
-    podSecurityContext:
+    SecurityContext:
       privileged: true
  
 
