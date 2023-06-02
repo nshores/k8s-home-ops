@@ -125,22 +125,29 @@ spotify_client_secret: xxx
 `kubectl apply -k .secrets -n home`
 &nbsp;
 
-# :handshake:&nbsp; Thanks
-
-I learned a lot from the people that have shared their clusters over at
-[awesome-home-kubernetes](https://github.com/k8s-at-home/awesome-home-kubernetes)
-
-Another big thanks to the great work done by community over at [Funky Penguin's Geek Cookbook](https://geek-cookbook.funkypenguin.co.nz/community/discord/)
-
 ## GPU Transcoding Notes
 
 Notes about the IGPU. The container manually had ffmpeg, clinfo, and intel-gpu-tools installed - not sure if this is needed.
 
-# testing tools
+## GPU Testing tools
 
+```
 apt install --no-install-recommends ffmpeg vainfo
 sudo apt install intel-gpu-tools
 clinfo
 vainfo --display drm --device /dev/dri/renderD129
 ffmpeg -v verbose -init_hw_device vaapi=va:/dev/dri/renderD129 -init_hw_device opencl@va
 ffmpeg -loglevel debug -hwaccel vaapi -vaapi_device /dev/dri/renderD129 -i *.mp4 -f null -
+```
+
+# K3S ApiServer VIP Notes
+
+By default the k3s apiserver does not have any kind of load balancing active. To enable HA ApiServer access the `kubernetes` network service object is to set to type `loadbalancer` and has an IP assigned from the range defined in `metallb`. To avoid SSL errors, this is added to the inital K3S setup as well via the `--tls-san value` argument.
+<https://docs.k3s.io/installation/configuration#registration-options-for-the-k3s-server>
+
+# :handshake:&nbsp; Thanks
+
+I learned a lot from the people that have shared their clusters over at
+[awesome-home-kubernetes](https://github.com/k8s-at-home/awesome-home-kubernetes)
+
+Another big thanks to the great work done by community over at [Funky Penguin's Geek Cookbook](https://geek-cookbook.funkypenguin.co.nz/community/discord/)
