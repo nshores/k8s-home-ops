@@ -19,6 +19,8 @@ vsphere_host_name: vcenter67.local # Name of the vsphere host that commands will
 vsphere_host_username: administrator@vsphere.local # vsphere user name for running commands
 
 k3s_server_token: home-k8s-ops
+#Pick this from the metallb range you define. The default/kubernetes service must be set to loadbalancer as well.
+k3s_api_vip: 192.168.99.241
 kubeconfig: ~/.kube/config
 
 vcenter_host_password: "{{ vault_vcenter_host_password }}"
