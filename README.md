@@ -145,6 +145,11 @@ ffmpeg -loglevel debug -hwaccel vaapi -vaapi_device /dev/dri/renderD129 -i *.mp4
 By default the k3s apiserver does not have any kind of load balancing active. To enable HA ApiServer access the `kubernetes` network service object is to set to type `loadbalancer` and has an IP assigned from the range defined in `metallb`. To avoid SSL errors, this is added to the inital K3S setup as well via the `--tls-san value` argument.
 <https://docs.k3s.io/installation/configuration#registration-options-for-the-k3s-server>
 
+# TODO
+
+Perhaps this is a better way to handle the HA VIP SAN issue.  
+<https://github.com/k3s-io/k3s/issues/3369>
+
 # :handshake:&nbsp; Thanks
 
 I learned a lot from the people that have shared their clusters over at
