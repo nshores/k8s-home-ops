@@ -19,6 +19,8 @@ This repository is the running configuration of my personal home kubernetes clus
 
 ### Hypervisor: VMware ESXI 8.0
 
+### Base OS: Ubuntu 22.04
+
 ### K8S Distribution: [K3s](https://k3s.io/)
 
 ### K8S Storage Provider: [Longhorn](https://longhorn.io/)
