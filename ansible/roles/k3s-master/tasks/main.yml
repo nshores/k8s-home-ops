@@ -16,7 +16,7 @@
 
 - name: install k3s on master[1-n]
   shell: >
-    curl -sfL https://get.k3s.io | K3S_TOKEN={{ k3s_server_token }}INSTALL_K3S_VERSION=v1.23.6+k3s1 INSTALL_K3S_EXEC="--tls-san {{ k3s_api_vip }} --disable traefik --disable servicelb server --server https://{{ master_ip }}:6443" sh -
+    curl -sfL https://get.k3s.io |  K3S_TOKEN={{ k3s_server_token }} INSTALL_K3S_VERSION=v1.23.6+k3s1 INSTALL_K3S_EXEC="--tls-san {{ k3s_api_vip }} --disable traefik --disable servicelb server --server https://{{ master_ip }}:6443" sh -
   args:
     creates: /usr/local/bin/k3s
     warn: no
@@ -28,6 +28,7 @@
     regexp: 'source <\(kubectl completion bash\)'
     line: source <(kubectl completion bash)
     create: yes
+
 - name: fetch k3s.yaml
   become: true
   fetch:
