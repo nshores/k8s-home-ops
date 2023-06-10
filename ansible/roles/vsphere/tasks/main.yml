@@ -55,7 +55,7 @@
             dest: "{{ terraform_dir }}/main.tf"
 
         - name: Run terraform init
-          command: terraform init
+          command: terraform init -upgrade
           args:
             chdir: "{{ terraform_dir }}"
 

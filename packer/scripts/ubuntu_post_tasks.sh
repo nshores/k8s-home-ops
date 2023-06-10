@@ -9,8 +9,14 @@ apt-get install -f -y python net-tools curl python3-pip zsh
 cloud-init clean -s -l
 
 #allow cloud-init to customize network settings
-https://askubuntu.com/questions/1366315/terraform-cloud-init-via-extra-config-datasourcevmware
+#https://askubuntu.com/questions/1366315/terraform-cloud-init-via-extra-config-datasourcevmware
 sudo rm /etc/cloud/cloud.cfg.d/90_dpkg.cfg
+
+cat > /etc/cloud/cloud.cfg.d/90_dpkg.cfg <<EOF
+# to update this file, run dpkg-reconfigure cloud-init
+datasource_list: [ VMware ]
+EOF
+
 
  
 cat > /etc/cloud/cloud.cfg.d/99-vmware-guest-customization.cfg <<EOF
