@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      # renovate: registryUrl=https://charts.botkube.io/
       chart: botkube
       version: 0.12.4
       sourceRef:
