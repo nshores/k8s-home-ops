@@ -194,9 +194,6 @@ spec:
             ignore:
               -
           events:
-            - create
-            - update
-            - delete
             - error
           updateSetting:
             includeDiff: true
