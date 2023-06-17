@@ -717,7 +717,7 @@ spec:
         pullSecrets: []
         registry: docker.io
         repository: bitnami/memcached
-        tag: 1.6.17-debian-11-r14
+        tag: 1.6.19-debian-11-r14
       initContainers: []
       kubeVersion: ""
       lifecycleHooks: {}
@@ -936,7 +936,7 @@ spec:
         pullSecrets: []
         registry: docker.io
         repository: bitnami/memcached
-        tag: 1.6.17-debian-11-r14
+        tag: 1.6.19-debian-11-r14
       initContainers: []
       kubeVersion: ""
       lifecycleHooks: {}
@@ -1155,7 +1155,7 @@ spec:
         pullSecrets: []
         registry: docker.io
         repository: bitnami/memcached
-        tag: 1.6.17-debian-11-r14
+        tag: 1.6.19-debian-11-r14
       initContainers: []
       kubeVersion: ""
       lifecycleHooks: {}
@@ -1322,7 +1322,7 @@ spec:
         digest: ""
         registry: docker.io
         repository: bitnami/memcached
-        tag: 1.6.17-debian-11-r14
+        tag: 1.6.19-debian-11-r14
       nameOverride: ""
       service:
         ports:
