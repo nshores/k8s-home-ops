@@ -247,7 +247,7 @@ spec:
         pullSecrets: []
         registry: docker.io
         repository: bitnami/nginx
-        tag: 1.23.1-debian-11-r32
+        tag: 1.23.3-debian-11-r32
       ingress:
         annotations: {}
         apiVersion: ""
