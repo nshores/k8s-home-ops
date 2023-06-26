@@ -116,3 +116,19 @@ spec:
 
     nodeSelector:
       kubernetes.io/hostname: k3s-master-6
+    probes:
+    # -- Liveness probe configuration
+    # @default -- See below
+    liveness:
+      # -- Enable the liveness probe
+      enabled: true
+      # -- Set this to `true` if you wish to specify your own livenessProbe
+      custom: true
+      # -- The spec field contains the values for the default livenessProbe.
+      # If you selected `custom: true`, this field holds the definition of the livenessProbe.
+      # @default -- See below
+      spec:
+        initialDelaySeconds: 60
+        periodSeconds: 60
+        timeoutSeconds: 10
+        failureThreshold: 5
