@@ -1,0 +1,114 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubernetes-pfsense-controller
+  namespace: home
+spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: kubernetes-pfsense-controller
+      version: 1.4.2
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-pfsense-controller
+        namespace: default
+  interval: 15m
+  timeout: 5m
+  releaseName: kubernetes-pfsense-controller
+  values:
+    pfsense:
+      url: http://192.168.99.253
+      insecure: true
+
+    # you MUST copy the remainder of the config from example to meet your needs
+    # https://github.com/travisghansen/kubernetes-pfsense-controller/blob/master/deploy/config.yaml
+    config:
+      controller-id: "home-cluster"
+      enabled: true
+      plugins:
+        metallb:
+          enabled: false
+        haproxy-declarative:
+          enabled: false
+        haproxy-ingress-proxy:
+          enabled: false
+        pfsense-dns-services:
+          enabled: false
+        pfsense-dns-ingresses:
+          enabled: true
+          ingressLabelSelector:
+          ingressFieldSelector:
+          # works in conjunction with the ingress annotation 'dns.pfsense.org/enabled'
+          # if defaultEnabled is empty or true, you can disable specific ingresses by setting the annotation to false
+          # if defaultEnabled is false, you can enable specific ingresses by setting the annotation to true
+          defaultEnabled: true
+          #allowedHostRegex: "/.*/"
+          dnsBackends:
+            dnsmasq:
+              enabled: false
+            unbound:
+              enabled: true
+        pfsense-dns-haproxy-ingress-proxy:
+          enabled: false
+
+    # do NOT set this higher than 1
+    # it is only an option to allow scaling to 0
+    replicaCount: 1
+
+    image:
+      repository: docker.io/travisghansen/kubernetes-pfsense-controller
+      pullPolicy: Always
+      #pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: "latest"
+
+    imagePullSecrets: []
+    nameOverride: ""
+    fullnameOverride: ""
+
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: true
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    rbac:
+      enabled: true
+
+    podAnnotations: {}
+
+    podSecurityContext:
+      {}
+      # fsGroup: 2000
+
+    securityContext:
+      {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    resources:
+      {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
