@@ -8,7 +8,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: kubernetes-pfsense-controller
-      version: 1.4.2
+      version: 0.1.2
       sourceRef:
         kind: HelmRepository
         name: kubernetes-pfsense-controller
