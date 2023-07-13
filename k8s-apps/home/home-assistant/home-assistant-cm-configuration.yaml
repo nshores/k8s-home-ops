@@ -317,7 +317,7 @@ data:
           garage_door:
             device_class: garage
             friendly_name: "Garage Door"
-            value_template: "{{is_state('binary_sensor.garage_tilt_sensor_124', 'on')}}"
+            value_template: "{{is_state('binary_sensor.binary_sensor.garage_door', 'on')}}"
             open_cover:
               service: switch.turn_on
               data:
@@ -331,7 +331,7 @@ data:
               data:
                 entity_id: switch.garage_door_121
             icon_template: >-
-              {% if is_state('binary_sensor.garage_tilt_sensor_124', 'on') %}
+              {% if is_state('binary_sensor.binary_sensor.garage_door', 'on') %}
                 mdi:garage-open
               {% else %}
                 mdi:garage
