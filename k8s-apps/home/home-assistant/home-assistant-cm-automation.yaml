@@ -450,7 +450,7 @@ data:
             }}) - consider opening some windows.
       id: d12af3ef08c244d0b3f21aac056ab71c
     - id: 0ca5feb72ab1420997a5f22dd3a244dc
-      alias: Living Room Movie Lights - Playing
+      alias: Living Room Movie Lights - Playing Movie or TV Show
       trigger:
       - platform: state
         entity_id: media_player.shield_4
@@ -465,6 +465,10 @@ data:
             entity_id: media_player.shield_4
             attribute: media_content_type
             state: music
+          - condition: state
+            entity_id: media_player.shield_4
+            attribute: media_content_type
+            state: video
       action:
       - service: light.turn_on
         entity_id: light.living_room_lights
