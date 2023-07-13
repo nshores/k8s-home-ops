@@ -465,11 +465,11 @@ data:
             entity_id: media_player.shield_4
             attribute: media_content_type
             state: music
-        action:
-        - service: light.turn_on
-          entity_id: light.living_room_lights
-          data:
-            brightness_pct: 20
+      action:
+      - service: light.turn_on
+        entity_id: light.living_room_lights
+        data:
+          brightness_pct: 20
     - id: 3eeb0aad017041d08c88d3a33b717f17
       alias: Living Room Movie Lights - Paused
       trigger:
