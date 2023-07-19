@@ -706,7 +706,7 @@ data:
       action:
         - service: script.nye_2023
           data: {}
-    - alias: 'Control fans based on temperature'
+    - alias: Control fans based on temperature
         trigger:
           platform: state
           entity_id: climate.hallway_upstairs_2
