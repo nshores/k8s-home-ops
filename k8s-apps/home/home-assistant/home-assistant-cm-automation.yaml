@@ -722,7 +722,7 @@ data:
             {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 75 %}
               33
             {% else %}
-              0
+              {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
             {% endif %}
       - service: fan.set_percentage
         data:
@@ -733,7 +733,5 @@ data:
             {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 78 %}
               66
             {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 75 %}
-              33
-            {% else %}
-              0
+              {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
             {% endif %}
