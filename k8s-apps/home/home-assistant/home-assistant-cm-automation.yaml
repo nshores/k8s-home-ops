@@ -711,29 +711,29 @@ data:
           platform: state
           entity_id: climate.hallway_upstairs_2
         action:
-          - service: fan.set_percentage
-            data:
-              entity_id: fan.ceiling_fan_office
-              percentage: >-
-                {% if state_attr('climate.hallway_upstairs_2', 'current_temperature') > 80 %}
-                  100
-                {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 78 %}
-                  66
-                {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 75 %}
-                  33
-                {% else %}
-                  0
-                {% endif %}
-          - service: fan.set_percentage
-            data:
-              entity_id: fan.ceiling_fan_master
-              percentage: >-
-                {% if state_attr('climate.hallway_upstairs_2', 'current_temperature') > 80 %}
-                  100
-                {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 78 %}
-                  66
-                {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 75 %}
-                  33
-                {% else %}
-                  0
-                {% endif %}
+        - service: fan.set_percentage
+          data:
+            entity_id: fan.ceiling_fan_office
+            percentage: >-
+              {% if state_attr('climate.hallway_upstairs_2', 'current_temperature') > 80 %}
+                100
+              {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 78 %}
+                66
+              {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 75 %}
+                33
+              {% else %}
+                0
+              {% endif %}
+        - service: fan.set_percentage
+          data:
+            entity_id: fan.ceiling_fan_master
+            percentage: >-
+              {% if state_attr('climate.hallway_upstairs_2', 'current_temperature') > 80 %}
+                100
+              {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 78 %}
+                66
+              {% elif state_attr('climate.hallway_upstairs_2', 'current_temperature') > 75 %}
+                33
+              {% else %}
+                0
+              {% endif %}
