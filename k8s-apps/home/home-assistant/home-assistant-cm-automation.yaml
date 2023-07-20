@@ -706,10 +706,11 @@ data:
       action:
         - service: script.nye_2023
           data: {}
-    - alias: Control fans based on temperature
+    - alias: Control upstairs fans based on temperature above 75
       trigger:
         platform: state
         entity_id: climate.hallway_upstairs_2
+        above: 75
       action:
       - service: fan.set_percentage
         data:
