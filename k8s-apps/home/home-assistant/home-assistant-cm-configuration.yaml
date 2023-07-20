@@ -253,7 +253,7 @@ data:
           warm_inside:
             friendly_name: "Warm Inside"
             value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
-          fan_thermostat_automation
+          fan_thermostat_automation:
             friendly_name "Fan Speed Automation based on temp"
             value_template: >-
               {% if states('sensor.bedroom_temp_temperature_measurement') | int > 80 %}
