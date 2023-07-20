@@ -709,7 +709,7 @@ data:
     - alias: Control upstairs fans based on temperature above 75
       trigger:
         platform: state
-        entity_id: climate.hallway_upstairs_2
+        entity_id: sensor.bedroom_temp_temperature_measurement
         above: 75
       action:
       - service: fan.set_percentage
