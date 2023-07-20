@@ -731,5 +731,3 @@ data:
               {% else %}
                 {{ state_attr(fan, 'percentage') }}
               {% endif %}
-          target:
-            entity_id: "{{ fans }}"
