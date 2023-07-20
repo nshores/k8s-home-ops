@@ -715,19 +715,27 @@ data:
         entity_id: sensor.bedroom_temp_temperature_measurement
         above: 75
       action:
-        variables:
-          temperature: "{{ states('sensor.bedroom_temp_temperature_measurement') | int }}"
-          fans: [fan.ceiling_fan_office, fan.ceiling_fan_master]
-        - service: fan.set_percentage
-          data:
-            entity_id: "{{ fan }}"
-            percentage: >-
-              {% if temperature > 80 %}
-                100
-              {% elif temperature > 78 %}
-                66
-              {% elif temperature > 75 %}
-                33
-              {% else %}
-                {{ state_attr(fan, 'percentage') }}
-              {% endif %}
+      - service: fan.set_percentage
+        data:
+          entity_id: fan.ceiling_fan_office
+          percentage: >-
+            {% if states('sensor.bedroom_temp_temperature_measurement') | int > 80 %}
+              100
+            {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 78 %}
+              66
+            {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 75 %}
+              33
+            {% else %}
+              {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
+            {% endif %}
+      - service: fan.set_percentage
+        data:
+          entity_id: fan.ceiling_fan_master
+          percentage: >-
+            {% if states('sensor.bedroom_temp_temperature_measurement') | int > 80 %}
+              100
+            {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 78 %}
+              66
+            {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 75 %}
+              {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
+            {% endif %}
