@@ -253,8 +253,6 @@ data:
           warm_inside:
             friendly_name: "Warm Inside"
             value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
-          fan_thermostat_automation:
-            friendly_name "Fan Speed Automation based on temp"
       - platform: time_date
         display_options:
           - "time"
