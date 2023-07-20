@@ -718,8 +718,8 @@ data:
       - service: fan.set_percentage
         data:
           entity_id: fan.ceiling_fan_office
-          percentage: "{{ sensor.fan_thermostat_automation }}"
+          percentage: {{ sensor.fan_thermostat_automation }}
       - service: fan.set_percentage
         data:
           entity_id: fan.ceiling_fan_master
-          percentage: "{{ sensor.fan_thermostat_automation }}"
+          percentage: {{ sensor.fan_thermostat_automation }}

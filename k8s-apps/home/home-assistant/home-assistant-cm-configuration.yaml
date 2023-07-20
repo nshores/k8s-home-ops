@@ -255,16 +255,7 @@ data:
             value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
           fan_thermostat_automation:
             friendly_name "Fan Speed Automation based on temp"
-            value_template: >-
-              {% if states('sensor.bedroom_temp_temperature_measurement') | int > 80 %}
-                100
-              {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 78 %}
-                66
-              {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 75 %}
-                33
-              {% else %}
-                {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
-              {% endif %}
+            value_template: "{{states('sensor.bedroom_temp_temperature_measurement'}}"
       - platform: time_date
         display_options:
           - "time"
