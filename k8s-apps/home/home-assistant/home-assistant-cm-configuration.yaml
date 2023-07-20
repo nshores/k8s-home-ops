@@ -255,7 +255,6 @@ data:
             value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
           fan_thermostat_automation:
             friendly_name "Fan Speed Automation based on temp"
-            value_template: "{{states('sensor.bedroom_temp_temperature_measurement'}}"
       - platform: time_date
         display_options:
           - "time"
