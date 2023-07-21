@@ -717,7 +717,7 @@ data:
       action:
       - service: fan.set_percentage
         data:
-          entity_id: fan.ceiling_fan_office
+          entity_id:
           - fan.ceiling_fan_master
           - fan.ceiling_fan_office
           percentage: >-
