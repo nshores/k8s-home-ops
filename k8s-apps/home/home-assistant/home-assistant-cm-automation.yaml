@@ -718,8 +718,8 @@ data:
       - service: fan.set_percentage
         data:
           entity_id: fan.ceiling_fan_office
-            - fan.ceiling_fan_master
-            - fan.ceiling_fan_office
+          - fan.ceiling_fan_master
+          - fan.ceiling_fan_office
           percentage: >-
             {% if states('sensor.bedroom_temp_temperature_measurement') | int > 80 %}
               100
