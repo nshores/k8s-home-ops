@@ -721,11 +721,11 @@ data:
           - fan.ceiling_fan_master
           - fan.ceiling_fan_office
           percentage: >-
-            {% if states('sensor.bedroom_temp_temperature_measurement') | int > 80 %}
+            {% if states('sensor.bedroom_temp_temperature_measurement') | int >= 80 %}
               100
-            {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 78 %}
+            {% elif states('sensor.bedroom_temp_temperature_measurement') | int >= 78 %}
               66
-            {% elif states('sensor.bedroom_temp_temperature_measurement') | int > 75 %}
+            {% elif states('sensor.bedroom_temp_temperature_measurement') | int >= 75 %}
               33
             {% else %}
               {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
