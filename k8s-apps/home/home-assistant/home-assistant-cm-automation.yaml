@@ -53,7 +53,7 @@ data:
           entity_id: camera.garage
         data:
           filename: /config/www/garage.jpg
-      - service: notify.pixel_phones
+      - service: notify.mobile_app_pixel_7_pro
         data:
           message: The garage door has been left open!
           title: Garage door alert!
@@ -85,7 +85,7 @@ data:
           data:
             file:
               path: /config/www/front.jpg
-      - service: notify.pixel_phones
+      - service: notify.mobile_app_pixel_7_pro
         data:
           message: Somebody is at the front door!
           title: Somebody is at the front door!
@@ -184,10 +184,10 @@ data:
       action:
       - service: tts.google_say
         entity_id:
-        - media_player.downstairs_announce
+        - media_player.all
         data:
           message: The Washing Machine cycle is complete!
-      - service: notify.pixel_phones
+      - service: notify.mobile_app_pixel_7_pro
         data_template:
           message: The Washing Machine cycle is complete!
       id: a17355b71df94a14870408fb80c40cc6
@@ -281,10 +281,10 @@ data:
       action:
       - service: tts.google_say
         entity_id:
-        - media_player.downstairs_announce
+        - media_player.all
         data:
           message: The dryer Machine is ready to be emptied!
-      - service: notify.pixel_phones
+      - service: notify.mobile_app_pixel_7_pro
         data_template:
           message: The dryer Machine is ready to be emptied!
       id: e26fc2cb61404368aa850abe47821da0
@@ -401,7 +401,7 @@ data:
             type: announce
       - service: tts.google_say
         entity_id:
-        - media_player.downstairs_announce
+        - media_player.all
         data:
           message: The {{ trigger.to_state.attributes.friendly_name }} has been opened
             for about 5 minutes.  I will shut down the Air Conditioner so you can enjoy
@@ -438,12 +438,12 @@ data:
       action:
       - service: tts.google_say
         entity_id:
-        - media_player.downstairs_announce
+        - media_player.all
         data:
           message: The temperature inside ({{ states('sensor.average_house_temp')}}) is
             hotter than outside ({{ state_attr('weather.ksac_daynight', 'temperature')
             }}) - consider opening some windows.
-      - service: notify.pixel_phones
+      - service: notify.mobile_app_pixel_7_pro
         data_template:
           message: The temperature inside ({{ states('sensor.average_house_temp')}}) is
             hotter than outside ({{ state_attr('weather.ksac_daynight', 'temperature')
