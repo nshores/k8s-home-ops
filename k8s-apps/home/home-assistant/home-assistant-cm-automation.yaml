@@ -465,10 +465,6 @@ data:
             entity_id: media_player.shield_4
             attribute: media_content_type
             state: music
-          - condition: state
-            entity_id: media_player.shield_4
-            attribute: media_content_type
-            state: video
       action:
       - service: light.turn_on
         entity_id: light.living_room_lights
