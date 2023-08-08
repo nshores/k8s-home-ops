@@ -101,7 +101,7 @@ data:
         data:
           media_player: media_player.nesthub4e50
         target:
-          entity_id: camera.doorbell_main
+          entity_id: camera.doorbell
       - delay:
           hours: 0
           minutes: 2
