@@ -702,7 +702,7 @@ data:
       action:
         - service: script.nye_2023
           data: {}
-    - alias: Control upstairs fans based when tempature above 75
+    - alias: Control upstairs fan speed when tempature above 75
       trigger:
         platform: state
         entity_id: sensor.bedroom_temp_temperature_measurement
@@ -717,9 +717,7 @@ data:
           - fan.ceiling_fan_master
           - fan.ceiling_fan_office
           percentage: >-
-            {% if states('sensor.bedroom_temp_temperature_measurement') | int >= 80 %}
-              100
-            {% elif states('sensor.bedroom_temp_temperature_measurement') | int >= 78 %}
+            {% if states('sensor.bedroom_temp_temperature_measurement') | int >= 78 %}
               66
             {% elif states('sensor.bedroom_temp_temperature_measurement') | int >= 75 %}
               33
