@@ -116,7 +116,7 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - k3s-master-5
+                    - k3s-master-6
 
     # -- Configure the resource requests and/or limits for the Pod
     resources:
