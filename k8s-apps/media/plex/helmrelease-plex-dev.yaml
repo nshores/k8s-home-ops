@@ -17,6 +17,11 @@ spec:
   timeout: 5m
   releaseName: plex-dev
   values:
+    global:
+    # -- Set an override for the prefix of the fullname
+    nameOverride: plex-dev
+    # -- Set the entire name definition
+    fullnameOverride: plex-dev
     image:
       # -- image repository
       repository: lscr.io/linuxserver/plex
