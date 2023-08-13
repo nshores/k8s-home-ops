@@ -85,9 +85,9 @@ spec:
     #             mountPath: /config
     #         securityContext:
     #           runAsUser: 0
-    #disabled for gpu mem leak testing
-    # securityContext:
-    #   privileged: true
+
+    securityContext:
+      privileged: true
 
     ingress:
       # -- Enable and configure ingress settings for the chart under this key.
@@ -145,18 +145,17 @@ spec:
         mountPath: /transcode
         hostPath: /var/data/transcode
 
-    #Temp disable for testing gpu mem leak
-    # quicksync-card1-to-card-0:
-    #   enabled: true
-    #   type: hostPath
-    #   mountPath: /dev/dri/card0
-    #   hostPath: /dev/dri/card1
+      quicksync-card1-to-card-0:
+        enabled: true
+        type: hostPath
+        mountPath: /dev/dri/card0
+        hostPath: /dev/dri/card1
 
-    # quicksync-renderd129-to-renderd128:
-    #   enabled: true
-    #   type: hostPath
-    #   mountPath: /dev/dri/renderD128
-    #   hostPath: /dev/dri/renderD129
+      quicksync-renderd129-to-renderd128:
+        enabled: true
+        type: hostPath
+        mountPath: /dev/dri/renderD128
+        hostPath: /dev/dri/renderD129
 
     nodeSelector:
       kubernetes.io/hostname: k3s-master-6
