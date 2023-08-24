@@ -119,7 +119,6 @@ spec:
     persistence:
       config:
         enabled: true
-        type: pvc
         size: 30Gi
 
       movies:
