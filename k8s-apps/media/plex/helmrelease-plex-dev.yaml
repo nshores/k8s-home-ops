@@ -119,7 +119,7 @@ spec:
     persistence:
       config:
         enabled: true
-        size: 30Gi
+        size: 40Gi
 
       movies:
         enabled: true
