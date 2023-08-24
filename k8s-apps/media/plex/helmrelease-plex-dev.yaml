@@ -119,7 +119,8 @@ spec:
     persistence:
       config:
         enabled: true
-        size: 40Gi
+        size: 30Gi
+        existingClaim: plex-dev-config
 
       movies:
         enabled: true
