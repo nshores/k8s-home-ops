@@ -293,7 +293,7 @@ data:
           - light.wiz_bulb_office
 
     influxdb:
-      host: grafana.local
+      host: grafana-old.lab.nickshores.net
       port: 8086
       database: homeassistant
       username: admin
