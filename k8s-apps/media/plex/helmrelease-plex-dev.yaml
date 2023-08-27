@@ -120,7 +120,6 @@ spec:
       config:
         enabled: true
         size: 30Gi
-        existingClaim: plex-dev-config
 
       movies:
         enabled: true
