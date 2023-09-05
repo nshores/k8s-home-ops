@@ -115,4 +115,4 @@ spec:
         mountPath: /tv
 
     nodeSelector:
-      kubernetes.io/hostname: k3s-master-6
+      kubernetes.io/hostname: k3s-master-2
