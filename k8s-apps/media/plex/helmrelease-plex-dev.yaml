@@ -157,7 +157,7 @@ spec:
         hostPath: /dev/dri/renderD129
 
     nodeSelector:
-      kubernetes.io/hostname: k3s-master-6
+      kubernetes.io/hostname: k3s-master-5
 #     resources:
 #       requests:
 #         gpu.intel.com/i915: "1"
