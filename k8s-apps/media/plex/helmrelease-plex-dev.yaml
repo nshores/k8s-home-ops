@@ -40,7 +40,7 @@ spec:
       PGID: 1002
       PLEX_CLAIM: claim-sLbUs7qb4FHNsE6yMx9y
       ALLOWED_NETWORKS: 172.16.200.0/24,192.168.99.0/24,10.42.0.0/22
-      ADVERTISE_IP: http://192.168.99.208:32400
+      ADVERTISE_IP: http://192.168.99.207:32400
 
     # -- Configures service settings for the chart.
     # @default -- See values.yaml
