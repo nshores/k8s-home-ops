@@ -40,22 +40,22 @@ spec:
           http:
             port: 5076
 
-    initContainers:
-      update-volume-permissions:
-        image: busybox:1.35.0
-        command: ["/bin/sh", "-c"]
-        args: ["chown -R 1000:1000 /config"]
-        volumeMounts:
-          - name: config
-            mountPath: /config
-        securityContext:
-          runAsUser: 0
+    # initContainers:
+    #   update-volume-permissions:
+    #     image: busybox:1.35.0
+    #     command: ["/bin/sh", "-c"]
+    #     args: ["chown -R 1000:1000 /config"]
+    #     volumeMounts:
+    #       - name: config
+    #         mountPath: /config
+    #     securityContext:
+    #       runAsUser: 0
 
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
+    # podSecurityContext:
+    #   runAsUser: 1000
+    #   runAsGroup: 1000
+    #   fsGroup: 1000
+    #   fsGroupChangePolicy: "OnRootMismatch"
 
     ingress:
       # -- Enable and configure ingress settings for the chart under this key.
