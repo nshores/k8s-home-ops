@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: linuxserver/nzbhydra2
       # -- image tag
-      tag: 4.7.1-dev
+      tag: amd64-4.7.1-dev
       # -- image pull policy
       pullPolicy: IfNotPresent
 
