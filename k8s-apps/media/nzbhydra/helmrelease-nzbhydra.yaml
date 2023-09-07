@@ -19,9 +19,9 @@ spec:
   values:
     image:
       # -- image repository
-      repository: ghcr.io/onedr0p/nzbhydra2
+      repository: linuxserver/nzbhydra2
       # -- image tag
-      tag: 4.7.1
+      tag: 4.7.1-dev
       # -- image pull policy
       pullPolicy: IfNotPresent
 
