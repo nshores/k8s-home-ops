@@ -22,7 +22,7 @@ spec:
       repository: ghcr.io/blakeblackshear/frigate
       # -- image tag
       # @default -- chart.appVersion
-      tag: stable
+      tag: 0.12.1
       # -- image pull policy
       pullPolicy: IfNotPresent
 
