@@ -145,16 +145,17 @@ spec:
         mountPath: /transcode
         hostPath: /var/data/transcode
 
-      quicksync-card1-to-card-0:
+      quicksync-card0-to-card-0:
         enabled: true
         type: hostPath
         mountPath: /dev/dri/card0
-        hostPath: /dev/dri/card1
-      quicksync-renderd129-to-renderd128:
+        hostPath: /dev/dri/card0
+
+      quicksync-renderd128-to-renderd128:
         enabled: true
         type: hostPath
         mountPath: /dev/dri/renderD128
-        hostPath: /dev/dri/renderD129
+        hostPath: /dev/dri/renderD128
 
     nodeSelector:
       kubernetes.io/hostname: k3s-master-5
