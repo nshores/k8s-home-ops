@@ -36,8 +36,8 @@ spec:
       # -- Set the container timezone
       TZ: America/Los_Angeles
       VERSION: docker
-      PUID: 1002
-      PGID: 1002
+      PUID: 1001
+      PGID: 1001
       PLEX_CLAIM: claim-sLbUs7qb4FHNsE6yMx9y
       ALLOWED_NETWORKS: 172.16.200.0/24,192.168.99.0/24,10.42.0.0/22
       ADVERTISE_IP: http://192.168.99.207:32400
