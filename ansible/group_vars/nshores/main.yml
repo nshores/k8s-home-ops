@@ -6,8 +6,8 @@ vsphere_compute_cluster: ProdCluster
 vsphere_network: production-10gb
 vsphere_template_folder: Templates
 vsphere_template_name: ubuntu2204-amd64-shoreslab-090923
-vsphere_vm_ram: 8096 # How much RAM to give each VM
-vsphere_vm_cores: 4 # How many processors to give each VM
+vsphere_vm_ram: 32000 # How much RAM to give each VM
+vsphere_vm_cores: 8 # How many processors to give each VM
 vsphere_vm_disk0_size: 120 # Size (in GB) of the primary (system) disk on each VM
 vsphere_vm_disk1_size: 100 # Size (in GB) of scratch disk on each vm.
 vsphere_vlan_gateway: 192.168.99.253 # Network gateway for the VM network adapter
