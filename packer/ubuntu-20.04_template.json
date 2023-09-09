@@ -15,6 +15,7 @@
       "datastore": "{{ user `vcenter_datastore` }}",
       "vm_name": "{{ user `vm_name` }}",
       "vm_version": 11,
+      "firmware": "efi",
       "guest_os_type": "ubuntu64Guest",
       "convert_to_template": true,
       "CPUs": 2,
