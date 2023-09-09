@@ -154,7 +154,7 @@ spec:
         enabled: true
         type: hostPath
         mountPath: /dev/dri/renderD128
-        hostPath: /dev/dri/renderD128
+        hostPath: /dev/dri/renderD129
 
     nodeSelector:
       kubernetes.io/hostname: k3s-master-5
