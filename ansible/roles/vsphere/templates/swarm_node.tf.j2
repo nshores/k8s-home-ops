@@ -30,7 +30,7 @@ resource "vsphere_virtual_machine" "{{ inventory_hostname_short }}" {
     ignore_changes = all
   }
 
-  hardware_version = 20
+  # hardware_version = 20
 
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
