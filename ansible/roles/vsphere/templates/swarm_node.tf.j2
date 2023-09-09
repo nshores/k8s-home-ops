@@ -17,6 +17,7 @@ resource "vsphere_virtual_machine" "{{ inventory_hostname_short }}" {
     cdrom {
     client_device = true
   }
+  firmware = "efi"
 
   disk {
     label = "disk0"
