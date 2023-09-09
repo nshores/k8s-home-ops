@@ -145,6 +145,9 @@ spec:
         mountPath: /transcode
         hostPath: /var/data/transcode
 
+      # If not setting  SVGA.present=FALSE you need to passthroug the entire path so that the linuxserver.io container script
+      # can properly set permissions on the passthrough GPU. Otherwise, pass through and remap the
+      # /dev/dri/renderDxxx device.
       quicksync-card0-to-card-0:
         enabled: true
         type: hostPath
