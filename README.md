@@ -149,6 +149,11 @@ ffmpeg -loglevel debug -hwaccel vaapi -vaapi_device /dev/dri/renderD129 -i *.mp4
 By default the k3s apiserver does not have any kind of load balancing active. To enable HA ApiServer access the `kubernetes` network service object is to set to type `loadbalancer` and has an IP assigned from the range defined in `metallb`. To avoid SSL errors, this is added to the inital K3S setup as well via the `--tls-san value` argument.
 <https://docs.k3s.io/installation/configuration#registration-options-for-the-k3s-server>
 
+# ESXI Options
+
+To prevent having to toggle the passthrough of the iGPU upon ESXI reboot, perform the following command in ESXI via SSH
+esxcli system settings kernel set -s vga -v FALSE
+
 # TODO
 
 Perhaps this is a better way to handle the HA VIP SAN issue.  
