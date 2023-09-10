@@ -151,8 +151,9 @@ By default the k3s apiserver does not have any kind of load balancing active. To
 
 # ESXI Options
 
-To prevent having to toggle the passthrough of the iGPU upon ESXI reboot, perform the following command in ESXI via SSH
-esxcli system settings kernel set -s vga -v FALSE
+To prevent having to toggle the passthrough of the iGPU upon ESXI reboot, perform the following command in ESXI via SSH  
+
+`esxcli system settings kernel set -s vga -v FALSE`
 
 # TODO
 
