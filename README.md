@@ -133,6 +133,8 @@ spotify_client_secret: xxx
 
 Notes about the IGPU. The container manually had ffmpeg, clinfo, and intel-gpu-tools installed - not sure if this is needed.
 
+There is a bug in ESXI 8.0 that will create a memory leak when passing through your iGPU unless you set `SVGA.present=FALSE` [on the VM](https://github.com/nshores/k8s-home-ops/blob/d6202e760876ca792b5551dd7abef33265fc8691/ansible/roles/vsphere/templates/swarm_node.tf.j2#L43) being created.
+
 ## GPU Testing tools
 
 ```
