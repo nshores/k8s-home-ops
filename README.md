@@ -27,7 +27,7 @@ This repository is the running configuration of my personal home kubernetes clus
 
 ### K8S Ingress: [Traefik2](https://doc.traefik.io/traefik/)
 
-### K8S Version: 1.23
+### K8S Version: 1.25
 
 # Directory Structure
 
