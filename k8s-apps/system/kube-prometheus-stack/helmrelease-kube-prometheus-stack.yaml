@@ -1234,7 +1234,7 @@ spec:
       endpoints:
         - 192.168.99.206
         - 192.168.99.207
-        # - 192.168.99.201
+        - 192.168.99.201
 
       ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
       ##
