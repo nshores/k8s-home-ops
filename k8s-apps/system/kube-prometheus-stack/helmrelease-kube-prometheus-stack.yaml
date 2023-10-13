@@ -1231,17 +1231,17 @@ spec:
 
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: []
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints:
+        - 192.168.42.10
+        - 192.168.42.11
+        - 192.168.42.12
 
       ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
       ##
       service:
         enabled: true
-        port: 2379
-        targetPort: 2379
+        port: 2381
+        targetPort: 2381
         # selector:
         #   component: etcd
 
@@ -2877,40 +2877,32 @@ spec:
       ## Name of the PodMonitor to create
       ##
       # - name: ""
-
       ## Additional labels to set used for the PodMonitorSelector. Together with standard labels from
       ## the chart
       ##
       # additionalLabels: {}
-
       ## Pod label for use in assembling a job name of the form <label value>-<port>
       ## If no label is specified, the pod endpoint name is used.
       ##
       # jobLabel: ""
-
       ## Label selector for pods to which this PodMonitor applies
       ##
       # selector: {}
-
       ## PodTargetLabels transfers labels on the Kubernetes Pod onto the target.
       ##
       # podTargetLabels: {}
-
       ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
       ##
       # sampleLimit: 0
-
       ## Namespaces from which pods are selected
       ##
       # namespaceSelector:
       ## Match any namespace
       ##
       # any: false
-
       ## Explicit list of namespace names to select
       ##
       # matchNames: []
-
       ## Endpoints of the selected pods to be monitored
       ## https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#podmetricsendpoint
       ##
