@@ -1232,9 +1232,9 @@ spec:
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-        - 192.168.42.10
-        - 192.168.42.11
-        - 192.168.42.12
+        # - 192.168.42.10
+        # - 192.168.42.11
+        # - 192.168.42.12
 
       ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
       ##
