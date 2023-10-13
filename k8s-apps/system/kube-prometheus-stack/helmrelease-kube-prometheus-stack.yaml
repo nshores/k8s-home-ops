@@ -1232,7 +1232,7 @@ spec:
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-        - 192.168.99.206
+        - 192.168.99.208
         - 192.168.99.207
         - 192.168.99.201
 
