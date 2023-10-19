@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/onedr0p/sabnzbd
       # -- image tag
-      tag: 4.0.3
+      tag: 4.1.0
       # -- image pull policy
       pullPolicy: IfNotPresent
 
