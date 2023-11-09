@@ -290,7 +290,7 @@ data:
         name: Office Lights
         entities:
           - light.shapes_82f4
-          - light.wiz_bulb_office
+          - light.wiz_rgbw_tunable_f3b7f5
 
     influxdb:
       host: grafana-old.lab.nickshores.net
