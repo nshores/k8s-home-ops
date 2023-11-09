@@ -291,6 +291,7 @@ data:
         entities:
           - light.shapes_82f4
           - light.wiz_rgbw_tunable_f3b7f5
+          - light.controller_rgb_ww_cw_8fbc55
 
     influxdb:
       host: grafana-old.lab.nickshores.net
