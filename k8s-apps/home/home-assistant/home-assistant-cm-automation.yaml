@@ -526,11 +526,11 @@ data:
         entity_id:
         - light.upper_stairs_127
       id: ecca8f41564441478c69e48c68c0cc9d
-    - alias: Turn off upstairs light 1 minutes after last movement
+    - alias: Turn off upstairs light after 1 minute
       trigger:
         platform: state
-        entity_id: binary_sensor.upstairs_hallway_mot_97
-        to: 'off'
+        entity_id: light.upper_stairs_127
+        to: 'on'
         for:
           minutes: 1
       action:
