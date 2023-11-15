@@ -514,17 +514,29 @@ data:
       id: f799f29b0598443ebd39499127e0cb19
     - alias: Turn on upstairs light when there is movement
       trigger:
-        platform: state
-        entity_id: binary_sensor.upstairs_hallway_mot_97
-        to: 'on'
-      condition:
-      - condition: state
-        entity_id: sun.sun
-        state: below_horizon
-      action:
-        service: light.turn_on
-        entity_id:
-        - light.upper_stairs_127
+        - platform: state
+          entity_id: binary_sensor.upstairs_hallway_mot_97
+          to: 'on'
+        action:
+        - choose:
+          - conditions:
+            - condition: time
+              after: 22:00
+              before: 07:00
+              condition:
+            - condition: state
+              entity_id: sun.sun
+              state: below_horizon
+            sequence:
+            - service: homeassistant.turn_on
+              data:
+                brightness_pct: 20
+                entity_id: light.upper_stairs_127
+          default:
+          - service: homeassistant.turn_on
+            entity_id: light.upper_stairs_127
+            data:
+              brightness_pct: 20
       id: ecca8f41564441478c69e48c68c0cc9d
     - alias: Turn off upstairs light after 1 minute
       trigger:
