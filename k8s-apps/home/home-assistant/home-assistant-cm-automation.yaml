@@ -490,7 +490,7 @@ data:
         entity_id: binary_sensor.downstairs_motion_motion
         to: 'on'
       - platform: state
-        entity_id: binary_sensor.downstairs_motion_motion
+        entity_id: binary_sensor.first_floor_motion
         to: 'on'
       condition:
       - condition: state
