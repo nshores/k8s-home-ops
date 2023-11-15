@@ -528,7 +528,6 @@ data:
         platform: state
         entity_id: binary_sensor.upstairs_hallway_mot_97
         to: 'off'
-        from: 'on'
         for:
           minutes: 1
       action:
