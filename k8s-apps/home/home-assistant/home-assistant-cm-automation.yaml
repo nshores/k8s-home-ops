@@ -523,7 +523,6 @@ data:
             - condition: time
               after: 22:00
               before: 07:00
-              condition:
             - condition: state
               entity_id: sun.sun
               state: below_horizon
