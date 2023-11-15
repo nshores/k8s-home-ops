@@ -502,8 +502,11 @@ data:
       id: 91b391ee050c48a999f2f00fe5f47867
     - alias: Turn off entry light 5 minutes after last movement
       trigger:
-        platform: state
+      - platform: state
         entity_id: binary_sensor.downstairs_motion_motion
+        to: 'off'
+      - platform: state
+        entity_id: binary_sensor.first_floor_motion
         to: 'off'
       action:
         service: light.turn_off
