@@ -315,24 +315,46 @@ data:
         data:
           name: clear
       id: 26ce7db966b04fad8f3854712c6a464f
-    - alias: Living Room Motion Lighting On
+    - alias: Living Room Motion Lighting On 
       trigger:
-      - platform: state
+        platform: state
         entity_id: binary_sensor.downstairs_motion_119
         to: 'on'
-      condition:
-        condition: and
-        conditions:
-        - condition: state
-          entity_id: media_player.lg_webos_smart_tv_2
-          state: 'off'
-        - condition: state
-          entity_id: sun.sun
-          state: below_horizon
       action:
-      - service: light.turn_on
-        data:
-          entity_id: light.living_room_lights
+        - choose:
+            - conditions:
+                - condition: state
+                  entity_id: input_boolean.late_night
+                  state: "on"
+                - condition: state
+                  entity_id: sun.sun
+                  state: below_horizon
+                - condition: state
+                  entity_id: media_player.lg_webos_smart_tv_2
+                  state: 'off'
+              sequence:
+                - service: light.turn_on
+                  target:
+                    entity_id: light.living_room_lights
+                  data:
+                    brightness_pct: 20
+            - conditions:
+                - condition: state
+                  entity_id: input_boolean.late_night
+                  state: "off"
+                - condition: state
+                  entity_id: sun.sun
+                  state: below_horizon
+                - condition: state
+                  entity_id: media_player.lg_webos_smart_tv_2
+                  state: 'off'
+              sequence:
+                - service: input_boolean.turn_on
+                  data:
+                    brightness_pct: 100
+                  target:
+                    entity_id: light.living_room_lights
+      mode: single
       id: fad1cc2ac279424283301b871688f464
     - alias: Living Room Motion Lighting Off
       trigger:
