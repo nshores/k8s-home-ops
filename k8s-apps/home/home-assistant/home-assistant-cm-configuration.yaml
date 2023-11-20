@@ -219,6 +219,11 @@ data:
           - Clean
         initial: Idle
 
+    #Creating bools for night mode
+    input_boolean:
+      late_night:
+        name: late night mode from 10PM to 7AM
+
     # Expose Zigbee Smartthings state as a platform template sensor
     # Expose washing machine status as a sensor
     # Expose dryer machine status as a sensor
