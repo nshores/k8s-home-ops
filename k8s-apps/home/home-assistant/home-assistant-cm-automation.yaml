@@ -512,20 +512,40 @@ data:
         service: light.turn_off
         entity_id: light.bottom_stairs_126
       id: f799f29b0598443ebd39499127e0cb19
-    - alias: Turn on upstairs light when there is movement
+    - alias: Turn on upstairs light when there is movement after dusk
       trigger:
         platform: state
         entity_id: binary_sensor.upstairs_hallway_mot_97
         to: 'on'
-      condition:
-      - condition: state
-        entity_id: sun.sun
-        state: below_horizon
       action:
-        service: light.turn_on
-        entity_id:
-        - light.upper_stairs_127
-      id: ecca8f41564441478c69e48c68c0cc9d
+        - choose:
+            - conditions:
+                - condition: state
+                  entity_id: input_boolean.late_night
+                  state: "on"
+                - condition: state
+                  entity_id: sun.sun
+                  state: below_horizon
+              sequence:
+                - service: light.turn_on
+                  target:
+                  entity_id: light.upper_stairs_127
+                  data:
+                    brightness_pct: 20
+            - conditions:
+                - condition: state
+                  entity_id: input_boolean.late_night
+                  state: "on"
+                - condition: state
+                  entity_id: sun.sun
+                  state: below_horizon
+              sequence:
+                - service: input_boolean.turn_on
+                  data:
+                    brightness_pct: 100
+                  target:
+                    entity_id: light.upper_stairs_127
+      mode: single
     - alias: Turn off upstairs light after 1 minute
       trigger:
         platform: state
