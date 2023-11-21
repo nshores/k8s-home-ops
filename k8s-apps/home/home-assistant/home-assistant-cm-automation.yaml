@@ -562,7 +562,7 @@ data:
                   entity_id: sun.sun
                   state: below_horizon
               sequence:
-                - service: input_boolean.turn_on
+                - service: light.turn_on
                   data:
                     brightness_pct: 100
                   target:
