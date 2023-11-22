@@ -349,7 +349,7 @@ data:
                   entity_id: media_player.lg_webos_smart_tv_2
                   state: 'off'
               sequence:
-                - service: input_boolean.turn_on
+                - service: light.turn_on
                   data:
                     brightness_pct: 100
                   target:
