@@ -751,25 +751,25 @@ data:
             {% else %}
               {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
             {% endif %}
-      - alias: Turn on Late Night Mode
-        trigger:
-          - platform: time
-            at: "22:00:00"
-          - platform: homeassistant
-            event: start
-        condition:
-          - condition: time
-            after: '22:00:00'
-        action:
-          service: input_boolean.turn_on
-          target:
-            entity_id: input_boolean.late_night
+    - alias: Turn on Late Night Mode
+      trigger:
+        - platform: time
+          at: "22:00:00"
+        - platform: homeassistant
+          event: start
+      condition:
+        - condition: time
+          after: '22:00:00'
+      action:
+        service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.late_night
 
-      - alias: Turn off Late Night Mode
-        trigger:
-          - platform: time
-            at: "07:00:00"
-        action:
-          service: input_boolean.turn_off
-          target:
-            entity_id: input_boolean.late_night
+    - alias: Turn off Late Night Mode
+      trigger:
+        - platform: time
+          at: "07:00:00"
+      action:
+        service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.late_night
