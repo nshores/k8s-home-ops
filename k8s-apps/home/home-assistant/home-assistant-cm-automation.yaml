@@ -412,7 +412,7 @@ data:
           temperature: 80
       - service: climate.set_temperature
         data:
-          entity_id: climate.hallway_upstairs_2
+          entity_id: 2dc7e86c-3cca-405a-9a3c-17fd0de0f6dc
           temperature: 80
       - service: notify.alexa_media_everywhere
         data_template:
@@ -448,7 +448,7 @@ data:
           hvac_mode: cool
       - service: climate.set_hvac_mode
         data:
-          entity_id: climate.hallway_upstairs_2
+          entity_id: 2dc7e86c-3cca-405a-9a3c-17fd0de0f6dc
           hvac_mode: cool
       id: 304fd1d104434198971339dc5a752be4
     - alias: Hotter inside than Outside -- Open Windows
