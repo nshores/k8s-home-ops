@@ -90,10 +90,10 @@ data:
         name: onyko
 
 
-    #Spotify Integration
-    spotify:
-      client_id: !secret spotify_client_id
-      client_secret: !secret spotify_client_secret
+    # #Spotify Integration
+    # spotify:
+    #   client_id: !secret spotify_client_id
+    #   client_secret: !secret spotify_client_secret
 
     #group: !include groups.yaml
     automation: !include automations.yaml
