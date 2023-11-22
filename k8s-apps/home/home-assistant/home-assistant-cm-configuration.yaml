@@ -148,7 +148,7 @@ data:
           include_entities:
             - light.living_room_lights_125
             - cover.garage_door
-            - lock.door_lock_131
+            - lock.front_door_lock_131
             - script.go_to_sleep
             - script.show_front_door
             - sensor.people_home
@@ -176,7 +176,7 @@ data:
           include_entities:
             - light.living_room_lights_125
             - cover.garage_door
-            - lock.door_lock_131
+            - lock.front_door_lock_131
             - script.go_to_sleep
             - script.show_front_door
             - sensor.people_home
