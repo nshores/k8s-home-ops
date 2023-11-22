@@ -46,10 +46,10 @@ data:
     # Enables configuration UI
     config:
 
-    # Discover some devices automatically
-    discovery:
-      ignore:
-        - sabnzbd
+    # Discover some devices automatically - deprecated
+    # discovery:
+    #   ignore:
+    #     - sabnzbd
 
     # Allows you to issue voice commands from the frontend in enabled browsers
     conversation:
@@ -80,9 +80,9 @@ data:
 
     # Cloud
 
-    vera:
-      vera_controller_url: http://192.168.99.151:3480
-      lights: [126, 125, 127]
+    # vera:
+    #   vera_controller_url: http://192.168.99.151:3480
+    #   lights: [126, 125, 127]
 
     media_player:
       - platform: onkyo
@@ -275,22 +275,22 @@ data:
     #streaming camera setup
     stream:
 
-    #nest
-    nest:
-      client_id: e4ca1071-d674-4475-9401-3952b38577c4
-      client_secret: !secret nest_client_secret
+    #nest - moved to UI
+    # nest:
+    #   client_id: e4ca1071-d674-4475-9401-3952b38577c4
+    #   client_secret: !secret nest_client_secret
 
     person:
 
     light:
       # Example configuration.yaml entry
-      - platform: flux_led
-        automatic_add: true
-        devices:
-          192.168.50.100:
-            name: office_led
-          192.168.99.107:
-            name: master_bedroom_led
+      # - platform: flux_led - moved to UI
+      #   automatic_add: true
+      #   devices:
+      #     192.168.50.100:
+      #       name: office_led
+      #     192.168.99.107:
+      #       name: master_bedroom_led
       - platform: group
         name: Office Lights
         entities:
