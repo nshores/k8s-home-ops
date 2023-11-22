@@ -335,7 +335,7 @@ data:
               sequence:
                 - service: light.turn_on
                   target:
-                    entity_id: light.living_room_lights
+                    entity_id: light.living_room_lights_125
                   data:
                     brightness_pct: 20
             - conditions:
@@ -353,7 +353,7 @@ data:
                   data:
                     brightness_pct: 100
                   target:
-                    entity_id: light.living_room_lights
+                    entity_id: light.living_room_lights_125
       mode: single
       id: fad1cc2ac279424283301b871688f464
     - alias: Living Room Motion Lighting Off
@@ -378,7 +378,7 @@ data:
       action:
       - service: light.turn_off
         data:
-          entity_id: light.living_room_lights
+          entity_id: light.living_room_lights_125
       id: bb4d40ba686940be9fe9f5927e501975
     - alias: Turn off HVAC if window/door is opened
       trigger:
@@ -485,7 +485,7 @@ data:
             state: above_horizon
       action:
       - service: light.turn_on
-        entity_id: light.living_room_lights
+        entity_id: light.living_room_lights_125
         data:
           brightness_pct: 20
     - id: 3eeb0aad017041d08c88d3a33b717f17
@@ -503,7 +503,7 @@ data:
         state: below_horizon
       action:
       - service: light.turn_on
-        entity_id: light.living_room_lights
+        entity_id: light.living_room_lights_125
         data:
           brightness_pct: 90
     - alias: Turn on entry light when there is movement
@@ -651,7 +651,7 @@ data:
       action:
       - service: light.turn_on
         target:
-          entity_id: light.living_room_lights_125
+          entity_id: light.living_room_lights_125_125
         data:
           brightness_pct: 20
       mode: single
@@ -721,22 +721,6 @@ data:
         service: light.turn_off
         entity_id: light.controller_rgb_ir_90c0af
       id: 94668e8641e147c585ecb20ed973c3bb
-    - alias: Fix WIZ Living Room Lights
-      trigger:
-      - platform: state
-        entity_id:
-        - light.living_room_lights
-      condition: "{{ trigger.to_state.state == 'unavailable' }}"
-      action:
-        - service: light.turn_off
-          entity_id: light.living_room_lights_125
-        - delay:
-            hours: 0
-            minutes: 0
-            seconds: 30
-            milliseconds: 0
-        - service: light.turn_on
-          entity_id: light.living_room_lights_125
     - alias: NYE 2023 
       trigger:
         - platform: time
