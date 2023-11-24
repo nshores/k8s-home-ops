@@ -52,6 +52,7 @@ spec:
     persistence:
       config:
         enabled: true
+        mountPath: /app/config
     resources:
       requests:
         cpu: 10m
