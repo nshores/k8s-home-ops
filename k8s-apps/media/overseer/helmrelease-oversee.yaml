@@ -1,0 +1,60 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: overseerr
+  namespace: home
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/sct/overseerr
+      tag: 1.33.2@sha256:714ea6db2bc007a2262d112bef7eec74972eb33d9c72bddb9cbd98b8742de950
+    env:
+      LOG_LEVEL: "info"
+      PORT: 80
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+    ingress:
+      # -- Enable and configure ingress settings for the chart under this key.
+      # @default -- See values.yaml
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+        hosts:
+          - # -- Host address. Helm template can be passed.
+            host: overerseerr.nickshores.net
+            ## Configure the paths for the host
+            paths:
+              - # -- Path.  Helm template can be passed.
+                path: /
+                # -- Ignored if not kubeVersion >= 1.14-0
+                pathType: Prefix
+                service:
+                  # -- Overrides the service name reference for this path
+                  name:
+                  # -- Overrides the service port reference for this path
+                  port:
+    persistence:
+      config:
+        enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi
+      limits:
+        memory: 500Mi
