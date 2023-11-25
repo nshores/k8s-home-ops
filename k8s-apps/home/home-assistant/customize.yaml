@@ -1,0 +1,22 @@
+device_tracker.nshores_pixel3:
+  friendly_name: Nick
+sensor.washing_machine_status:
+  icon: mdi:washing-machine
+sensor.dryer_machine_status:
+  icon: mdi:tumble-dryer
+input_select.washing_machine_status:
+  icon: mdi:washing-machine
+input_select.dryer_machine_status:
+  icon: mdi:tumble-dryer
+device_tracker.nshores_pixel3_2:
+  entity_picture: /local/nick.jpg
+  icon: /local/nick.jpg
+person.nick:
+  entity_picture: /local/nick.jpg
+  icon: /local/nick.jpg
+light.c44f3390c0af_192_168_99_107:
+  friendly_name: bedroom_led
+light.neopixel_light:
+  friendly_name: Server Rack LED
+light.c44f338fbc55_192_168_99_111:
+  friendly_name: Office LED

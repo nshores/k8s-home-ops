@@ -1,0 +1,384 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 38.572912485266144
+  longitude: -121.50207860675803
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+  allowlist_external_dirs:
+    - /tmp
+    - /media
+  external_url: https://ha.nickshores.net
+  internal_url: https://ha.nickshores.net
+  allowlist_external_urls:
+    - "https://ha.nickshores.net/api/"
+
+#Enable zeroconf:
+zeroconf:
+
+schedule:
+
+#Enable media extractor
+media_extractor:
+
+scene: !include scenes.yaml
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Enables configuration UI
+config:
+
+# Discover some devices automatically - deprecated
+# discovery:
+#   ignore:
+#     - sabnzbd
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+  exclude:
+    entities:
+      - sensor.time
+      - sensor.time_date
+      - sensor.internet_time
+      - binary_sensor.doorbell_alarm_local
+      - sensor.home_alarm_keypad
+      - binary_sensor.front_door_motion
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Cloud
+
+# vera:
+#   vera_controller_url: http://192.168.99.151:3480
+#   lights: [126, 125, 127]
+
+media_player:
+  - platform: onkyo
+    host: 192.168.99.134
+    name: onyko
+
+# #Spotify Integration
+# spotify:
+#   client_id: !secret spotify_client_id
+#   client_secret: !secret spotify_client_secret
+
+#group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+#slack Integration
+notify:
+  - name: Slack_Notify
+    platform: slack
+    api_key: !secret slack_api_key
+    default_channel: "#home"
+  - platform: webostv
+    host: 192.168.99.187
+    name: livingroom_tv
+  - name: pixel_phones
+    platform: group
+    services:
+      - service: mobile_app_pixel_6_pro
+
+#Timers
+timer:
+  garage_door:
+    duration: "00:10:00"
+
+#Enable API
+api:
+
+#enable ffmpeg
+ffmpeg:
+
+#cameras
+camera:
+  - platform: zoneminder
+  - platform: ffmpeg
+    input: !secret garage_ffmpeg_input
+    name: garage__ffmpeg
+
+#ZM Config
+zoneminder:
+  - host: 192.168.99.51:8080
+    username: admin
+    password: !secret zoneminder_password
+
+system_health:
+
+cloud:
+  alexa:
+    filter:
+      exclude_entities:
+        - switch.living_room_lights_17
+      include_entities:
+        - light.living_room_lights_125
+        - cover.garage_door
+        - lock.front_door_lock_131
+        - script.go_to_sleep
+        - script.show_front_door
+        - sensor.people_home
+        - light.c44f3390c0af_192_168_99_107
+        - light.bottom_stairs_126
+        - light.upper_stairs_127
+        - light.neopixel_light
+        - script.netflix_and_chill
+        - light.2cf432f4a1bd_192_168_99_164
+        - switch.smart_switch_6_104
+        - switch.washing_machine_111
+        - switch.bedroom_lamp
+        - light.controller_rgb_ir_90c0af
+        - light.wiz_bulb_office
+        - light.ceiling_fan_office
+        - light.shapes_82f4
+        - light.ceiling_fan_master
+        - light.controller_rgb_ww_cw_8fbc55
+        - switch.spare
+        - light.wiz_rgbw_tunable_f3b7f5
+  google_actions:
+    filter:
+      exclude_entities:
+        - switch.living_room_lights_17
+      include_entities:
+        - light.living_room_lights_125
+        - cover.garage_door
+        - lock.front_door_lock_131
+        - script.go_to_sleep
+        - script.show_front_door
+        - sensor.people_home
+        - light.c44f3390c0af_192_168_99_107
+        - light.bottom_stairs_126
+        - light.upper_stairs_127
+        - light.neopixel_light
+        - script.netflix_and_chill
+        - light.2cf432f4a1bd_192_168_99_164
+        - switch.washing_machine_111
+        - switch.bedroom_lamp
+        - light.controller_rgb_ir_90c0af
+        - light.wiz_bulb_office
+        - light.ceiling_fan_office
+        - light.shapes_82f4
+        - light.ceiling_fan_master
+        - light.controller_rgb_ww_cw_8fbc55
+        - switch.spare
+        - light.wiz_rgbw_tunable_f3b7f5
+    entity_config:
+      camera.front_door_ffmpeg:
+        name: Front Door Camera
+
+#Creating inputs for washing/drying machine state
+input_select:
+  washing_machine_status:
+    name: Washing Machine Status
+    options:
+      - Idle
+      - Running
+      - Finishing
+      - Clean
+    initial: Idle
+  dryer_machine_status:
+    name: Dryer Status
+    options:
+      - Idle
+      - Running
+      - Finishing
+      - Clean
+    initial: Idle
+
+#Creating bools for night mode
+input_boolean:
+  late_night:
+    name: late night mode from 10PM to 7AM
+
+# Expose Zigbee Smartthings state as a platform template sensor
+# Expose washing machine status as a sensor
+# Expose dryer machine status as a sensor
+# When Zigbee Sensors sense no power the attributes disappear from the entities in the current build of HA. The work around for this is to use some logic to check for
+# A value, and if not write a '0'
+sensor:
+  - platform: template
+    sensors:
+      wash_power:
+        friendly_name: "Current Wash Power"
+        unit_of_measurement: "W"
+        value_template: "{{ states.switch.washing_machine_111.attributes.current_power_w }}"
+      washing_machine_status:
+        value_template: "{{ states.input_select.washing_machine_status.state}}"
+        friendly_name: "Washing Machine Status"
+      dry_power:
+        friendly_name: "Current Dryer Power"
+        unit_of_measurement: "W"
+        value_template: >-
+          {% if states.switch.dryer_machine_98.attributes.current_power_w %}
+          {{ states.switch.dryer_machine_98.attributes.current_power_w }}
+          {% else %}
+          0
+          {% endif %}
+      dryer_machine_status:
+        value_template: "{{ states.input_select.dryer_machine_status.state}}"
+        friendly_name: "Dryer Machine Status"
+      average_house_temp:
+        friendly_name: "Average House Temp"
+        unit_of_measurement: "°F"
+        value_template: "{{(((float(states('sensor.downstairs_motion_temperature_measurement')) + float(states.climate.living_room.attributes.current_temperature)) + float(states('sensor.bedroom_temp_temperature_measurement'))) /3)|round  }}"
+      warm_inside:
+        friendly_name: "Warm Inside"
+        value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
+  - platform: time_date
+    display_options:
+      - "time"
+      - "date"
+      - "date_time"
+      - "date_time_utc"
+      - "date_time_iso"
+      - "time_date"
+      - "time_utc"
+      - "beat"
+
+  - platform: zoneminder
+    include_archived: false
+
+#streaming camera setup
+stream:
+
+#nest - moved to UI
+# nest:
+#   client_id: e4ca1071-d674-4475-9401-3952b38577c4
+#   client_secret: !secret nest_client_secret
+
+person:
+
+light:
+  # Example configuration.yaml entry
+  # - platform: flux_led - moved to UI
+  #   automatic_add: true
+  #   devices:
+  #     192.168.50.100:
+  #       name: office_led
+  #     192.168.99.107:
+  #       name: master_bedroom_led
+  - platform: group
+    name: Office Lights
+    entities:
+      - light.shapes_82f4
+      - light.wiz_rgbw_tunable_f3b7f5
+      - light.controller_rgb_ww_cw_8fbc55
+
+influxdb:
+  host: grafana-old.lab.nickshores.net
+  port: 8086
+  database: homeassistant
+  username: admin
+  password: !secret influxdb_password
+  ssl: false
+  max_retries: 3
+  default_measurement: state
+  tags:
+    instance: prod
+    source: hass
+
+  # Example configuration.yaml entry
+mobile_app:
+
+#Cover Configuration
+
+cover:
+  - platform: template
+    covers:
+      garage_door:
+        device_class: garage
+        friendly_name: "Garage Door"
+        value_template: "{{is_state('binary_sensor.doorbell_sensor_120', 'on')}}"
+        open_cover:
+          service: switch.turn_on
+          data:
+            entity_id: switch.garage_door_121
+        close_cover:
+          service: switch.turn_on
+          data:
+            entity_id: switch.garage_door_121
+        stop_cover:
+          service: switch.turn_on
+          data:
+            entity_id: switch.garage_door_121
+        icon_template: >-
+          {% if is_state('binary_sensor.doorbell_sensor_120', 'on') %}
+            mdi:garage-open
+          {% else %}
+            mdi:garage
+          {% endif %}
+
+media_source:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.42.0.0/22
+    - 192.168.99.0/24
+    - 127.0.0.1
+    - ::1
+
+recorder:
+  exclude:
+    entities:
+      - sensor.time
+      - sensor.time_date
+      - sensor.internet_time
+      - sensor.time_utc
+      - sensor.date_time
+      - sensor.date_time_utc
+      - sensor.date_time_iso
+      - binary_sensor.doorbell_motion_alarm
+
+envisalink:
+  host: 192.168.99.147
+  panel_type: HONEYWELL
+  user_name: user
+  password: user
+  code: "2950"
+  port: 4025
+  evl_version: 4
+  keepalive_interval: 60
+  zonedump_interval: 30
+  timeout: 10
+  panic_type: Police
+  zones:
+    1:
+      name: "Front Door"
+      type: "opening"
+    2:
+      name: "Garage Door"
+      type: "opening"
+    3:
+      name: "Patio Door"
+      type: "opening"
+    5:
+      name: "First Floor Motion"
+      type: "motion"
+  partitions:
+    1:
+      name: "Home Alarm"

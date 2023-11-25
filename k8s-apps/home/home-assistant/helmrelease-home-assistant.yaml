@@ -98,27 +98,27 @@ spec:
         type: custom
         volumeSpec:
           configMap:
-            name: home-assistant-configuration
+            name: home-assistant-configs
         subPath:
-          - path: config
+          - path: configuration
             mountPath: /config/configuration.yaml
       ha-automation:
         enabled: true
         type: custom
         volumeSpec:
           configMap:
-            name: home-assistant-automation
+            name: home-assistant-configs
         subPath:
-          - path: config
+          - path: automations
             mountPath: /config/automations.yaml
       ha-customize:
         enabled: true
         type: custom
         volumeSpec:
           configMap:
-            name: home-assistant-customize
+            name: home-assistant-configs
         subPath:
-          - path: config
+          - path: customize
             mountPath: /config/customize.yaml
       ha-secrets:
         enabled: true

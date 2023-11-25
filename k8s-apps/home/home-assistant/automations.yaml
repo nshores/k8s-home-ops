@@ -1,0 +1,776 @@
+- id: "1549141011449"
+  alias: Front Door Lock 5 minute lock
+  trigger:
+    - entity_id: lock.front_door_lock_131
+      platform: state
+      from: locked
+      to: unlocked
+      for:
+        minutes: 5
+  action:
+    - service: lock.lock
+      entity_id:
+        - lock.front_door_lock_131
+- alias: Door Chime
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zone_01_front_door_garage_entry_42
+      from: "off"
+      to: "on"
+  action:
+    - service: tts.google_say
+      entity_id:
+        - media_player.google_dining_room
+        - media_player.google_kitchen
+      data:
+        message: Door Open
+  id: 109a022a73354bac8a75ddb0407c2a40
+- id: 01c7ecc7d8b04f1290034b1de6eace86
+  alias: Garage Door Left Open Notification
+  trigger:
+    - platform: state
+      entity_id: cover.garage_door
+      to: open
+      for:
+        minutes: 10
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.doorbell_sensor_120
+          attribute: device_tripped
+          state: "True"
+  action:
+    - service: camera.snapshot
+      target:
+        entity_id: camera.garage
+      data:
+        filename: /config/www/garage.jpg
+    - service: notify.mobile_app_pixel_7_pro
+      data:
+        message: The garage door has been left open!
+        title: Garage door alert!
+        data:
+          image: local/garage.jpg
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+- id: b67112aad2d3493ea0a2679ba7ecd6ec
+  alias: Doorbell Alert
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.doorbell_button_pressed
+      from: "off"
+      to: "on"
+  action:
+    - service: camera.snapshot
+      data:
+        filename: /config/www/front.jpg
+      target:
+        entity_id: camera.doorbell
+    - service: notify.slack_notify
+      data:
+        title: Front Door View
+        message: Somebody is at the front door!
+        data:
+          file:
+            path: /config/www/front.jpg
+    - service: notify.mobile_app_pixel_7_pro
+      data:
+        message: Somebody is at the front door!
+        title: Somebody is at the front door!
+        data:
+          image: /local/front.jpg
+    - service: tts.google_say
+      entity_id:
+        - media_player.nesthub4e50
+        - media_player.googlehome7126
+      data:
+        message: Somebody is at the front door!
+    - service: camera.play_stream
+      data:
+        media_player: media_player.nesthub4e50
+      target:
+        entity_id: camera.doorbell
+    - delay:
+        hours: 0
+        minutes: 2
+        seconds: 0
+        milliseconds: 0
+    - service: media_player.turn_off
+      data: {}
+      target:
+        entity_id: media_player.nesthub4e50
+- alias: Set washing machine active when power detected
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.wash_power
+      above: 4
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.washing_machine_status
+        state: Idle
+      - condition: state
+        entity_id: sensor.washing_machine_status
+        state: Clean
+      - condition: state
+        entity_id: sensor.washing_machine_status
+        state: Finishing
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.washing_machine_status
+        option: Running
+  id: 688e49e0c8724f819695792e5cc456f9
+- alias: Set washing machine finished when power drops
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.wash_power
+      below: 3
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.washing_machine_status
+        state: Running
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.washing_machine_status
+        option: Finishing
+  id: 065e2003c0874ef9b5994244498eb0d3
+- alias: Set washing machine clean after timeout
+  trigger:
+    - platform: state
+      entity_id: input_select.washing_machine_status
+      to: Finishing
+      for:
+        minutes: 8
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.washing_machine_status
+        state: Finishing
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.washing_machine_status
+        option: Clean
+  id: c150220b7e4d4423a0046cb6bffc1ef9
+- alias: Send alert when washing machine is finished
+  trigger:
+    - platform: state
+      entity_id: input_select.washing_machine_status
+      to: Clean
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.washing_machine_status
+        state: Clean
+  action:
+    - service: tts.google_say
+      entity_id:
+        - media_player.all
+      data:
+        message: The Washing Machine cycle is complete!
+    - service: notify.mobile_app_pixel_7_pro
+      data_template:
+        message: The Washing Machine cycle is complete!
+  id: a17355b71df94a14870408fb80c40cc6
+- alias: Set washing machine clean when door opens
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.multipurpose_sensor_contact_2
+      to: "on"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.washing_machine_status
+        state: Clean
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.washing_machine_status
+        option: Idle
+  id: 0d87accc739e40fea269742ff5daab5c
+- alias: Set dryer machine active when power detected
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.dry_power
+      above: 10
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.dryer_machine_status
+        state: Idle
+      - condition: state
+        entity_id: sensor.dryer_machine_status
+        state: Clean
+      - condition: state
+        entity_id: sensor.dryer_machine_status
+        state: Finishing
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.dryer_machine_status
+        option: Running
+  id: ffdeb8098c404dcfb989eef3be81af5b
+- alias: Set dryer machine finished when power drops
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.dry_power
+      below: 6
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.dryer_machine_status
+        state: Running
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.dryer_machine_status
+        option: Finishing
+  id: ae4a61e2b6aa463dae0f09beb14d5863
+- alias: Set dryer machine clean after timeout
+  trigger:
+    - platform: state
+      entity_id: input_select.dryer_machine_status
+      to: Finishing
+      for:
+        minutes: 8
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.dryer_machine_status
+        state: Finishing
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.dryer_machine_status
+        option: Clean
+  id: 02b0428296bf4e09b5fb3e4ad5827d53
+- alias: Send alert when dryer machine is finished
+  trigger:
+    - platform: state
+      entity_id: input_select.dryer_machine_status
+      to: Clean
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.dryer_machine_status
+        state: Clean
+  action:
+    - service: tts.google_say
+      entity_id:
+        - media_player.all
+      data:
+        message: The dryer Machine is ready to be emptied!
+    - service: notify.mobile_app_pixel_7_pro
+      data_template:
+        message: The dryer Machine is ready to be emptied!
+  id: e26fc2cb61404368aa850abe47821da0
+- alias: Set drying machine idle when door opens
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.multipurpose_sensor_contact
+      to: "on"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_select.dryer_machine_status
+        state: Clean
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.dryer_machine_status
+        option: Idle
+  id: dccdfe44ce024e9ca9fd466ea1a4406c
+- alias: Set theme at startup
+  initial_state: "on"
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    service: frontend.set_theme
+    data:
+      name: clear
+  id: 26ce7db966b04fad8f3854712c6a464f
+- alias: Living Room Motion Lighting On
+  trigger:
+    platform: state
+    entity_id: binary_sensor.downstairs_motion_119
+    to: "on"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.late_night
+              state: "on"
+            - condition: state
+              entity_id: sun.sun
+              state: below_horizon
+            - condition: state
+              entity_id: media_player.lg_webos_smart_tv_2
+              state: "off"
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id: light.living_room_lights_125
+              data:
+                brightness_pct: 20
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.late_night
+              state: "off"
+            - condition: state
+              entity_id: sun.sun
+              state: below_horizon
+            - condition: state
+              entity_id: media_player.lg_webos_smart_tv_2
+              state: "off"
+          sequence:
+            - service: light.turn_on
+              data:
+                brightness_pct: 100
+              target:
+                entity_id: light.living_room_lights_125
+  mode: single
+  id: fad1cc2ac279424283301b871688f464
+- alias: Living Room Motion Lighting Off
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.downstairs_motion_119
+      to: "off"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: media_player.lg_webos_smart_tv_2
+        state: "off"
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: media_player.shield_4
+            state: "idle"
+          - condition: state
+            entity_id: media_player.shield_4
+            state: "off"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_lights_125
+  id: bb4d40ba686940be9fe9f5927e501975
+- alias: Turn off HVAC if window/door is opened
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.zone_01_front_door_garage_entry_60
+        - binary_sensor.zone_3_window_next_to_front_door_67
+        - binary_sensor.zone_11_laundry_window_62
+        - binary_sensor.zone_12_living_room_patio_door_63
+        - binary_sensor.zone_2_both_kitchen_window_66
+        - binary_sensor.zone_10_window_next_to_front_door_61
+        - binary_sensor.zone_4_living_room_laundry_window_99
+        - binary_sensor.zone_9_kitchen_window_73
+      to: "on"
+      from: "off"
+      for:
+        minutes: 5
+  condition:
+    condition: or
+    conditions:
+      - condition: template
+        value_template:
+          "{{ states('sensor.downstairs_thermostat_hvac_state_2') !=
+          'off' }}"
+      - condition: template
+        value_template:
+          "{{ states('sensor.hallway_thermostat_upstairs_hvac_state_2')
+          != 'off' }}"
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.downstairs_2
+        temperature: 80
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.living_room
+        temperature: 80
+    - service: notify.alexa_media_everywhere
+      data_template:
+        message:
+          The {{ trigger.to_state.attributes.friendly_name }} has been opened
+          for about 5 minutes.  I will shut down the Air Conditioner so you can enjoy
+          the fresh air.
+        data:
+          type: announce
+    - service: tts.google_say
+      entity_id:
+        - media_player.all
+      data:
+        message:
+          The {{ trigger.to_state.attributes.friendly_name }} has been opened
+          for about 5 minutes.  I will shut down the Air Conditioner so you can enjoy
+          the fresh air.
+  id: 418b1b81c4ec43ca824dab58f05b0c30
+- alias: Turn HVAC back on when all doors/windows are closed.
+  trigger:
+    - platform: state
+      entity_id:
+        - group.ext_entry
+      to: "off"
+      from: "on"
+      for:
+        minutes: 5
+  condition:
+    - condition: template
+      value_template: "{{ states('climate.downstairs_2') == 'off' }}"
+  action:
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.downstairs_2
+        hvac_mode: cool
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.living_room
+        hvac_mode: cool
+  id: 304fd1d104434198971339dc5a752be4
+- alias: Hotter inside than Outside -- Open Windows
+  trigger:
+    platform: state
+    entity_id: sensor.warm_inside
+    from: "False"
+    to: "True"
+  action:
+    - service: tts.google_say
+      entity_id:
+        - media_player.all
+      data:
+        message:
+          The temperature inside ({{ states('sensor.average_house_temp')}}) is
+          hotter than outside ({{ state_attr('weather.ksac_daynight', 'temperature')
+          }}) - consider opening some windows.
+    - service: notify.mobile_app_pixel_7_pro
+      data_template:
+        message:
+          The temperature inside ({{ states('sensor.average_house_temp')}}) is
+          hotter than outside ({{ state_attr('weather.ksac_daynight', 'temperature')
+          }}) - consider opening some windows.
+  id: d12af3ef08c244d0b3f21aac056ab71c
+- id: 0ca5feb72ab1420997a5f22dd3a244dc
+  alias: Living Room Movie Lights - Playing Movie or TV Show
+  trigger:
+    - platform: state
+      entity_id: media_player.shield_4
+      to: playing
+  condition:
+    condition: not
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: above_horizon
+  action:
+    - service: light.turn_on
+      entity_id: light.living_room_lights_125
+      data:
+        brightness_pct: 20
+- id: 3eeb0aad017041d08c88d3a33b717f17
+  alias: Living Room Movie Lights - Paused
+  trigger:
+    - platform: state
+      entity_id: media_player.shield_4
+      from: playing
+      to:
+        - "paused"
+        - "idle"
+        - "off"
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+  action:
+    - service: light.turn_on
+      entity_id: light.living_room_lights_125
+      data:
+        brightness_pct: 90
+- alias: Turn on entry light when there is movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.downstairs_motion_motion
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.first_floor_motion
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+  action:
+    service: light.turn_on
+    entity_id: light.bottom_stairs_126
+  id: 91b391ee050c48a999f2f00fe5f47867
+- alias: Turn off entry light 5 minutes after last movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.downstairs_motion_motion
+      to: "off"
+    - platform: state
+      entity_id: binary_sensor.first_floor_motion
+      to: "off"
+  action:
+    service: light.turn_off
+    entity_id: light.bottom_stairs_126
+  id: f799f29b0598443ebd39499127e0cb19
+- alias: Turn on upstairs light when there is movement after dusk
+  trigger:
+    platform: state
+    entity_id: binary_sensor.upstairs_hallway_mot_97
+    to: "on"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.late_night
+              state: "on"
+            - condition: state
+              entity_id: sun.sun
+              state: below_horizon
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id: light.upper_stairs_127
+              data:
+                brightness_pct: 20
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.late_night
+              state: "off"
+            - condition: state
+              entity_id: sun.sun
+              state: below_horizon
+          sequence:
+            - service: light.turn_on
+              data:
+                brightness_pct: 100
+              target:
+                entity_id: light.upper_stairs_127
+  mode: single
+- alias: Turn off upstairs light after 1 minute
+  trigger:
+    platform: state
+    entity_id: light.upper_stairs_127
+    to: "on"
+    for:
+      minutes: 1
+  action:
+    service: light.turn_off
+    entity_id:
+      - light.upper_stairs_127
+  id: 60d717679e194dc782636cc09f8aea97
+- alias: Turn on patio lights when motion detected by camera
+  trigger:
+    platform: webhook
+    webhook_id: patio
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+  action:
+    service: light.turn_on
+    data:
+      rgb_color:
+        - 255
+        - 255
+        - 255
+      brightness: 255
+      entity_id: light.2cf432f4a1bd_192_168_99_164
+  id: 43402ba803fb45a48567cd6297282ebb
+- alias: Turn off patio light 5 minutes after last movement
+  trigger:
+    platform: state
+    entity_id: camera.backyard
+    to: idle
+    for:
+      minutes: 5
+  action:
+    service: light.turn_off
+    entity_id: light.2cf432f4a1bd_192_168_99_164
+  id: 010193e7bc49414483b065b6e3da92a8
+- alias: Christmas Tree Sunset on
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: switch.turn_on
+    entity_id: switch.smart_switch_6_104
+  id: aed4bfec373c423b9f9577f682c259d3
+- alias: Christmas Tree Sunrise off
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: switch.turn_off
+    entity_id: switch.smart_switch_6_104
+  id: 098851fe6824426cb7c1c2c76d823a2c
+- alias: Notify of frigate events
+  trigger:
+    platform: mqtt
+    topic: frigate/events
+  action:
+    - service: notify.slack_notify
+      data_template:
+        message:
+          A {{trigger.payload_json["after"]["label"]}} was detected at the front
+          door!
+        data:
+          file:
+            url: https://ha.nickshores.net/api/frigate/notifications/{{trigger.payload_json["after"]["id"]}}/thumbnail.jpg
+    - delay:
+        minutes: 1
+  id: d4bab80f373546e4b27924c92df6f136
+- id: "1635037169949"
+  alias: dim lights with movie playing in living room
+  description: ""
+  trigger:
+    - platform: state
+      entity_id: media_player.plex_plex_for_android_tv_shield_android_tv
+      to: playing
+  condition: []
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.living_room_lights_125_125
+      data:
+        brightness_pct: 20
+  mode: single
+- id: "1635116818341"
+  alias: Low battery level detection & notification for all battery sensors
+  description: ""
+  use_blueprint:
+    path: Sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      actions:
+        - service: notify.slack_notify
+          data:
+            message: "{{sensors}} - low battery"
+      exclude:
+        entity_id:
+          - sensor.pixel_5_battery_level
+          - sensor.pixel_6_pro_battery_level
+        device_id:
+          - 3850f679e3e4ce2ade9afc0de1f26de7
+          - 6fba876208f2a1b7949234b79dc565f6
+          - a75928601b96d842733cd4724fbdda4e
+          - 3b52268c37c240f79cd84a9c68b1ad4a
+- id: "1639685344164"
+  alias: Frigate Notification
+  description: ""
+  use_blueprint:
+    path: hunterjm/frigate_notification.yaml
+    input:
+      camera: front_door
+      notify_device: 6fba876208f2a1b7949234b79dc565f6
+      base_url: https://ha.nickshores.net
+      cooldown: 60
+      silence_timer: 60
+- alias: Turn on kitchen LED with movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.downstairs_motion_119
+    to: "on"
+  action:
+    service: light.turn_on
+    entity_id:
+      - light.controller_rgb_ww_cw_8fbc55
+  id: 7f803e3b22104a4a9d5497ce01e25497
+- alias: Turn off kitch LED without movement for 5 mins
+  trigger:
+    platform: state
+    entity_id: binary_sensor.downstairs_motion_119
+    to: "off"
+  action:
+    service: light.turn_off
+    entity_id:
+      - light.controller_rgb_ww_cw_8fbc55
+  id: 7e0457aa1455447499ef96ee2675667b
+- alias: Bedroom LED Sunset
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: light.turn_on
+    entity_id: light.controller_rgb_ir_90c0af
+  id: 757761ec33dc40f08b71c5e688c3cd39
+- alias: Bedroom LED Sunrise
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: light.turn_off
+    entity_id: light.controller_rgb_ir_90c0af
+  id: 94668e8641e147c585ecb20ed973c3bb
+- alias: NYE 2023
+  trigger:
+    - platform: time
+      at: "23:59:00"
+  condition: []
+  action:
+    - service: script.nye_2023
+      data: {}
+- alias: Control upstairs fan speed when tempature above 75
+  trigger:
+    platform: state
+    entity_id: sensor.bedroom_temp_temperature_measurement
+  condition:
+    condition: numeric_state
+    entity_id: sensor.bedroom_temp_temperature_measurement
+    above: 75
+  action:
+    - service: fan.set_percentage
+      data:
+        entity_id:
+          - fan.ceiling_fan_master
+          - fan.ceiling_fan_office
+        percentage: >-
+          {% if states('sensor.bedroom_temp_temperature_measurement') | int >= 78 %}
+            66
+          {% elif states('sensor.bedroom_temp_temperature_measurement') | int >= 75 %}
+            33
+          {% else %}
+            {{ state_attr('fan.ceiling_fan_master', 'percentage') }}
+          {% endif %}
+- alias: Turn on Late Night Mode
+  trigger:
+    - platform: time
+      at: "22:00:00"
+    - platform: homeassistant
+      event: start
+  condition:
+    - condition: time
+      after: "22:00:00"
+  action:
+    service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.late_night
+
+- alias: Turn off Late Night Mode
+  trigger:
+    - platform: time
+      at: "07:00:00"
+  action:
+    service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.late_night
