@@ -100,7 +100,7 @@ spec:
           configMap:
             name: home-assistant-configs
         subPath:
-          - path: configuration
+          - path: configuration.yaml
             mountPath: /config/configuration.yaml
       ha-automation:
         enabled: true
@@ -109,7 +109,7 @@ spec:
           configMap:
             name: home-assistant-configs
         subPath:
-          - path: automations
+          - path: automations.yaml
             mountPath: /config/automations.yaml
       ha-customize:
         enabled: true
@@ -118,7 +118,7 @@ spec:
           configMap:
             name: home-assistant-configs
         subPath:
-          - path: customize
+          - path: customize.yaml
             mountPath: /config/customize.yaml
       ha-secrets:
         enabled: true

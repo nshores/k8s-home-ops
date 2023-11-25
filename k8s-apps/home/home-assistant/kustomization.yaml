@@ -10,3 +10,5 @@ configMapGenerator:
       - automations.yaml
       - configuration.yaml
       - customize.yaml
+generatorOptions:
+  disableNameSuffixHash: true
