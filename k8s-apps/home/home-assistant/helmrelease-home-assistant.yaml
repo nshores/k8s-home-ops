@@ -220,5 +220,14 @@ spec:
           - --user-data-dir
           - /data/config/.vscode
         volumeMounts:
-          - name: config
-            mountPath: /data/config
+          - mountPath: /config
+            name: config
+          - mountPath: /config/automations.yaml
+            name: ha-automation
+            subPath: automations.yaml
+          - mountPath: /config/configuration.yaml
+            name: ha-configuration
+            subPath: configuration.yaml
+          - mountPath: /config/customize.yaml
+            name: ha-customize
+            subPath: customize.yaml
