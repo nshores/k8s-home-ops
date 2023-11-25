@@ -475,7 +475,7 @@ data:
       alias: Living Room Movie Lights - Playing Movie or TV Show
       trigger:
       - platform: state
-        entity_id: media_player.plex_plex_for_android_tv_shield_android_tv
+        entity_id: media_player.shield_4
         to: playing
       condition:
         condition: not
@@ -492,11 +492,12 @@ data:
       alias: Living Room Movie Lights - Paused
       trigger:
       - platform: state
-        entity_id: media_player.plex_plex_for_android_tv_shield_android_tv
+        entity_id: media_player.shield_4
         from: playing
         to:
           - "paused"
           - "idle"
+          - "off"
       condition:
       - condition: state
         entity_id: sun.sun
