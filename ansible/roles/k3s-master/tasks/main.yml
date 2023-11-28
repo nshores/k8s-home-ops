@@ -4,7 +4,7 @@
 #prepare hosts for etcd
 
 - name: set ionice tuning param for etcd
-  shell: sudo ionice -c2 -n0 -p `pgrep etcd`
+  shell: sudo ionice -c2 -n0 -p $(pgrep -f "k3s server")
   become: true
 
 - name: install k3s on master[0]
