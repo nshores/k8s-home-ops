@@ -1,6 +1,12 @@
 ---
 # tasks file for k3s-master
 
+#prepare hosts for etcd
+
+- name: set ionice tuning param for etcd
+  shell: sudo ionice -c2 -n0 -p `pgrep etcd`
+  become: true
+
 - name: install k3s on master[0]
   shell: >
     curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.23.6+k3s K3S_TOKEN={{ k3s_server_token }} INSTALL_K3S_EXEC="--disable traefik --disable servicelb --etcd-expose-metrics --cluster-init --etcd-arg heartbeat-interval=10000 --etcd-arg election-timeout=50000" sh -
