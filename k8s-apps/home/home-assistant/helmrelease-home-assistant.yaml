@@ -33,7 +33,7 @@ spec:
       repository: ghcr.io/home-assistant/home-assistant
       # -- image tag
       # @default -- chart.appVersion
-      tag: 2023.8.4
+      tag: 2023.12.0
       # -- image pull policy
       pullPolicy: IfNotPresent
 
