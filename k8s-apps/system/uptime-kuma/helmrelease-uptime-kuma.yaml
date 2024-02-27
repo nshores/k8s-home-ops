@@ -69,3 +69,4 @@ spec:
       config:
         enabled: true
         mountPath: /app/data
+        size: 5Gi

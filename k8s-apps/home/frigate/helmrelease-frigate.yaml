@@ -17,106 +17,163 @@ spec:
   timeout: 5m
   releaseName: frigate
   values:
-# Default values for frigate.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+    image:
+      # -- image repository
+      repository: ghcr.io/blakeblackshear/frigate
+      # -- image tag
+      # @default -- chart.appVersion
+      tag: 0.12.1
+      # -- image pull policy
+      pullPolicy: IfNotPresent
 
-# -- upgrade strategy type (e.g. Recreate or RollingUpdate)
-strategyType: Recreate
+    # -- environment variables. See [docs](https://blakeblackshear.github.io/frigate/) for more details.
+    # @default -- See below
+    env:
+      # -- Set the container timezone
+      TZ: America/Los_Angeles
+      # -- Set a RTSP password
+      # @default -- empty
+      FRIGATE_RTSP_PASSWORD: ""
 
-values:
-  image:
-    # -- Docker registry/repository to pull the image from
-    repository: ghcr.io/blakeblackshear/frigate
-    # -- Overrides the default tag (appVersion) used in Chart.yaml ([Docker Hub](https://hub.docker.com/r/blakeblackshear/frigate/tags?page=1))
-    tag: 0.12.1
-    # -- Docker image pull policy
-    pullPolicy: IfNotPresent
+    # -- Configures service settings for the chart.
+    # @default -- See values.yaml
+    service:
+      main:
+        ports:
+          http:
+            port: 5000
+          rtmp:
+            enabled: false
+            port: 1935
+            protocol: TCP
+            targetPort: 1935
 
-  # -- Docker image pull policy
-  imagePullSecrets: []
+    ingress:
+      # -- Enable and configure ingress settings for the chart under this key.
+      # @default -- See values.yaml
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+        hosts:
+          - # -- Host address. Helm template can be passed.
+            host: frigate.lab.nickshores.net
+            ## Configure the paths for the host
+            paths:
+              - # -- Path.  Helm template can be passed.
+                path: /
+                # -- Ignored if not kubeVersion >= 1.14-0
+                pathType: Prefix
+                service:
+                  # -- Overrides the service name reference for this path
+                  name:
+                  # -- Overrides the service port reference for this path
+                  port:
 
-  # -- additional ENV variables to set. Prefix with FRIGATE_ to target Frigate configuration values
-  env:
-    {}
-    # TZ: UTC
+    securityContext:
+      # -- (bool) Privileged securityContext may be required if USB devices are accessed directly through the host machine
+      privileged: false
 
-  # -- set environment variables from Secret(s)
-  envFromSecrets:
-    []
-    # secrets are required before `helm install`
-    # - frigate-rstp-credentials
+    # -- Configure persistence settings for the chart under this key.
+    # @default -- See values.yaml
+    persistence:
+      data:
+        enabled: true
+        mountPath: /data
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        storageClass: longhorn
+      media:
+        enabled: true
+        mountPath: /media
+        accessMode: ReadWriteOnce
+        size: 20Gi
+        storageClass: longhorn
+      # -- Configure a hostPathMount to mount a USB device in the container.
+      # @default -- See values.yaml
+      usb:
+        enabled: false
+        type: hostPath
+        hostPath: /dev/bus/usb
+      # -- Configure a temporary cache. See [docs](https://blakeblackshear.github.io/frigate/) for more details..
+      # @default -- See values.yaml
+      cache:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 1Gi
+        mountPath: /dev/shm
 
-  coral:
-    # -- enables the use of a Coral device
-    enabled: false
-    # -- path on the host to which to mount the Coral device
-    hostPath: /dev/bus/usb
+    # -- Affinity constraint rules to place the Pod on a specific node.
+    # [[ref]](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
+    # affinity:
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #         - matchExpressions:
+    #             - key: kubernetes.io/hostname
+    #               operator: In
+    #               values:
+    #                 - k3s-master-6
 
-  gpu:
-    nvidia:
-      # -- Enables NVIDIA GPU compatibility. Must also use the "amd64nvidia" tagged image
-      enabled: false
+    # -- Configure the resource requests and/or limits for the Pod
+    resources:
+      requests:
+        cpu: 0.5
+      limits:
+        cpu: 1.0
 
-      # -- Overrides the default runtimeClassName
-      runtimeClassName:
+    configmap:
+      config:
+        # -- Store frigate configuration as a ConfigMap
+        enabled: true
 
-  # -- declare extra volumes to use for Frigate
-  extraVolumes: []
-  # -- declare additional volume mounts
-  extraVolumeMounts: []
-
-  # -- amount of shared memory to use for caching
-  shmSize: 1Gi
-
-  # nameOverride -- Overrides the name of resources
-  nameOverride: ""
-
-  # fullnameOverride -- Overrides the Full Name of resources
-  fullnameOverride: ""
-
-  # -- frigate configuration - see [Docs](https://docs.frigate.video/configuration/index) for more info
-  config: |
-    mqtt:
-      host: mosquitto
-    cameras:
-      front_door:
-        ffmpeg:
-          inputs:
-            - path: rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1
-              roles:
-                - detect
-            - path: rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0
-              roles:
-                - record
-        detect:
-          width: 640
-          height: 480
-          fps: 5
-        snapshots:
-          enabled: True
-          required_zones:
-            - porch
-        record:
-          enabled: True
-          events:
-            required_zones:
-              - porch
-        rtmp:
-          enabled: false
-        motion:
-          mask:
-            - 519,480,640,480,640,480,640,480,640,90,640,0,518,0,525,276
-            - 0,255,0,165,640,158,640,254
-            - 0,236,640,230,640,0,0,0
-        zones:
-          porch:
-            coordinates: 0,480,517,480,525,264,0,229
-            objects:
-            - person
-    detectors:
-      cpu1:
-        type: cpu
+        # -- See [docs](https://blakeblackshear.github.io/frigate/) for more details.
+        # @default -- see URL to default config
+        data:
+          config.yml: |
+            mqtt:
+              host: mosquitto
+            cameras:
+              front_door:
+                ffmpeg:
+                  inputs:
+                    - path: rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1
+                      roles:
+                        - detect
+                    - path: rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0
+                      roles:
+                        - record
+                detect:
+                  width: 640
+                  height: 480
+                  fps: 5
+                snapshots:
+                  enabled: True
+                  required_zones:
+                    - porch
+                record:
+                  enabled: True
+                  events:
+                    required_zones:
+                      - porch
+                rtmp:
+                  enabled: false
+                motion:
+                  mask:
+                    - 519,480,640,480,640,480,640,480,640,90,640,0,518,0,525,276
+                    - 0,255,0,165,640,158,640,254
+                    - 0,236,640,230,640,0,0,0
+                zones:
+                  porch:
+                    coordinates: 0,480,517,480,525,264,0,229
+                    objects:
+                    - person
+            detectors:
+              cpu1:
+                type: cpu
 
     record:
       # Optional: Enable recording (default: shown below)
