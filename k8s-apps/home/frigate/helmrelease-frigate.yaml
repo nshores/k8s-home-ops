@@ -234,7 +234,7 @@ spec:
         ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
         ##   GKE, AWS & OpenStack)
         ##
-        # storageClass: "-"
+        storageClass: "longhorn"
         ##
         ## If you want to reuse an existing claim, you can pass the name of the PVC using
         ## the existingClaim variable
@@ -260,7 +260,7 @@ spec:
         ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
         ##   GKE, AWS & OpenStack)
         ##
-        # storageClass: "-"
+        storageClass: "longhorn"
         ##
         ## If you want to reuse an existing claim, you can pass the name of the PVC using
         ## the existingClaim variable
