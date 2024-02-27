@@ -279,10 +279,10 @@ spec:
     # -- Set resource limits/requests for the Pod(s)
     resources:
       limits:
-        cpu: 0.5
+        cpu: 1.0
 
       requests:
-        cpu: 1.0
+        cpu: 0.5
     # -- Set Security Context
     securityContext:
       {}
