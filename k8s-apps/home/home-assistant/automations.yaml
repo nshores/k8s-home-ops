@@ -486,7 +486,7 @@
     - service: light.turn_on
       entity_id: light.living_room_lights_125
       data:
-        brightness_pct: 20
+        brightness_pct: 5
 - id: 3eeb0aad017041d08c88d3a33b717f17
   alias: Living Room Movie Lights - Paused
   trigger:
