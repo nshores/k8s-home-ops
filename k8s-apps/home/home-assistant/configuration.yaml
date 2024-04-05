@@ -59,8 +59,8 @@ logbook:
       - sensor.home_alarm_keypad
       - binary_sensor.front_door_motion
 
-# Enables a map showing the location of tracked devices
-map:
+# # Enables a map showing the location of tracked devices
+# map:
 
 # Track the sun
 sun:
@@ -257,7 +257,6 @@ sensor:
       - "date_time_iso"
       - "time_date"
       - "time_utc"
-      - "beat"
 
   - platform: zoneminder
     include_archived: false
