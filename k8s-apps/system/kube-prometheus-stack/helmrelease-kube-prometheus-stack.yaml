@@ -717,6 +717,27 @@ spec:
       enabled: true
       namespaceOverride: ""
 
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+            - name: provider-site
+              orgId: 1
+              folder: ""
+              type: file
+              disableDeletion: false
+              editable: true
+              options:
+                path: /var/lib/grafana/dashboards/provider-site
+      # now using that provider to import dashboards
+      dashboards:
+        provider-site:
+          node-exporter-full:
+            # url: https://grafana.com/api/dashboards/1860/revisions/27/download
+            gnetId: 1860
+            revision: 27
+            datasource: Prometheus
+
       ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
       ##
       forceDeployDatasources: false
