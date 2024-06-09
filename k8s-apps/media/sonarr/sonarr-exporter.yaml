@@ -84,6 +84,8 @@ spec:
                 secretKeyRef:
                   name: home-secrets
                   key: SONARR_API_KEY
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: true
           ports:
             - name: monitoring
               containerPort: 9707
