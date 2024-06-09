@@ -20,7 +20,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: sonarr-exporter
-  namespace: home
+  namespace: default
   labels:
     app.kubernetes.io/name: sonarr-exporter
     app.kubernetes.io/instance: sonarr-exporter
