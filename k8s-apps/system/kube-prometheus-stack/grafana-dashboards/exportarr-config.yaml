@@ -5,6 +5,7 @@ metadata:
   name: grafana-dashboards
   labels:
     grafana_dashboard: "1"
+  namespace: default
 data:
   exportarr.json: |
     {{ .Files.Get "exportarr.json" | indent 4 }}
