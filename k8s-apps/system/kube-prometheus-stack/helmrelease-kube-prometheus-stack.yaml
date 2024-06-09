@@ -737,7 +737,16 @@ spec:
             gnetId: 1860
             revision: 27
             datasource: Prometheus
-
+          traefik-2-2:
+            # url: https://grafana.com/grafana/dashboards/12250-traefik-2-2/
+            gnetId: 12250
+            revision: 1
+            datasource: Prometheus
+          longhorn:
+            # url: https://grafana.com/grafana/dashboards/16888-longhorn/
+            gnetId: 16888
+            revision: 9
+            datasource: Prometheus
       ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
       ##
       forceDeployDatasources: false
