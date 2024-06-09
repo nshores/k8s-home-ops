@@ -24,6 +24,8 @@ metadata:
   labels:
     app.kubernetes.io/name: sonarr-exporter
     app.kubernetes.io/instance: sonarr-exporter
+    release: kube-prometheus-stack
+    app: kube-prometheus-stack-prometheus
 spec:
   selector:
     matchLabels:
