@@ -10,7 +10,7 @@ spec:
     - name: sabnzbd_alerts
       rules:
         - alert: sabnzbdQueueHigh
-          expr: avg_over_time(sabnzbd_queue_total[30m]) > 1
+          expr: avg_over_time(sabnzbd_queue_length[30m]) > 1
           for: 30m
           labels:
             severity: critical
