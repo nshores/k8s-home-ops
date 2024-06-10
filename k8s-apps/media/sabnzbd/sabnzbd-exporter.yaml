@@ -1,0 +1,110 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sabnzbd-exporter
+  namespace: home
+  labels:
+    app.kubernetes.io/name: sabnzbd-exporter
+    app.kubernetes.io/instance: sabnzbd-exporter
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: sabnzbd-exporter
+    app.kubernetes.io/instance: sabnzbd-exporter
+  ports:
+    - name: monitoring
+      port: 9707
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sabnzbd-exporter
+  namespace: default
+  labels:
+    app.kubernetes.io/name: sabnzbd-exporter
+    app.kubernetes.io/instance: sabnzbd-exporter
+    release: kube-prometheus-stack
+    app: kube-prometheus-stack-prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sabnzbd-exporter
+      app.kubernetes.io/instance: sabnzbd-exporter
+  namespaceSelector:
+    matchNames:
+      - home
+  endpoints:
+    - port: monitoring
+      interval: 4m
+      scrapeTimeout: 90s
+      path: /metrics
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sabnzbd-exporter
+  namespace: home
+  labels:
+    app.kubernetes.io/name: sabnzbd-exporter
+    app.kubernetes.io/instance: sabnzbd-exporter
+  annotations:
+    fluxcd.io/ignore: "false"
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.sabnzbd-exporter: semver:~v0.1
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sabnzbd-exporter
+      app.kubernetes.io/instance: sabnzbd-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sabnzbd-exporter
+        app.kubernetes.io/instance: sabnzbd-exporter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "monitoring"
+    spec:
+      containers:
+        - name: sabnzbd-exporter
+          image: ghcr.io/onedr0p/exportarr:v1.5.3
+          imagePullPolicy: IfNotPresent
+          args:
+            - sabnzbd
+          env:
+            - name: PORT
+              value: "9707"
+            - name: URL
+              value: "http://sabnzbd.home.svc.cluster.local:8080"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: home-secrets
+                  key: SABNZBD_API_KEY
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
+          ports:
+            - name: monitoring
+              containerPort: 9707
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

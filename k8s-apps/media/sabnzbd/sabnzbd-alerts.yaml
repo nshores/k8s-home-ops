@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: sabnzbd-prometheus-rules
+  namespace: default
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: sabnzbd_alerts
+      rules:
+        - alert: sabnzbdQueueHigh
+          expr: avg_over_time(sabnzbd_queue_total[30m]) > 1
+          for: 30m
+          labels:
+            severity: critical
+            alertname: sabnzbdQueueHigh
+          annotations:
+            summary: "sabnzbd queue has been high for 30 minutes."
+            description: "The average value of sabnzbd_queue_total has been greater than 1 for the last 30 minutes. This may indicate a potential issue that requires attention."
