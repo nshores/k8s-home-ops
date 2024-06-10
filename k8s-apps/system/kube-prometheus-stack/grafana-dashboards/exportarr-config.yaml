@@ -34,7 +34,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1717996534186,
+      "iteration": 1717998446694,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -90,8 +90,16 @@ data:
                     "value": null
                   },
                   {
+                    "color": "#EAB839",
+                    "value": 1
+                  },
+                  {
+                    "color": "#6ED0E0",
+                    "value": 5
+                  },
+                  {
                     "color": "red",
-                    "value": 80
+                    "value": 10
                   }
                 ]
               }
@@ -108,7 +116,7 @@ data:
           "options": {
             "legend": {
               "calcs": [
-                "lastNotNull"
+                "last"
               ],
               "displayMode": "table",
               "placement": "right"
@@ -1218,8 +1226,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1316,8 +1323,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1419,8 +1425,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1487,8 +1492,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1654,8 +1658,7 @@ data:
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
-                        "value": null
+                        "color": "green"
                       },
                       {
                         "color": "red",
@@ -1737,8 +1740,7 @@ data:
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "red",
-                        "value": null
+                        "color": "red"
                       },
                       {
                         "color": "semi-dark-orange",
@@ -1813,8 +1815,7 @@ data:
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
-                        "value": null
+                        "color": "green"
                       }
                     ]
                   },
@@ -1908,8 +1909,7 @@ data:
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
-                        "value": null
+                        "color": "green"
                       }
                     ]
                   },
@@ -1983,8 +1983,7 @@ data:
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
-                        "value": null
+                        "color": "green"
                       }
                     ]
                   },
@@ -2062,8 +2061,7 @@ data:
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
-                        "value": null
+                        "color": "green"
                       }
                     ]
                   },
@@ -2137,8 +2135,7 @@ data:
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
-                        "value": null
+                        "color": "green"
                       },
                       {
                         "color": "red",
@@ -2664,13 +2661,13 @@ data:
         ]
       },
       "time": {
-        "from": "now-3h",
+        "from": "now-12h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "browser",
       "title": "Media Dashboard",
       "uid": "WURH98Y4k",
-      "version": 1,
+      "version": 4,
       "weekStart": ""
     }
