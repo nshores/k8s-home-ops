@@ -34,7 +34,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1717996534172,
+      "iteration": 1717996534186,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -54,15 +54,18 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
+                "fillOpacity": 11,
+                "gradientMode": "opacity",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
                 "lineInterpolation": "linear",
-                "lineWidth": 1,
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 2,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
@@ -104,9 +107,11 @@ data:
           "id": 135,
           "options": {
             "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right"
             },
             "tooltip": {
               "mode": "single",
@@ -167,6 +172,7 @@ data:
               }
             }
           ],
+          "transparent": true,
           "type": "timeseries"
         },
         {
@@ -2658,7 +2664,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-3h",
         "to": "now"
       },
       "timepicker": {},
