@@ -4,7 +4,7 @@ import time
 
 # Configuration
 SONARR_URL = 'https://sonarr.nickshores.net'
-API_KEY = '932bcb225f3a4cf4ac64fa96f785b57a'
+API_KEY = 'xxx'
 
 def get_queued_items():
     url = f"{SONARR_URL}/api/v3/queue"
