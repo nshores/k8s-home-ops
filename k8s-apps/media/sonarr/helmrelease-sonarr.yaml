@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/onedr0p/sonarr
       # -- image tag
-      tag: 4.0.4.1491
+      tag: 4.0.5.1710
       # -- image pull policy
       pullPolicy: IfNotPresent
 
