@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: linuxserver/nzbhydra2
       # -- image tag
-      tag: 7.7.0
+      tag: v7.3.0-ls17
       # -- image pull policy
       pullPolicy: IfNotPresent
 
