@@ -117,6 +117,7 @@ spec:
         enabled: true
         mountPath: /app/server
         accessMode: ReadWriteOnce
+        storageClass: "longhorn"
 
       # -- Volume used for media libraries
       # @default -- See values.yaml
