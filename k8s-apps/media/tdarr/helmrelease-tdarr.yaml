@@ -118,6 +118,7 @@ spec:
         mountPath: /app/server
         accessMode: ReadWriteOnce
         storageClass: "longhorn"
+        size: 5Gi
 
       # -- Volume used for media libraries
       # @default -- See values.yaml
