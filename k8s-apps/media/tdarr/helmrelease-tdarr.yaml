@@ -116,6 +116,7 @@ spec:
       data:
         enabled: true
         mountPath: /app/server
+        accessMode: ReadWriteOnce
 
       # -- Volume used for media libraries
       # @default -- See values.yaml
