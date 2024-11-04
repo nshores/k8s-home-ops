@@ -108,7 +108,7 @@ spec:
       # -- Volume used for configuration
       # @default -- See values.yaml
       config:
-        enabled: fatruelse
+        enabled: true
         mountPath: /app/configs
 
       # -- Volume used for tdarr server database
