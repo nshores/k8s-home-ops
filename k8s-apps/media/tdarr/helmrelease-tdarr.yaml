@@ -29,7 +29,7 @@ spec:
       repository: ghcr.io/haveagitgat/tdarr
       # -- image tag
       # @default -- chart.appVersion
-      tag:
+      tag: 2.27.02
       # -- image pull policy
       pullPolicy: IfNotPresent
 
@@ -50,6 +50,7 @@ spec:
       PUID: "1000"
       # -- Set the container group id
       PGID: "1000"
+      internalNode: "true"
 
     # -- Configures service settings for the chart.
     # @default -- See values.yaml
@@ -89,7 +90,7 @@ spec:
 
     node:
       # -- Deploy a tdarr node.
-      enabled: true
+      enabled: flase
       # -- Node ID
       id: node
       image:
