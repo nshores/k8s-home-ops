@@ -284,6 +284,7 @@ spec:
       - "--entrypoints.websecure.forwardedHeaders.insecure"
       - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
       - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
+      - "--accesslog.filepath=/data/log/access.log"
 
     # Environment variables to be passed to Traefik's binary
     env:
