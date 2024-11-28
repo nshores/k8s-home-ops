@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/onedr0p/radarr
       # -- image tag
-      tag: 5.14.0.9383
+      tag: 5.15.1.9463
       # -- image pull policy
       pullPolicy: IfNotPresent
 
