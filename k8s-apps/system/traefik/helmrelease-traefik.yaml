@@ -210,7 +210,7 @@ spec:
         # By default, the level is set to ERROR. Alternative logging levels are DEBUG, PANIC, FATAL, ERROR, WARN, and INFO.
         level: ERROR
         # -- To write the logs into a log file, use the filePath option.
-        filePath: /data/logs/access.log
+        # filePath: /data/logs/access.log
       access:
         # To enable access logs
         enabled: true
