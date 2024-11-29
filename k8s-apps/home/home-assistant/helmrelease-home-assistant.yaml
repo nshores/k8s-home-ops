@@ -42,7 +42,8 @@ spec:
     env:
       # -- Set the container timezone
       TZ: America/Los_Angeles
-
+      # Temp fix for python issue https://github.com/home-assistant/core/issues/127966#issuecomment-2439414558
+      PYTHONPATH: /usr/local/lib/python3.12:/config/deps
     # -- Configures service settings for the chart. Normally this does not need to be modified.
     # @default -- See values.yaml
     service:
