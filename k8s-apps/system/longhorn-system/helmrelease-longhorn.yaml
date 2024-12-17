@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      # renovate: registryUrl=https://charts.longhorn.io/
       chart: longhorn
       version: 1.4.3
       sourceRef:
