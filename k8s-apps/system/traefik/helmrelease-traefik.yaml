@@ -536,7 +536,9 @@ spec:
     #               values:
     #                 - {{ template "traefik.name" . }}
     #         topologyKey: kubernetes.io/hostname
-    nodeSelector: {}
+    nodeSelector:
+      # Run on-prem
+      location: "on-prem"
     tolerations: []
 
     # Pods can have priority.
