@@ -14,7 +14,7 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: traefik
+  releaseName: traefik-cloud
   values:
     image:
       name: traefik
@@ -457,7 +457,7 @@ spec:
     # - "--certificatesresolvers.le.acme.storage=/data/acme.json"
     # It will persist TLS certificates.
     persistence:
-      enabled: true
+      enabled: false
       name: data
       #  existingClaim: ""
       accessMode: ReadWriteOnce
