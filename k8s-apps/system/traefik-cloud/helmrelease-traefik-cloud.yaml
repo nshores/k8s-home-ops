@@ -122,8 +122,8 @@ spec:
       dashboard:
         enabled: true
         # Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class)
-        annotations: {}
-        # Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)
+      annotations:
+        kubernetes.io/ingress.class: "traefik-cloud"
         labels: {}
 
     rollingUpdate:
