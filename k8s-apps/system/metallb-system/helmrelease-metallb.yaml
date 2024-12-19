@@ -215,7 +215,9 @@ spec:
       ## @param controller.nodeSelector Node labels for controller pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
-      nodeSelector: {}
+      nodeSelector:
+        # Run on-prem
+        location: "on-prem"
       ## @param controller.tolerations Tolerations for controller pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
