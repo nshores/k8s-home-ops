@@ -16,3 +16,22 @@ spec:
   interval: 15m
   timeout: 5m
   releaseName: longhorn
+  values:
+    longhornManager:
+      # -- Node selector for nodes allowed to run user-deployed components such as Longhorn Manager, Longhorn UI, and Longhorn Driver Deployer.
+      nodeSelector:
+        # Run longhorn components on-prem only
+        location: "on-prem"
+    longhornUI:
+      # -- Node selector for nodes allowed to run user-deployed components such as Longhorn Manager, Longhorn UI, and Longhorn Driver Deployer.
+      nodeSelector:
+        # Run longhorn components on-prem only
+        location: "on-prem"
+    longhornDriver:
+      # -- Node selector for nodes allowed to run user-deployed components such as Longhorn Manager, Longhorn UI, and Longhorn Driver Deployer.
+      nodeSelector:
+        # Run longhorn components on-prem only
+        location: "on-prem"
+    defaultSettings:
+      # -- Node selector for nodes allowed to run user-deployed components such as Longhorn Manager, Longhorn UI, and Longhorn Driver Deployer.
+      systemManagedComponentsNodeSelector: "location:on-prem"

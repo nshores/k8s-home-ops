@@ -13,7 +13,7 @@
       }
 
 # If we have any k3s masters
-- hosts: k3s_masters
+- hosts: k3s_masters:digital-ocean
   gather_facts: yes
   become: yes
   vars:

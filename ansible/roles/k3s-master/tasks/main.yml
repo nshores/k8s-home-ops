@@ -41,6 +41,15 @@
     src: /etc/rancher/k3s/k3s.yaml
     dest: "{{ kubeconfig }}"
     flat: yes
+
+- name: Label nodes based on group membership
+  shell: >
+    kubectl label node {{ inventory_hostname }}
+    location={{ 'on-prem' if inventory_hostname in groups['on_prem'] else 'cloud' }}
+  args:
+    warn: no
+  when: inventory_hostname in groups['k3s_masters'] or inventory_hostname in groups['k3s_workers']
+  become: true
 # - name: update master ip in k3s.yaml
 #   become: true
 #   replace:
