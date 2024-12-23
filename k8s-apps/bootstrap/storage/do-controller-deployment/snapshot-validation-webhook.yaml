@@ -153,8 +153,7 @@ spec:
   # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
   dnsNames:
     - snapshot-validation-webhook-service
-    - snapshot-validation-webhook-service.home
-    - snapshot-validation-webhook-service.home.svc.cluster.local
+    - snapshot-validation-webhook-service.kube-system.svc
 
   # Issuer references are always required.
   issuerRef:
