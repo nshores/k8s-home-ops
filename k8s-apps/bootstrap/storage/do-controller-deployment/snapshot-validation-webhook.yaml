@@ -154,6 +154,7 @@ spec:
   dnsNames:
     - snapshot-validation-webhook-service
     - snapshot-validation-webhook-service.kube-system.svc
+    - snapshot-validation-service.kube-system.svc
 
   # Issuer references are always required.
   issuerRef:
