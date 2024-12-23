@@ -19,9 +19,6 @@ metadata:
   annotations:
     # https://cert-manager.io/docs/concepts/ca-injector/
     cert-manager.io/inject-ca-from: "home/snapshot-validation-webhook-cert"
-annotations:
-  # https://cert-manager.io/docs/concepts/ca-injector/
-  cert-manager.io/inject-ca-from: "home/snapshot-validation-webhook-cert"
 webhooks:
   - name: "validation-webhook.snapshot.storage.k8s.io"
     rules:
