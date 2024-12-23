@@ -82,7 +82,7 @@ spec:
         - name: snapshot-validation-webhook
           secret:
             # XXX Populate the secret properly with a certificate and key
-            secretName: snapshot-validation-secret
+            secretName: snapshot-validation-webhook
 
 ---
 apiVersion: v1
