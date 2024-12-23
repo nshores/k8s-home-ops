@@ -16,15 +16,12 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: "validation-webhook.snapshot.storage.k8s.io"
-<<<<<<< HEAD
   annotations:
     # https://cert-manager.io/docs/concepts/ca-injector/
     cert-manager.io/inject-ca-from: "home/snapshot-validation-webhook-cert"
-=======
 annotations:
   # https://cert-manager.io/docs/concepts/ca-injector/
   cert-manager.io/inject-ca-from: "home/snapshot-validation-webhook-cert"
->>>>>>> e2cb1063a1c69470283b6ebf8190da407346b0f7
 webhooks:
   - name: "validation-webhook.snapshot.storage.k8s.io"
     rules:
