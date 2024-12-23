@@ -410,6 +410,8 @@ spec:
           args:
             - "--endpoint=$(CSI_ENDPOINT)"
             - "--url=$(DIGITALOCEAN_API_URL)"
+            #Set to run outside of DOKS droplet
+            - "--region=SFO1"
           env:
             - name: CSI_ENDPOINT
               value: unix:///csi/csi.sock
