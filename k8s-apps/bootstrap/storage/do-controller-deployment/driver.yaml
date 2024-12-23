@@ -442,24 +442,24 @@ roleRef:
 #             - name: device-dir
 #               mountPath: /dev
 #       volumes:
-        # - name: registration-dir
-        #   hostPath:
-        #     path: /var/lib/kubelet/plugins_registry/
-        #     type: DirectoryOrCreate
-        # - name: plugin-dir
-        #   hostPath:
-        #     path: /var/lib/kubelet/plugins/dobs.csi.digitalocean.com
-        #     type: DirectoryOrCreate
-        # - name: pods-mount-dir
-        #   hostPath:
-        #     path: /var/lib/kubelet
-        #     type: Directory
-        # - name: device-dir
-        #   hostPath:
-        #     path: /dev
-        # - name: udev-rules-dir
-          hostPath:
-            path: /etc/udev/rules.d/
+# - name: registration-dir
+#   hostPath:
+#     path: /var/lib/kubelet/plugins_registry/
+#     type: DirectoryOrCreate
+# - name: plugin-dir
+#   hostPath:
+#     path: /var/lib/kubelet/plugins/dobs.csi.digitalocean.com
+#     type: DirectoryOrCreate
+# - name: pods-mount-dir
+#   hostPath:
+#     path: /var/lib/kubelet
+#     type: Directory
+# - name: device-dir
+#   hostPath:
+#     path: /dev
+# - name: udev-rules-dir
+# hostPath:
+#   path: /etc/udev/rules.d/
 ---
 apiVersion: v1
 kind: ServiceAccount
