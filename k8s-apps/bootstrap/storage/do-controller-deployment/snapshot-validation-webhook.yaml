@@ -69,8 +69,8 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
             [
-              "--tls-cert-file=/etc/snapshot-validation-webhook/certs/cert.pem",
-              "--tls-private-key-file=/etc/snapshot-validation-webhook/certs/key.pem",
+              "--tls-cert-file=/etc/snapshot-validation-webhook/certs/tls.pem",
+              "--tls-private-key-file=/etc/snapshot-validation-webhook/certs/tls.key",
             ]
           ports:
             - containerPort: 443
