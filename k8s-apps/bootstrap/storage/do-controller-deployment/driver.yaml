@@ -347,119 +347,118 @@ roleRef:
   name: csi-do-resizer-role
   apiGroup: rbac.authorization.k8s.io
 
-# ---
-# Not needed - since this is running in controller + node mode
-# ########################################
-# ###########                 ############
-# ###########   Node plugin   ############
-# ###########                 ############
-# ########################################
+---
+########################################
+###########                 ############
+###########   Node plugin   ############
+###########                 ############
+########################################
 
-# kind: DaemonSet
-# apiVersion: apps/v1
-# metadata:
-#   name: csi-do-node
-#   namespace: kube-system
-# spec:
-#   selector:
-#     matchLabels:
-#       app: csi-do-node
-#   template:
-#     metadata:
-#       annotations:
-#         kubectl.kubernetes.io/default-container: csi-do-plugin
-#       labels:
-#         app: csi-do-node
-#         role: csi-do
-#     spec:
-#       priorityClassName: system-node-critical
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: csi-do-node
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: csi-do-node
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: csi-do-plugin
+      labels:
+        app: csi-do-node
+        role: csi-do
+    spec:
+      priorityClassName: system-node-critical
 
-#       nodeSelector:
-#         # Run in digital ocean
-#         location: "cloud"
-#       serviceAccount: csi-do-node-sa
-#       hostNetwork: true
-#       initContainers:
-#         # Delete automount udev rule running on all DO droplets. The rule mounts
-#         # devices briefly and may conflict with CSI-managed droplets (leading to
-#         # "resource busy" errors). We can safely delete it in DOKS.
-#         - name: automount-udev-deleter
-#           image: alpine:3
-#           args:
-#             - "rm"
-#             - "-f"
-#             - "/etc/udev/rules.d/99-digitalocean-automount.rules"
-#           volumeMounts:
-#             - name: udev-rules-dir
-#               mountPath: /etc/udev/rules.d/
-#       containers:
-#         - name: csi-node-driver-registrar
-#           image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.11.1
-#           args:
-#             - "--v=5"
-#             - "--csi-address=$(ADDRESS)"
-#             - "--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)"
-#           env:
-#             - name: ADDRESS
-#               value: /csi/csi.sock
-#             - name: DRIVER_REG_SOCK_PATH
-#               value: /var/lib/kubelet/plugins/dobs.csi.digitalocean.com/csi.sock
-#             - name: KUBE_NODE_NAME
-#               valueFrom:
-#                 fieldRef:
-#                   fieldPath: spec.nodeName
-#           volumeMounts:
-#             - name: plugin-dir
-#               mountPath: /csi/
-#             - name: registration-dir
-#               mountPath: /registration/
-#         - name: csi-do-plugin
-#           image: digitalocean/do-csi-plugin:v4.12.0
-#           args:
-#             - "--endpoint=$(CSI_ENDPOINT)"
-#             - "--url=$(DIGITALOCEAN_API_URL)"
-#             #Set to run outside of DOKS droplet
-#             # - "--region=SFO1"
-#           env:
-#             - name: CSI_ENDPOINT
-#               value: unix:///csi/csi.sock
-#             - name: DIGITALOCEAN_API_URL
-#               value: https://api.digitalocean.com/
-#           imagePullPolicy: "Always"
-#           securityContext:
-#             privileged: true
-#             capabilities:
-#               add: ["SYS_ADMIN"]
-#             allowPrivilegeEscalation: true
-#           volumeMounts:
-#             - name: plugin-dir
-#               mountPath: /csi
-#             - name: pods-mount-dir
-#               mountPath: /var/lib/kubelet
-#               # needed so that any mounts setup inside this container are
-#               # propagated back to the host machine.
-#               mountPropagation: "Bidirectional"
-#             - name: device-dir
-#               mountPath: /dev
-#       volumes:
-# - name: registration-dir
-#   hostPath:
-#     path: /var/lib/kubelet/plugins_registry/
-#     type: DirectoryOrCreate
-# - name: plugin-dir
-#   hostPath:
-#     path: /var/lib/kubelet/plugins/dobs.csi.digitalocean.com
-#     type: DirectoryOrCreate
-# - name: pods-mount-dir
-#   hostPath:
-#     path: /var/lib/kubelet
-#     type: Directory
-# - name: device-dir
-#   hostPath:
-#     path: /dev
-# - name: udev-rules-dir
-# hostPath:
-#   path: /etc/udev/rules.d/
+      nodeSelector:
+        # Run in digital ocean
+        location: "cloud"
+      serviceAccount: csi-do-node-sa
+      hostNetwork: true
+      initContainers:
+        # Delete automount udev rule running on all DO droplets. The rule mounts
+        # devices briefly and may conflict with CSI-managed droplets (leading to
+        # "resource busy" errors). We can safely delete it in DOKS.
+        - name: automount-udev-deleter
+          image: alpine:3
+          args:
+            - "rm"
+            - "-f"
+            - "/etc/udev/rules.d/99-digitalocean-automount.rules"
+          volumeMounts:
+            - name: udev-rules-dir
+              mountPath: /etc/udev/rules.d/
+      containers:
+        - name: csi-node-driver-registrar
+          image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.11.1
+          args:
+            - "--v=5"
+            - "--csi-address=$(ADDRESS)"
+            - "--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)"
+          env:
+            - name: ADDRESS
+              value: /csi/csi.sock
+            - name: DRIVER_REG_SOCK_PATH
+              value: /var/lib/kubelet/plugins/dobs.csi.digitalocean.com/csi.sock
+            - name: KUBE_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi/
+            - name: registration-dir
+              mountPath: /registration/
+        - name: csi-do-plugin
+          image: digitalocean/do-csi-plugin:v4.12.0
+          args:
+            - "--endpoint=$(CSI_ENDPOINT)"
+            - "--url=$(DIGITALOCEAN_API_URL)"
+            #Set to run outside of DOKS droplet
+            # - "--region=SFO1"
+          env:
+            - name: CSI_ENDPOINT
+              value: unix:///csi/csi.sock
+            - name: DIGITALOCEAN_API_URL
+              value: https://api.digitalocean.com/
+          imagePullPolicy: "Always"
+          securityContext:
+            privileged: true
+            capabilities:
+              add: ["SYS_ADMIN"]
+            allowPrivilegeEscalation: true
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+            - name: pods-mount-dir
+              mountPath: /var/lib/kubelet
+              # needed so that any mounts setup inside this container are
+              # propagated back to the host machine.
+              mountPropagation: "Bidirectional"
+            - name: device-dir
+              mountPath: /dev
+      volumes:
+        - name: registration-dir
+          hostPath:
+            path: /var/lib/kubelet/plugins_registry/
+            type: DirectoryOrCreate
+        - name: plugin-dir
+          hostPath:
+            path: /var/lib/kubelet/plugins/dobs.csi.digitalocean.com
+            type: DirectoryOrCreate
+        - name: pods-mount-dir
+          hostPath:
+            path: /var/lib/kubelet
+            type: Directory
+        - name: device-dir
+          hostPath:
+            path: /dev
+        - name: udev-rules-dir
+          hostPath:
+            path: /etc/udev/rules.d/
 ---
 apiVersion: v1
 kind: ServiceAccount
