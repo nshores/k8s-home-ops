@@ -79,7 +79,7 @@ spec:
               mountPath: /etc/snapshot-validation-webhook/certs
               readOnly: true
       volumes:
-        - name: snapshot-validation-webhook-certs
+        - name: snapshot-validation-webhook
           secret:
             # XXX Populate the secret properly with a certificate and key
             secretName: snapshot-validation-secret
