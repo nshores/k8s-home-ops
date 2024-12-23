@@ -99,6 +99,9 @@ spec:
         app: csi-do-controller
         role: csi-do
     spec:
+      nodeSelector:
+        # Run in digital ocean
+        location: "cloud"
       priorityClassName: system-cluster-critical
       serviceAccount: csi-do-controller-sa
       containers:
@@ -369,6 +372,10 @@ spec:
         role: csi-do
     spec:
       priorityClassName: system-node-critical
+
+      nodeSelector:
+        # Run in digital ocean
+        location: "cloud"
       serviceAccount: csi-do-node-sa
       hostNetwork: true
       initContainers:
