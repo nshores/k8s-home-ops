@@ -75,7 +75,7 @@ spec:
           ports:
             - containerPort: 443
           volumeMounts:
-            - name: snapshot-validation-webhook-certs
+            - name: snapshot-validation-webhook
               mountPath: /etc/snapshot-validation-webhook/certs
               readOnly: true
       volumes:
