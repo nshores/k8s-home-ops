@@ -69,7 +69,7 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
             [
-              "--tls-cert-file=/etc/snapshot-validation-webhook/certs/tls.pem",
+              "--tls-cert-file=/etc/snapshot-validation-webhook/certs/tls.crt",
               "--tls-private-key-file=/etc/snapshot-validation-webhook/certs/tls.key",
             ]
           ports:
