@@ -167,7 +167,7 @@ spec:
             - "--url=$(DIGITALOCEAN_API_URL)"
             - "--default-volumes-page-size=200"
             #Set to run outside of DOKS droplet
-            # - "--region=SFO1"
+            - "--region=SFO2"
           env:
             - name: CSI_ENDPOINT
               value: unix:///var/lib/csi/sockets/pluginproxy/csi.sock
@@ -418,7 +418,7 @@ spec:
             - "--endpoint=$(CSI_ENDPOINT)"
             - "--url=$(DIGITALOCEAN_API_URL)"
             #Set to run outside of DOKS droplet
-            # - "--region=SFO1"
+            - "--region=SFO2"
           env:
             - name: CSI_ENDPOINT
               value: unix:///csi/csi.sock
