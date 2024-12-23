@@ -62,6 +62,9 @@ spec:
       labels:
         app: snapshot-validation
     spec:
+      nodeSelector:
+        # Run in digital ocean
+        location: "cloud"
       serviceAccountName: snapshot-validation
       containers:
         - name: snapshot-validation
