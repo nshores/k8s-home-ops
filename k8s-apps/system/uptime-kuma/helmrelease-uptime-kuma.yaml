@@ -21,7 +21,7 @@ spec:
       name: uptime-kuma
       repository: louislam/uptime-kuma
       # defaults to appVersion
-      tag: 1.23.15
+      tag: 1.23.16
       pullPolicy: IfNotPresent
 
     # -- environment variables.
