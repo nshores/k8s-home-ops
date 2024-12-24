@@ -383,7 +383,7 @@ spec:
         # devices briefly and may conflict with CSI-managed droplets (leading to
         # "resource busy" errors). We can safely delete it in DOKS.
         - name: automount-udev-deleter
-          image: alpine:3
+          image: alpine:20240923
           args:
             - "rm"
             - "-f"
