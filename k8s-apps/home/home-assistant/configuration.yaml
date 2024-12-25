@@ -261,6 +261,9 @@ sensor:
   - platform: zoneminder
     include_archived: false
 
+    #enable authenticated integration
+  - platform: authenticated
+
 #streaming camera setup
 stream:
 
