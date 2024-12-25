@@ -560,7 +560,9 @@ spec:
       ## @param speaker.nodeSelector Node labels for speaker pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
-      nodeSelector: {}
+      nodeSelector:
+        # Run on-prem
+        location: "on-prem"
       ## @param speaker.tolerations Tolerations for speaker pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##

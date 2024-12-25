@@ -402,7 +402,7 @@ spec:
     # from.
     service:
       enabled: true
-      type: LoadBalancer
+      type: NodePort
       # Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
       annotations: {}
       # Additional annotations for TCP service only
@@ -462,7 +462,7 @@ spec:
       #  existingClaim: ""
       accessMode: ReadWriteOnce
       size: 1Gi
-      storageClass: "local-path"
+      storageClass: "do-block-storage"
       path: /data
       annotations: {}
       # subPath: "" # only mount a subpath of the Volume into the pod
