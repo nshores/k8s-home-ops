@@ -20,6 +20,11 @@ homeassistant:
   allowlist_external_urls:
     - "https://ha.nickshores.net/api/"
 
+logger:
+  default: warn
+  logs:
+    custom_components.sensor.authenticated: debug
+
 #Enable zeroconf:
 zeroconf:
 
