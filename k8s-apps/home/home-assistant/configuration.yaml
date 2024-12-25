@@ -263,6 +263,7 @@ sensor:
 
     #enable authenticated integration
   - platform: authenticated
+    log_location: /config/auth_log.log
 
 #streaming camera setup
 stream:
