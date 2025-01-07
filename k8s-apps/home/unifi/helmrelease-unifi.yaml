@@ -42,6 +42,8 @@ spec:
 
     service:
       type: "ClusterIP"
+      annotations:
+        traefik.ingress.kubernetes.io/service.serversscheme: https
       ports:
         devicecom: 8080
         webapi: 8443
@@ -57,7 +59,6 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
-        ingress.kubernetes.io/protocol: https
       hosts:
         - host: unifi.nickshores.net
           paths:
