@@ -42,8 +42,6 @@ spec:
 
     service:
       type: "ClusterIP"
-      annotations:
-        traefik.ingress.kubernetes.io/service.serversscheme: https
       ports:
         devicecom: 8080
         webapi: 8443
