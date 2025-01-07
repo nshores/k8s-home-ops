@@ -371,7 +371,7 @@ spec:
           #     - foo.example.com
           #     - bar.example.com
       metrics:
-        port: 9100
+        port: 9101
         # hostPort: 9100
         # Defines whether the port is exposed if service.type is LoadBalancer or
         # NodePort.
