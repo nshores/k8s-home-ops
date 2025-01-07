@@ -333,10 +333,10 @@ spec:
         # The port protocol (TCP/UDP)
         protocol: TCP
       web:
-        port: 80
+        port: 8080
         # hostPort: 8000
         expose: false
-        exposedPort: 80
+        exposedPort: 8080
         # The port protocol (TCP/UDP)
         protocol: TCP
         # Use nodeport if set. This is useful if you have configured Traefik in a
