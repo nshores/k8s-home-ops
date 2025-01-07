@@ -557,4 +557,4 @@ spec:
       runAsUser: 0
 
     podSecurityContext:
-      fsGroup: 65532
+      fsGroup: null
