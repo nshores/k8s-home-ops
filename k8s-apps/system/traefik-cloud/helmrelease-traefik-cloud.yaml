@@ -333,7 +333,7 @@ spec:
         # The port protocol (TCP/UDP)
         protocol: TCP
       web:
-        port: 8000
+        port: 80
         # hostPort: 8000
         expose: true
         exposedPort: 80
@@ -347,7 +347,7 @@ spec:
         # https://docs.traefik.io/routing/entrypoints/#redirection
         redirectTo: websecure
       websecure:
-        port: 8443
+        port: 443
         # hostPort: 8443
         expose: true
         exposedPort: 443
