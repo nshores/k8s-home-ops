@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/linuxserver/ombi
       # -- image tag
-      tag: 4.44.1
+      tag: 4.47.1
       # -- image pull policy
       pullPolicy: IfNotPresent
 
