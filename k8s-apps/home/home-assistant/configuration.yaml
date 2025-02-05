@@ -165,6 +165,8 @@ cloud:
         - switch.spare
         - light.wiz_rgbw_tunable_f3b7f5
         - light.living_room_lamp
+        - light.bedside_lamp_dimmer_134
+        - light.bedside_lamp_dimmer_133
   google_actions:
     filter:
       exclude_entities:
@@ -193,6 +195,8 @@ cloud:
         - switch.spare
         - light.wiz_rgbw_tunable_f3b7f5
         - light.living_room_lamp
+        - light.bedside_lamp_dimmer_134
+        - light.bedside_lamp_dimmer_133
     entity_config:
       camera.front_door_ffmpeg:
         name: Front Door Camera
