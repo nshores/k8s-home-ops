@@ -79,10 +79,31 @@ spec:
 
     # -- frigate configuration - see [Docs](https://docs.frigate.video/configuration/index) for more info
     config: |
+      go2rtc:
+        streams:
+          front_door_fullres:
+            - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#backchannel=0 # connect directly to main camera stream, no 2-way
+          front_door:
+            - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1#backchannel=0 # connect directly to sub stream, no 2-way
+          front_door_twoway:
+            - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1 # Connect to substream for lower bandwidth
+            - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
+          front_door_twoway_fullres:
+            - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0 # Connect to fullres
+            - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
+
+        webrtc:
+          candidates:
+            - 192.168.99.207:8555
+            - 192.168.99.191:8555
+            - stun:8555
       mqtt:
         host: mosquitto
       cameras:
         front_door:
+          enabled: true
+          live:
+            stream_name: front_door_fullres
           ffmpeg:
             inputs:
               - path: rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1
