@@ -484,7 +484,7 @@ spec:
         ##
         image:
           repository: quay.io/prometheus/alertmanager
-          tag: v0.24.0
+          tag: v0.28.0
           sha: ""
 
         ## If true then the user will be responsible to provide a secret with alertmanager configuration
