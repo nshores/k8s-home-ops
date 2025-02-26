@@ -228,7 +228,8 @@ spec:
       hosts:
         - host: frigate.lab.nickshores.net
           paths:
-            - "/"
+            - path: "/"
+              portName: http
 
       # -- list of TLS configurations
       tls: []
