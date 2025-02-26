@@ -144,6 +144,7 @@ spec:
         garage:
           enabled: true
           ffmpeg:
+            input_args: preset-rtsp-udp
             output_args:
               record: preset-record-generic-audio-aac
             inputs:
