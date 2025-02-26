@@ -180,8 +180,6 @@ spec:
           # Optional: Number of seconds after the event to include (default: shown below)
           post_capture: 5
           # Optional: Objects to save recordings for. (default: all tracked objects)
-          objects:
-            - person
           # Optional: Restrict recordings to objects that entered any of the listed zones (default: no required zones)
           # required_zones: []
           # Optional: Retention settings for recordings of events
