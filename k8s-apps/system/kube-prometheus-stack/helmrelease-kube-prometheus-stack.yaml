@@ -1841,7 +1841,7 @@ spec:
       ##
       thanosImage:
         repository: quay.io/thanos/thanos
-        tag: v0.31.0
+        tag: v0.37.2
         sha: ""
 
       ## Set a Field Selector to filter watched secrets
@@ -3091,7 +3091,7 @@ spec:
         ##
         image:
           repository: quay.io/thanos/thanos
-          tag: v0.31.0
+          tag: v0.37.2
           sha: ""
 
         ## Namespaces to be selected for PrometheusRules discovery.
