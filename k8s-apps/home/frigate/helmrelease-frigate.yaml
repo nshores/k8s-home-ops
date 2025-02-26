@@ -105,11 +105,13 @@ spec:
           live:
             stream_name: front_door_fullres
           ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-aac
             inputs:
-              - path: rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1
+              - path: rtsp://127.0.0.1:8554/front_door
                 roles:
                   - detect
-              - path: rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0
+              - path: rtsp://127.0.0.1:8554/front_door_fullres
                 roles:
                   - record
           detect:
