@@ -164,6 +164,8 @@ spec:
               #   - porch
           # rtmp:
           #   enabled: false
+          motion:
+            mask: 0.72,0.918,0.979,0.915,0.981,0.991,0.721,0.99
       detectors:
         cpu1:
           type: cpu
