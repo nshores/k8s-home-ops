@@ -151,6 +151,10 @@ spec:
                 roles:
                   - detect
                   - record
+          detect:
+            width: 640
+            height: 480
+            fps: 5
           snapshots:
             enabled: True
           record:
