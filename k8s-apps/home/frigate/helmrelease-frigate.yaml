@@ -91,6 +91,8 @@ spec:
           front_door_twoway_fullres:
             - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0 # Connect to fullres
             - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
+          garage:
+            - rtsp://admin:4118nick@192.168.99.148/live
 
         webrtc:
           candidates:
@@ -139,6 +141,25 @@ spec:
               coordinates: 0,480,517,480,525,264,0,229
               objects:
               - person
+        garage:
+          enabled: true
+          ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-aac
+            inputs:
+              - path: rtsp://127.0.0.1:8554/garage
+                roles:
+                  - detect
+                  - record
+          snapshots:
+            enabled: True
+          record:
+            enabled: True
+           # events:
+              # required_zones:
+              #   - porch
+          # rtmp:
+          #   enabled: false
       detectors:
         cpu1:
           type: cpu
