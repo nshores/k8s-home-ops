@@ -92,7 +92,7 @@ spec:
             - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0 # Connect to fullres
             - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
           garage:
-            - rtsp://admin:4118nick@192.168.99.148/live
+            - rtsp://admin:4118nick@192.168.99.148/live#input=rtsp/udp
 
         webrtc:
           candidates:
