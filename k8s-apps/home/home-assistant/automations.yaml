@@ -46,7 +46,7 @@
         entity_id: camera.garage
       data:
         filename: /config/www/garage.jpg
-    - service: notify.mobile_app_pixel_7_pro
+    - service: notify.mobile_app_pixel_9_pro
       data:
         message: The garage door has been left open!
         title: Garage door alert!
@@ -78,7 +78,7 @@
         data:
           file:
             path: /config/www/front.jpg
-    - service: notify.mobile_app_pixel_7_pro
+    - service: notify.mobile_app_pixel_9_pro
       data:
         message: Somebody is at the front door!
         title: Somebody is at the front door!
@@ -180,7 +180,7 @@
         - media_player.all
       data:
         message: The Washing Machine cycle is complete!
-    - service: notify.mobile_app_pixel_7_pro
+    - service: notify.mobile_app_pixel_9_pro
       data_template:
         message: The Washing Machine cycle is complete!
   id: a17355b71df94a14870408fb80c40cc6
@@ -277,7 +277,7 @@
         - media_player.all
       data:
         message: The dryer Machine is ready to be emptied!
-    - service: notify.mobile_app_pixel_7_pro
+    - service: notify.mobile_app_pixel_9_pro
       data_template:
         message: The dryer Machine is ready to be emptied!
   id: e26fc2cb61404368aa850abe47821da0
@@ -463,7 +463,7 @@
           The temperature inside ({{ states('sensor.average_house_temp')}}) is
           hotter than outside ({{ state_attr('weather.ksac_daynight', 'temperature')
           }}) - consider opening some windows.
-    - service: notify.mobile_app_pixel_7_pro
+    - service: notify.mobile_app_pixel_9_pro
       data_template:
         message:
           The temperature inside ({{ states('sensor.average_house_temp')}}) is
