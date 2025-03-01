@@ -70,7 +70,7 @@
       data:
         filename: /config/www/front.jpg
       target:
-        entity_id: camera.doorbell
+        entity_id: camera.front_door_2
     - service: notify.slack_notify
       data:
         title: Front Door View
@@ -94,7 +94,7 @@
       data:
         media_player: media_player.nesthub4e50
       target:
-        entity_id: camera.doorbell
+        entity_id: camera.front_door_2
     - delay:
         hours: 0
         minutes: 2
