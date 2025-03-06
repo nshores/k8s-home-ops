@@ -122,16 +122,9 @@ ffmpeg:
 
 #cameras
 camera:
-  - platform: zoneminder
   - platform: ffmpeg
     input: !secret garage_ffmpeg_input
     name: garage__ffmpeg
-
-#ZM Config
-zoneminder:
-  - host: 192.168.99.51:8080
-    username: admin
-    password: !secret zoneminder_password
 
 system_health:
 
