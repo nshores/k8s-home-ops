@@ -264,9 +264,6 @@ sensor:
       - "time_date"
       - "time_utc"
 
-  - platform: zoneminder
-    include_archived: false
-
     #enable authenticated integration
   - platform: authenticated
     log_location: /config/auth_log.log
