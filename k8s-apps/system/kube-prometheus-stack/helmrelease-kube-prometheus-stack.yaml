@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
       version: 36.2.0
       sourceRef:
