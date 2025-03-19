@@ -19,7 +19,7 @@ spec:
   values:
     image:
       # -- image repository
-      repository: ghcr.io/onedr0p/sonarr
+      repository: ghcr.io/home-operations/sonarr
       # -- image tag
       tag: 4.0.13.2932
       # -- image pull policy
