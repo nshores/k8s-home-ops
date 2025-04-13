@@ -92,7 +92,7 @@ spec:
       #Create a general PVC that holds all persistent data that we don't track.
       config:
         enabled: true
-        size: 10Gi
+        size: 20Gi
       #Mount a config map for each of our persistent configs we track in git.
       ha-configuration:
         enabled: true
