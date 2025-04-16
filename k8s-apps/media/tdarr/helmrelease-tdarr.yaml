@@ -29,7 +29,7 @@ spec:
       repository: ghcr.io/haveagitgat/tdarr
       # -- image tag
       # @default -- chart.appVersion
-      tag: 2.27.02
+      tag: 2.40.01
       # -- image pull policy
       pullPolicy: IfNotPresent
 
