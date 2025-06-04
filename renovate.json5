@@ -102,6 +102,7 @@
       matchPackageNames: [
         'plexinc/pms-docker',
         'ghcr.io/k8s-at-home/plex',
+        'lscr.io/linuxserver/plex',
         'ghcr.io/onedr0p/plex'
       ]
     },
