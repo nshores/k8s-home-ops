@@ -1,0 +1,20 @@
+name: Notify & Kick Plex Users Before Upgrade
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main # or your GitOps branch
+jobs:
+  notify_and_kill_plex:
+    if: github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.title, 'lscr.io/linuxserver/plex')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Plex user notification + terminate sessions
+        run: |
+          curl "https://tautulli.lab.nickshores.net/api/v2?apikey=${{ secrets.TAUTULLI_API_KEY }}&cmd=get_activity" -o activity.json
+          jq -r '.response.data[].session_id' activity.json | while read session_id; do
+            echo "Terminating session $session_id"
+            curl "https://tautulli.lab.nickshores.net/api/v2?apikey=${{ secrets.TAUTULLI_API_KEY }}&cmd=terminate_session&session_id=$session_id&message=Plex is restarting for update.&reason=Scheduled update"
+          done
