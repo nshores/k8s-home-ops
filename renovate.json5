@@ -13,75 +13,100 @@
     'ghcr.io/fluxcd/image-reflector-controller',
     'ghcr.io/fluxcd/kustomize-controller',
     'ghcr.io/fluxcd/notification-controller',
-    'ghcr.io/fluxcd/source-controller',
+    'ghcr.io/fluxcd/source-controller'
   ],
   assignees: ['@nshores'],
   'helm-values': {
-    managerFilePatterns: ['/./.+\\.yaml$/'],
+    managerFilePatterns: ['/./.+\\.yaml$/']
   },
   customManagers: [
     {
       customType: 'regex',
       managerFilePatterns: ['/./.+\\.yaml$/'],
       matchStrings: [
-        'registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n',
+        'registryUrl=(?<registryUrl>.*?)\\n *chart: (?<depName>.*?)\\n *version: (?<currentValue>.*)\\n'
       ],
-      datasourceTemplate: 'helm',
-    },
+      datasourceTemplate: 'helm'
+    }
   ],
   packageRules: [
+    // Enforce schedule for Plex and Home Assistant
+    {
+      matchDatasources: ['docker'],
+      matchPackageNames: [
+        'ghcr.io/home-assistant/home-assistant',
+        'ghcr.io/home-operations/plex',
+        'ghcr.io/k8s-at-home/plex',
+        'lscr.io/linuxserver/plex'
+      ],
+      schedule: ['after 12am and before 7am'],
+      automerge: true,
+      separateMinorPatch: true,
+      labels: ['nightly-update-window']
+    },
+
+    // Helm general rule
     {
       matchDatasources: ['helm'],
       commitMessageTopic: 'Helm chart {{depName}}',
-      separateMinorPatch: true,
+      separateMinorPatch: true
     },
+
+    // Docker general rule
     {
       matchDatasources: ['docker'],
       commitMessageTopic: 'Docker image {{depName}}',
       commitMessageExtra: 'to {{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}',
       enabled: true,
-      separateMinorPatch: true,
+      separateMinorPatch: true
     },
+
+    // Docker label rules
     {
       matchDatasources: ['docker'],
       matchUpdateTypes: ['major'],
-      labels: ['renovate/image-release', 'dependency/major'],
+      labels: ['renovate/image-release', 'dependency/major']
     },
     {
       matchDatasources: ['docker'],
       matchUpdateTypes: ['minor'],
-      labels: ['renovate/image-release', 'dependency/minor'],
+      labels: ['renovate/image-release', 'dependency/minor']
     },
     {
       matchDatasources: ['docker'],
       matchUpdateTypes: ['patch'],
-      labels: ['renovate/image-release', 'dependency/patch'],
+      labels: ['renovate/image-release', 'dependency/patch']
     },
+
+    // Helm label rules
     {
       matchDatasources: ['helm'],
       matchUpdateTypes: ['major'],
-      labels: ['renovate/helm-release', 'dependency/major'],
+      labels: ['renovate/helm-release', 'dependency/major']
     },
     {
       matchDatasources: ['helm'],
       matchUpdateTypes: ['minor'],
-      labels: ['renovate/helm-release', 'dependency/minor'],
+      labels: ['renovate/helm-release', 'dependency/minor']
     },
     {
       matchDatasources: ['helm'],
       matchUpdateTypes: ['patch'],
-      labels: ['renovate/helm-release', 'dependency/patch'],
+      labels: ['renovate/helm-release', 'dependency/patch']
     },
+
+    // Plex versioning loosening
     {
       matchDatasources: ['docker'],
       versioning: 'loose',
       matchPackageNames: [
         'plexinc/pms-docker',
         'ghcr.io/k8s-at-home/plex',
-        'ghcr.io/onedr0p/plex',
-      ],
+        'ghcr.io/onedr0p/plex'
+      ]
     },
-    // Automerge enabled for select docker images
+
+    // Automerge specifically allowed for selected apps
     {
       matchDatasources: ['docker'],
       matchPackageNames: [
@@ -89,12 +114,14 @@
         'ghcr.io/home-operations/radarr',
         'ghcr.io/home-operations/sonarr',
         'lscr.io/linuxserver/plex',
-        'ghcr.io/home-operations/sabnzbd',
+        'ghcr.io/home-operations/sabnzbd'
       ],
       automerge: true,
       separateMinorPatch: true,
-      labels: ['automerge-enabled'],
+      labels: ['automerge-enabled']
     },
+
+    // Default scheduled minor/patch updates for docker (excluding HA and Plex)
     {
       matchDatasources: ['docker'],
       automerge: false,
@@ -103,9 +130,11 @@
       matchUpdateTypes: ['minor', 'patch'],
       matchPackageNames: [
         '!ghcr.io/home-assistant/home-assistant',
-        '!ghcr.io/k8s-at-home/plex',
-      ],
+        '!ghcr.io/k8s-at-home/plex'
+      ]
     },
+
+    // Default scheduled minor/patch updates for helm (excluding HA and Plex)
     {
       matchDatasources: ['helm'],
       automerge: false,
@@ -114,8 +143,8 @@
       matchUpdateTypes: ['minor', 'patch'],
       matchPackageNames: [
         '!ghcr.io/home-assistant/home-assistant',
-        '!ghcr.io/k8s-at-home/plex',
-      ],
-    },
-  ],
+        '!ghcr.io/k8s-at-home/plex'
+      ]
+    }
+  ]
 }
