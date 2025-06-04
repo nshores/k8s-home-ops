@@ -40,6 +40,7 @@
         'lscr.io/linuxserver/plex'
       ],
       schedule: ['after 12am and before 7am'],
+      automergeSchedule: ['after 12am and before 7am'],
       automerge: true,
       separateMinorPatch: true,
       labels: ['nightly-update-window']
