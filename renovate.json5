@@ -106,14 +106,13 @@
       ]
     },
 
-    // Automerge specifically allowed for selected apps
+    // Automerge specifically allowed for selected apps at any time
     {
       matchDatasources: ['docker'],
       matchPackageNames: [
-        'ghcr.io/home-assistant/home-assistant',
         'ghcr.io/home-operations/radarr',
         'ghcr.io/home-operations/sonarr',
-        'lscr.io/linuxserver/plex',
+        'ghcr.io/blakeblackshear/frigate',
         'ghcr.io/home-operations/sabnzbd'
       ],
       automerge: true,
@@ -121,24 +120,11 @@
       labels: ['automerge-enabled']
     },
 
-    // Default scheduled minor/patch updates for docker (excluding HA and Plex)
-    {
-      matchDatasources: ['docker'],
-      automerge: false,
-      ignoreTests: true,
-      schedule: 'after 1am and before 5am',
-      matchUpdateTypes: ['minor', 'patch'],
-      matchPackageNames: [
-        '!ghcr.io/home-assistant/home-assistant',
-        '!ghcr.io/k8s-at-home/plex'
-      ]
-    },
-
     // Default scheduled minor/patch updates for helm (excluding HA and Plex)
     {
       matchDatasources: ['helm'],
       automerge: false,
-      ignoreTests: true,
+      ignoreTests: false,
       schedule: 'after 1am and before 5am',
       matchUpdateTypes: ['minor', 'patch'],
       matchPackageNames: [
