@@ -71,7 +71,7 @@
         filename: /config/www/front.jpg
       target:
         entity_id: camera.front_door_2
-    - service: notify.slack_notify
+    - service: notify.shoreshome
       data:
         title: Front Door View
         message: Somebody is at the front door!
@@ -630,7 +630,7 @@
     platform: mqtt
     topic: frigate/events
   action:
-    - service: notify.slack_notify
+    - service: notify.shoreshome
       data_template:
         message:
           A {{trigger.payload_json["after"]["label"]}} was detected at the front
@@ -663,7 +663,7 @@
     path: Sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
       actions:
-        - service: notify.slack_notify
+        - service: notify.shoreshome
           data:
             message: "{{sensors}} - low battery"
       exclude:
