@@ -71,7 +71,7 @@
         filename: /config/www/front.jpg
       target:
         entity_id: camera.front_door_2
-    - service: notify.slack_notify
+    - service: notify.shoreshome
       data:
         title: Front Door View
         message: Somebody is at the front door!
@@ -630,7 +630,7 @@
     platform: mqtt
     topic: frigate/events
   action:
-    - service: notify.slack_notify
+    - service: notify.shoreshome
       data_template:
         message:
           A {{trigger.payload_json["after"]["label"]}} was detected at the front
@@ -663,7 +663,7 @@
     path: Sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
       actions:
-        - service: notify.slack_notify
+        - service: notify.shoreshome
           data:
             message: "{{sensors}} - low battery"
       exclude:
@@ -774,3 +774,20 @@
     service: input_boolean.turn_off
     target:
       entity_id: input_boolean.late_night
+- alias: Reload Smartthings Integration Every Two Hours and at Sunrise/Sunset
+  description: ""
+  triggers:
+    - trigger: time_pattern
+      hours: /1
+    - trigger: sun
+      event: sunrise
+      offset: 0
+    - trigger: sun
+      event: sunset
+      offset: 0
+  conditions: []
+  actions:
+    - data:
+        entry_id: c1dbd4d0e7f8d347210c6c9da664f515
+      action: homeassistant.reload_config_entry
+  mode: single

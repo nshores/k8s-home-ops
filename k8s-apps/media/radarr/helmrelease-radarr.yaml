@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/home-operations/radarr
       # -- image tag
-      tag: 5.26.0.10051
+      tag: 5.27.1.10122
       # -- image pull policy
       pullPolicy: IfNotPresent
 
