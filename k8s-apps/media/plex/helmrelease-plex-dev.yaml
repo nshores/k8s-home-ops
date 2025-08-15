@@ -26,7 +26,7 @@ spec:
       # -- image repository
       repository: lscr.io/linuxserver/plex
       # -- image tag
-      tag: 1.41.9.9961-46083195d-ls276
+      tag: 1.42.1.10060-4e8b05daf-ls278
       # -- image pull policy
       pullPolicy: IfNotPresent
 
