@@ -1,0 +1,186 @@
+{
+    "NickFlix": [
+        {
+            "city": "Sacramento",
+            "ip": "73.48.249.10",
+            "lat": "38.5869",
+            "location_count": 0,
+            "lon": "-121.4944",
+            "platform": "Server",
+            "play_count": 0,
+            "region": "CA"
+        }
+    ],
+    "theslimone": [
+        {
+            "city": "Sacramento",
+            "ip": "172.56.170.218",
+            "lat": "38.6639",
+            "location_count": 5,
+            "lon": "-121.3388",
+            "platform": "Firefox",
+            "play_count": 1,
+            "region": "California"
+        },
+        {
+            "city": "San Diego",
+            "ip": "76.218.253.9",
+            "lat": "32.8003",
+            "location_count": 1,
+            "lon": "-117.2438",
+            "platform": "Roku",
+            "play_count": 1,
+            "region": "California"
+        },
+        {
+            "city": "Tracy",
+            "ip": "174.227.131.30",
+            "lat": "37.7353",
+            "location_count": 1,
+            "lon": "-121.4403",
+            "platform": "Firefox",
+            "play_count": 1,
+            "region": "California"
+        },
+        {
+            "city": "Sacramento",
+            "ip": "172.56.169.110",
+            "lat": "38.6639",
+            "location_count": 4,
+            "lon": "-121.3388",
+            "platform": "Firefox",
+            "play_count": 2,
+            "region": "California"
+        },
+        {
+            "city": "New York",
+            "ip": "184.169.45.4",
+            "lat": "40.7126",
+            "location_count": 1,
+            "lon": "-74.0066",
+            "platform": "Android",
+            "play_count": 1,
+            "region": "New York"
+        },
+        {
+            "city": "Denver",
+            "ip": "174.198.128.138",
+            "lat": "39.7861",
+            "location_count": 1,
+            "lon": "-104.8296",
+            "platform": "Android",
+            "play_count": 1,
+            "region": "Colorado"
+        },
+        {
+            "city": "Aurora",
+            "ip": "174.198.135.49",
+            "lat": "39.6973",
+            "location_count": 1,
+            "lon": "-104.8394",
+            "platform": "Firefox",
+            "play_count": 1,
+            "region": "Colorado"
+        },
+        {
+            "city": "Sacramento",
+            "ip": "172.56.14.89",
+            "lat": "38.6639",
+            "location_count": 3,
+            "lon": "-121.3388",
+            "platform": "Firefox",
+            "play_count": 1,
+            "region": "California"
+        },
+        {
+            "city": "Los Angeles",
+            "ip": "98.97.58.92",
+            "lat": "34.0544",
+            "location_count": 1,
+            "lon": "-118.244",
+            "platform": "Firefox",
+            "play_count": 2,
+            "region": "California"
+        },
+        {
+            "city": "Sacramento",
+            "ip": "174.236.225.106",
+            "lat": "38.5347",
+            "location_count": 2,
+            "lon": "-121.4442",
+            "platform": "Firefox",
+            "play_count": 4,
+            "region": "California"
+        },
+        {
+            "city": "Fresno",
+            "ip": "98.255.252.46",
+            "lat": "36.7405",
+            "location_count": 1,
+            "lon": "-119.7508",
+            "platform": "Firefox",
+            "play_count": 1,
+            "region": "California"
+        },
+        {
+            "city": "San Francisco",
+            "ip": "12.176.89.3",
+            "lat": "37.7794",
+            "location_count": 1,
+            "lon": "-122.4176",
+            "platform": "Firefox",
+            "play_count": 2,
+            "region": "California"
+        },
+        {
+            "city": "Sacramento",
+            "ip": "73.48.249.10",
+            "lat": "38.5347",
+            "location_count": 1,
+            "lon": "-121.4442",
+            "platform": "Firefox",
+            "play_count": 16,
+            "region": "California"
+        },
+        {
+            "city": "Ross",
+            "ip": "75.149.62.206",
+            "lat": "37.962",
+            "location_count": 1,
+            "lon": "-122.5562",
+            "platform": "Firefox",
+            "play_count": 1,
+            "region": "California"
+        },
+        {
+            "city": "Canc\u00fan",
+            "ip": "189.176.21.217",
+            "lat": "21.1757",
+            "location_count": 1,
+            "lon": "-86.8489",
+            "platform": "Android",
+            "play_count": 4,
+            "region": "Quintana Roo"
+        },
+        {
+            "city": "Ciudad Madero",
+            "ip": "189.206.53.210",
+            "lat": "22.28",
+            "location_count": 1,
+            "lon": "-97.8266",
+            "platform": "Android",
+            "play_count": 1,
+            "region": "Tamaulipas"
+        },
+        {
+            "city": "Ju\u00e1rez",
+            "ip": "189.193.251.148",
+            "lat": "20.9908",
+            "location_count": 1,
+            "lon": "-86.9392",
+            "platform": "Android",
+            "play_count": 1,
+            "region": "Quintana Roo"
+        }
+    ]
+}
