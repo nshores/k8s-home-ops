@@ -82,9 +82,9 @@ spec:
       go2rtc:
         streams:
           front_door_fullres:
-            - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#backchannel=0 # connect directly to main camera stream, no 2-way
+            - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#backchannel=0#video=h264 # connect directly to main camera stream, no 2-way
           front_door:
-            - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1#backchannel=0 # connect directly to sub stream, no 2-way
+            - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1#backchannel=0#video=h264 # connect directly to sub stream, no 2-way
           front_door_twoway:
             - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=1 # Connect to substream for lower bandwidth
             - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
@@ -92,7 +92,7 @@ spec:
             - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0 # Connect to fullres
             - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
           garage:
-            - ffmpeg:rtsp://admin:4118nick@192.168.99.148/live#input=rtsp/udp
+            - ffmpeg:rtsp://admin:4118nick@192.168.99.148/live#input=rtsp/udp#video=h264
 
         webrtc:
           candidates:
