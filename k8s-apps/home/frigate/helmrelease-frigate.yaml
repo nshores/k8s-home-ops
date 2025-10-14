@@ -79,6 +79,8 @@ spec:
 
     # -- frigate configuration - see [Docs](https://docs.frigate.video/configuration/index) for more info
     config: |
+      face_recognition:
+        enabled: true
       go2rtc:
         streams:
           front_door_fullres:
