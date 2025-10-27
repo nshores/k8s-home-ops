@@ -250,7 +250,7 @@ sensor:
       average_house_temp:
         friendly_name: "Average House Temp"
         unit_of_measurement: "°F"
-        value_template: "{{(((float(states('sensor.downstairs_motion_temperature_measurement')) + float(states.climate.living_room.attributes.current_temperature)) + float(states('sensor.bedroom_temperature_temperature_measurement'))) /3)|round  }}"
+        value_template: "{{(((float(states('sensor.downstairs_motion_temperature_measurement')) + float(states.climate.living_room_thermostat.attributes.current_temperature)) + float(states('sensor.bedroom_temperature_temperature_measurement'))) /3)|round  }}"
       warm_inside:
         friendly_name: "Warm Inside"
         value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
