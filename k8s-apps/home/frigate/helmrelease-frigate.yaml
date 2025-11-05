@@ -94,7 +94,7 @@ spec:
             - rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0 # Connect to fullres
             - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
           garage:
-            - ffmpeg:rtsp://admin:4118nick@192.168.99.194/live#input=rtsp/udp#video=h264
+            - ffmpeg:rtsp://thingino:thingino@192.168.99.102:554/ch0#input=rtsp/udp#video=h264
 
         webrtc:
           candidates:
