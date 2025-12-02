@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/home-operations/tautulli
       # -- image tag
-      tag: 2.15.3
+      tag: 2.16.0
       # -- image pull policy
       pullPolicy: IfNotPresent
 
