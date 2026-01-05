@@ -43,7 +43,7 @@
   action:
     - service: camera.snapshot
       target:
-        entity_id: camera.garage
+        entity_id: camera.garage_2
       data:
         filename: /config/www/garage.jpg
     - service: notify.mobile_app_pixel_9_pro
