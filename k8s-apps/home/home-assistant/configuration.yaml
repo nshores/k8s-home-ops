@@ -318,7 +318,7 @@ cover:
       garage_door:
         device_class: garage
         friendly_name: "Garage Door"
-        value_template: "{{is_state('binary_sensor.doorbell_sensor_120', 'on')}}"
+        value_template: "{{is_state('binary_sensor.garage_door_sensor_door', 'on')}}"
         open_cover:
           service: switch.turn_on
           data:
@@ -332,7 +332,7 @@ cover:
           data:
             entity_id: switch.garage_door_121
         icon_template: >-
-          {% if is_state('binary_sensor.doorbell_sensor_120', 'on') %}
+          {% if is_state('binary_sensor.garage_door_sensor_door', 'on') %}
             mdi:garage-open
           {% else %}
             mdi:garage
