@@ -37,7 +37,7 @@
     - condition: and
       conditions:
         - condition: state
-          entity_id: binary_sensor.garage_tilt_sensor_124
+          entity_id: binary_sensor.garage_door_sensor_door
           attribute: device_tripped
           state: "True"
   action:
