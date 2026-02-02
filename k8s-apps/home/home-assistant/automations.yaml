@@ -33,13 +33,6 @@
       to: open
       for:
         minutes: 10
-  condition:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.garage_door_sensor_door
-          attribute: device_tripped
-          state: "True"
   action:
     - service: camera.snapshot
       target:
