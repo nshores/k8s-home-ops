@@ -95,6 +95,8 @@ spec:
             - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
           garage:
             - ffmpeg:rtsp://thingino:thingino@192.168.99.113:554/ch0
+          back_door:
+            - ffmpeg:rtsp://thingino:thingino@192.168.99.152:554/ch0
 
         webrtc:
           candidates:
@@ -168,6 +170,24 @@ spec:
           #   enabled: false
           motion:
             mask: 0.72,0.918,0.979,0.915,0.981,0.991,0.721,0.99
+        back_door:
+          enabled: true
+          ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-aac
+            inputs:
+              - path: rtsp://127.0.0.1:8554/back_door?video&audio
+                roles:
+                  - detect
+                  - record
+          detect:
+            width: 1920
+            height: 1080
+            fps: 5
+          snapshots:
+            enabled: True
+          record:
+            enabled: True
       detectors:
         cpu1:
           type: cpu
