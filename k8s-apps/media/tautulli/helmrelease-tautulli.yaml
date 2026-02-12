@@ -42,7 +42,7 @@ spec:
 
     initContainers:
       update-volume-permissions:
-        image: busybox:1.35.0
+        image: busybox:1.37.0
         command: ["/bin/sh", "-c"]
         args: ["chown -R 1000:1000 /config"]
         volumeMounts:
