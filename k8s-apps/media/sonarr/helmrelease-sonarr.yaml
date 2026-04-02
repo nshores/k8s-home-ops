@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/home-operations/sonarr
       # -- image tag
-      tag: 4.0.16.2946
+      tag: 4.0.17.2953
       # -- image pull policy
       pullPolicy: IfNotPresent
 
