@@ -95,8 +95,12 @@ spec:
             - ffmpeg:rtsp://admin:4118nick@192.168.99.119:554/cam/realmonitor?channel=1&subtype=0#audio=opus
           garage:
             - ffmpeg:rtsp://thingino:thingino@192.168.99.113:554/ch0
+          garage_sub:
+            - ffmpeg:rtsp://thingino:thingino@192.168.99.113:554/ch1
           back_door:
             - ffmpeg:rtsp://thingino:thingino@192.168.99.152:554/ch0
+          back_door_sub:
+            - ffmpeg:rtsp://thingino:thingino@192.168.99.152:554/ch1
 
         webrtc:
           candidates:
@@ -109,7 +113,8 @@ spec:
         front_door:
           enabled: true
           live:
-            stream_name: front_door_fullres
+            streams:
+              front_door_fullres: front_door_fullres
           ffmpeg:
             output_args:
               record: preset-record-generic-audio-aac
@@ -125,12 +130,12 @@ spec:
             height: 480
             fps: 5
           snapshots:
-            enabled: True
+            enabled: true
             required_zones:
               - porch
           record:
-            enabled: True
-           # events:
+            enabled: true
+          # events:
               # required_zones:
               #   - porch
           # rtmp:
@@ -144,26 +149,28 @@ spec:
             porch:
               coordinates: 0,480,517,480,525,264,0,229
               objects:
-              - person
+                - person
         garage:
           enabled: true
           ffmpeg:
             output_args:
               record: preset-record-generic-audio-aac
             inputs:
-              - path: rtsp://127.0.0.1:8554/garage?video&audio
+              - path: rtsp://127.0.0.1:8554/garage_sub?video&audio
                 roles:
                   - detect
+              - path: rtsp://127.0.0.1:8554/garage?video&audio
+                roles:
                   - record
           detect:
-            width: 1920
-            height: 1080
+            width: 640
+            height: 480
             fps: 5
           snapshots:
-            enabled: True
+            enabled: true
           record:
-            enabled: True
-           # events:
+            enabled: true
+          # events:
               # required_zones:
               #   - porch
           # rtmp:
@@ -176,47 +183,42 @@ spec:
             output_args:
               record: preset-record-generic-audio-aac
             inputs:
-              - path: rtsp://127.0.0.1:8554/back_door?video&audio
+              - path: rtsp://127.0.0.1:8554/back_door_sub?video&audio
                 roles:
                   - detect
+              - path: rtsp://127.0.0.1:8554/back_door?video&audio
+                roles:
                   - record
           detect:
-            width: 1920
-            height: 1080
+            width: 640
+            height: 480
             fps: 5
           snapshots:
-            enabled: True
+            enabled: true
           record:
-            enabled: True
+            enabled: true
       detectors:
         cpu1:
           type: cpu
       record:
         # Optional: Enable recording (default: shown below)
-        enabled: True
+        enabled: true
         # Optional: Number of days to retain recordings regardless of events (default: shown below)
         # NOTE: This should be set to 0 and retention should be defined in events section below
         #       if you only want to retain recordings of events.
         # Optional: Event recording settings
-        events:
-          # Optional: Maximum length of time to retain video during long events. (default: shown below)
-          # NOTE: If an object is being tracked for longer than this amount of time, the retained recordings
-          #       will be the last x seconds of the event unless retain_days under record is > 0.
-          #max_seconds: 300
-          # Optional: Number of seconds before the event to include (default: shown below)
-          pre_capture: 5
-          # Optional: Number of seconds after the event to include (default: shown below)
-          post_capture: 5
-          # Optional: Objects to save recordings for. (default: all tracked objects)
-          # Optional: Restrict recordings to objects that entered any of the listed zones (default: no required zones)
-          # required_zones: []
-          # Optional: Retention settings for recordings of events
+        alerts:
           retain:
-            # Required: Default retention days (default: shown below)
-            default: 10
-            # Optional: Per object retention days
-            objects:
-              person: 15
+            days: 10
+          pre_capture: 5
+          post_capture: 5
+        detections:
+          retain:
+            days: 10
+          pre_capture: 5
+          post_capture: 5
+      version: 0.17-0
+
 
     # Probes configuration
     probes:
