@@ -21,7 +21,7 @@ spec:
       # -- image repository
       repository: ghcr.io/home-operations/sabnzbd
       # -- image tag
-      tag: 5.0.3
+      tag: 5.0.4
       # -- image pull policy
       pullPolicy: IfNotPresent
 
