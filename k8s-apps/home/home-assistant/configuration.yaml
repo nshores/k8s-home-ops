@@ -220,40 +220,7 @@ input_boolean:
   late_night:
     name: late night mode from 10PM to 7AM
 
-# Expose Zigbee Smartthings state as a platform template sensor
-# Expose washing machine status as a sensor
-# Expose dryer machine status as a sensor
-# When Zigbee Sensors sense no power the attributes disappear from the entities in the current build of HA. The work around for this is to use some logic to check for
-# A value, and if not write a '0'
 sensor:
-  - platform: template
-    sensors:
-      wash_power:
-        friendly_name: "Current Wash Power"
-        unit_of_measurement: "W"
-        value_template: "{{ states.switch.washing_machine_111.attributes.current_power_w }}"
-      washing_machine_status:
-        value_template: "{{ states.input_select.washing_machine_status.state}}"
-        friendly_name: "Washing Machine Status"
-      dry_power:
-        friendly_name: "Current Dryer Power"
-        unit_of_measurement: "W"
-        value_template: >-
-          {% if states.switch.dryer_machine_98.attributes.current_power_w %}
-          {{ states.switch.dryer_machine_98.attributes.current_power_w }}
-          {% else %}
-          0
-          {% endif %}
-      dryer_machine_status:
-        value_template: "{{ states.input_select.dryer_machine_status.state}}"
-        friendly_name: "Dryer Machine Status"
-      average_house_temp:
-        friendly_name: "Average House Temp"
-        unit_of_measurement: "°F"
-        value_template: "{{(((float(states('sensor.downstairs_motion_temperature_measurement')) + float(states.climate.living_room_thermostat.attributes.current_temperature)) + float(states('sensor.bedroom_temperature_temperature_measurement'))) /3)|round  }}"
-      warm_inside:
-        friendly_name: "Warm Inside"
-        value_template: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
   - platform: time_date
     display_options:
       - "time"
@@ -310,15 +277,38 @@ influxdb:
   # Example configuration.yaml entry
 mobile_app:
 
-#Cover Configuration
-
-cover:
-  - platform: template
-    covers:
-      garage_door:
+# Template integration (modern format, configured under its own `template:` key).
+# Migrated from the legacy `platform: template` blocks under `sensor:` / `cover:`.
+# When Zigbee sensors report no power the attributes disappear from the entities,
+# so the dryer power template checks for a value and falls back to '0'.
+template:
+  - sensor:
+      # name "Wash Power" slugs to sensor.wash_power (entity_id preserved)
+      - name: "Wash Power"
+        unit_of_measurement: "W"
+        state: "{{ states.switch.washing_machine_111.attributes.current_power_w }}"
+      - name: "Washing Machine Status"
+        state: "{{ states.input_select.washing_machine_status.state }}"
+      # name "Dry Power" slugs to sensor.dry_power (entity_id preserved)
+      - name: "Dry Power"
+        unit_of_measurement: "W"
+        state: >-
+          {% if states.switch.dryer_machine_98.attributes.current_power_w %}
+          {{ states.switch.dryer_machine_98.attributes.current_power_w }}
+          {% else %}
+          0
+          {% endif %}
+      - name: "Dryer Machine Status"
+        state: "{{ states.input_select.dryer_machine_status.state }}"
+      - name: "Average House Temp"
+        unit_of_measurement: "°F"
+        state: "{{(((float(states('sensor.downstairs_motion_temperature_measurement')) + float(states.climate.living_room_thermostat.attributes.current_temperature)) + float(states('sensor.bedroom_temperature_temperature_measurement'))) /3)|round  }}"
+      - name: "Warm Inside"
+        state: "{{ states('sensor.average_house_temp') | int > state_attr('weather.ksac_daynight', 'temperature') }}"
+  - cover:
+      - name: "Garage Door"
         device_class: garage
-        friendly_name: "Garage Door"
-        value_template: "{{is_state('binary_sensor.garage_door_sensor_door', 'on')}}"
+        state: "{{ is_state('binary_sensor.garage_door_sensor_door', 'on') }}"
         open_cover:
           service: switch.turn_on
           data:
@@ -331,7 +321,7 @@ cover:
           service: switch.turn_on
           data:
             entity_id: switch.garage_door_121
-        icon_template: >-
+        icon: >-
           {% if is_state('binary_sensor.garage_door_sensor_door', 'on') %}
             mdi:garage-open
           {% else %}
