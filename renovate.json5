@@ -108,6 +108,14 @@
       ]
     },
 
+    // linuxserver vX.Y.Z-lsN tags; default docker versioning treats -lsN as a
+    // compatibility suffix and never matches a newer build number
+    {
+      matchDatasources: ['docker'],
+      matchPackageNames: ['linuxserver/nzbhydra2'],
+      versioning: 'regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-ls(?<build>\\d+)$'
+    },
+
     // Automerge specifically allowed for selected apps at any time
     {
       matchDatasources: ['docker'],

@@ -6,118 +6,82 @@ metadata:
 spec:
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: nzbhydra2
-      version: 10.4.x
+      # renovate: registryUrl=https://bjw-s-labs.github.io/helm-charts/
+      chart: app-template
+      version: 5.2.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-charts
         namespace: flux-system
   interval: 15m
   timeout: 5m
   releaseName: nzbhydra2
   values:
-    image:
-      # -- image repository
-      repository: linuxserver/nzbhydra2
-      # -- image tag
-      tag: v7.3.0-ls17
-      # -- image pull policy
-      pullPolicy: IfNotPresent
+    controllers:
+      nzbhydra2:
+        strategy: Recreate
+        containers:
+          app:
+            image:
+              # -- image repository
+              repository: linuxserver/nzbhydra2
+              # -- image tag
+              tag: v7.3.0-ls17
+              # -- image pull policy
+              pullPolicy: IfNotPresent
 
-    # -- environment variables.
-    # @default -- See below
-    env:
-      # -- Set the container timezone
-      TZ: America/Los_Angeles
-      # HOST_WHITELIST_ENTRIES:
+            # -- environment variables.
+            env:
+              # -- Set the container timezone
+              TZ: America/Los_Angeles
+              # HOST_WHITELIST_ENTRIES:
 
-    # -- Configures service settings for the chart.
-    # @default -- See values.yaml
+            probes:
+              liveness: &probe
+                custom: true
+                enabled: true
+                spec:
+                  failureThreshold: 5
+                  httpGet:
+                    path: /actuator/health/ping
+                    port: 5076
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 10
+              readiness: *probe
+              startup: *probe
+
     service:
-      main:
+      app:
+        controller: nzbhydra2
         ports:
           http:
             port: 5076
 
-    # initContainers:
-    #   update-volume-permissions:
-    #     image: busybox:1.35.0
-    #     command: ["/bin/sh", "-c"]
-    #     args: ["chown -R 1000:1000 /config"]
-    #     volumeMounts:
-    #       - name: config
-    #         mountPath: /config
-    #     securityContext:
-    #       runAsUser: 0
-
-    # podSecurityContext:
-    #   runAsUser: 1000
-    #   runAsGroup: 1000
-    #   fsGroup: 1000
-    #   fsGroupChangePolicy: "OnRootMismatch"
-
     ingress:
-      # -- Enable and configure ingress settings for the chart under this key.
-      # @default -- See values.yaml
-      main:
-        enabled: true
+      app:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
         hosts:
-          - # -- Host address. Helm template can be passed.
-            host: nzbhydra.lab.nickshores.net
-            ## Configure the paths for the host
+          - host: nzbhydra.lab.nickshores.net
             paths:
-              - # -- Path.  Helm template can be passed.
-                path: /
-                # -- Ignored if not kubeVersion >= 1.14-0
+              - path: /
                 pathType: Prefix
                 service:
-                  # -- Overrides the service name reference for this path
-                  name:
-                  # -- Overrides the service port reference for this path
-                  port:
+                  identifier: app
+                  port: http
 
     # -- Configure persistence settings for the chart under this key.
-    # @default -- See values.yaml
     persistence:
       config:
-        enabled: true
+        type: persistentVolumeClaim
+        # Keep the PVC name from the old k8s-at-home chart so Helm adopts
+        # the existing volume instead of replacing it.
+        forceRename: nzbhydra2-config
+        accessMode: ReadWriteOnce
         size: 20Gi
-    probes:
-      liveness:
-        custom: true
-        enabled: true
-        spec:
-          failureThreshold: 5
-          httpGet:
-            path: /actuator/health/ping
-            port: http
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 10
-      readiness:
-        custom: true
-        enabled: true
-        spec:
-          failureThreshold: 5
-          httpGet:
-            path: /actuator/health/ping
-            port: http
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 10
-      startup:
-        custom: true
-        enabled: true
-        spec:
-          failureThreshold: 5
-          httpGet:
-            path: /actuator/health/ping
-            port: http
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 10
+        retain: true
+        globalMounts:
+          - path: /config
