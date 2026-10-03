@@ -571,7 +571,7 @@
   action:
     service: light.turn_off
     entity_id:
-      - light.upper_stairs_127
+      - light.upstairs_stair_light_140
   id: 60d717679e194dc782636cc09f8aea97
 - alias: Turn on patio lights when motion detected by camera
   trigger:
