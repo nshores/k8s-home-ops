@@ -477,7 +477,7 @@
         state: above_horizon
   action:
     - service: light.turn_on
-      entity_id: living_room_lamp
+      entity_id: light.living_room_lamp
       data:
         brightness_pct: 5
 - id: 3eeb0aad017041d08c88d3a33b717f17
@@ -496,7 +496,7 @@
       state: below_horizon
   action:
     - service: light.turn_on
-      entity_id: living_room_lamp
+      entity_id: light.living_room_lamp
       data:
         brightness_pct: 5
 - alias: Turn on entry light when there is movement
@@ -645,7 +645,7 @@
   action:
     - service: light.turn_on
       target:
-        entity_id: living_room_lamp
+        entity_id: light.living_room_lamp
       data:
         brightness_pct: 20
   mode: single
