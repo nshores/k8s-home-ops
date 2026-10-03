@@ -477,7 +477,7 @@
         state: above_horizon
   action:
     - service: light.turn_on
-      entity_id: light.living_room_lights_125
+      entity_id: living_room_lamp
       data:
         brightness_pct: 5
 - id: 3eeb0aad017041d08c88d3a33b717f17
@@ -496,7 +496,7 @@
       state: below_horizon
   action:
     - service: light.turn_on
-      entity_id: light.living_room_lights_125
+      entity_id: living_room_lamp
       data:
         brightness_pct: 5
 - alias: Turn on entry light when there is movement
@@ -530,7 +530,7 @@
 - alias: Turn on upstairs light when there is movement after dusk
   trigger:
     platform: state
-    entity_id: binary_sensor.upstairs_hallway_mot_97
+    entity_id: binary_sensor.downstairs_motion_119
     to: "on"
   action:
     - choose:
@@ -544,7 +544,7 @@
           sequence:
             - service: light.turn_on
               target:
-                entity_id: light.upper_stairs_127
+                entity_id: light.upstairs_stair_light_140
               data:
                 brightness_pct: 20
         - conditions:
@@ -559,7 +559,7 @@
               data:
                 brightness_pct: 100
               target:
-                entity_id: light.upper_stairs_127
+                entity_id: light.upstairs_stair_light_140
   mode: single
 - alias: Turn off upstairs light after 1 minute
   trigger:
@@ -645,7 +645,7 @@
   action:
     - service: light.turn_on
       target:
-        entity_id: light.living_room_lights_125_125
+        entity_id: living_room_lamp
       data:
         brightness_pct: 20
   mode: single
