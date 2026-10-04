@@ -498,7 +498,7 @@
     - service: light.turn_on
       entity_id: light.living_room_lamp
       data:
-        brightness_pct: 5
+        brightness_pct: 20
 - alias: Turn on entry light when there is movement
   trigger:
     - platform: state
