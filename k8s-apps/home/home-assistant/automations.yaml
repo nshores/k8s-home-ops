@@ -564,7 +564,7 @@
 - alias: Turn off upstairs light after 1 minute
   trigger:
     platform: state
-    entity_id: light.upper_stairs_127
+    entity_id: light.upstairs_stair_light_140
     to: "on"
     for:
       minutes: 1
