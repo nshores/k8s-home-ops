@@ -557,7 +557,7 @@
           sequence:
             - service: light.turn_on
               data:
-                brightness_pct: 100
+                brightness_pct: 50
               target:
                 entity_id: light.upstairs_stair_light_140
   mode: single
